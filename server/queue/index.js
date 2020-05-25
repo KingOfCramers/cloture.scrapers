@@ -4,38 +4,11 @@ import { logger } from "../loggers/winston";
 
 import { setupProducers } from "./producers";
 import { setupListeners } from "./listeners";
-
-const jobs = [
-  {
-    data: {
-      collection: "hfac",
-      link: "https://foreignaffairs.house.gov/hearings",
-      selectors: {
-        layerOne: {
-          rows: "table tbody tr",
-          dateSelector: "td.recordListDate",
-          dateFormat: "MM/DD/YYYY",
-        },
-        layerTwo: {
-          title: ".title",
-          date: "span.date",
-          time: "span.time",
-          location: "span.location strong",
-          witnesses: "div.witnesses strong",
-        },
-      },
-    },
-    schedule: { type: "every", value: 2000 },
-  },
-  //{
-  //data: { collection: "hvac", foo: "bar2" },
-  //schedule: { type: "cron", value: "* * * * *" },
-  //},
-];
+import jobs from "./jobs";
 
 export const setupQueue = async () => {
   try {
-    var myQueue = new Bull("myQueue", {
+    var queue = new Bull("myQueue", {
       redis: {
         port: process.env.REDIS_PORT,
         host: process.env.REDIS_URL,
@@ -49,7 +22,7 @@ export const setupQueue = async () => {
   }
 
   try {
-    await setupProducers(myQueue, jobs);
+    await setupProducers(queue, jobs);
   } catch (err) {
     logger.error("Could not setup producers.");
     throw err;
@@ -58,7 +31,7 @@ export const setupQueue = async () => {
   // Setup consumers elsewhere for scalability
 
   try {
-    await setupListeners(myQueue);
+    await setupListeners(queue);
   } catch (err) {
     logger.error("Could not setup listeners");
     throw err;

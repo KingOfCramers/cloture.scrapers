@@ -10,9 +10,7 @@ export const every = async (queue, data, every) => {
   try {
     await queue.add(data, options);
     logger.info(
-      `Created job '${data.collection}' recurring every ${
-        every / 1000
-      } seconds.`
+      `New job '${data.name}' recurring every ${every / 1000} seconds.`
     );
   } catch (err) {
     logger.info(`Could not schedule ${data.collection} every job`);

@@ -12,7 +12,7 @@ export const connect = async () => {
 
     // If in development, set username and password and mongoose debugger
     if (process.env.NODE_ENV === "development") {
-      mongoose.set("debug", true);
+      mongoose.set("debug", process.env.MONGOOOSE_DEBUG === "true" || false);
       options.user = process.env.MONGODB_USER;
       options.pass = process.env.MONGODB_PASS;
     }

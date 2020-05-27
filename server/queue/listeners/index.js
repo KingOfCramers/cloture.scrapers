@@ -20,13 +20,10 @@ export const setupListeners = async (queue) => {
     try {
       // See: https://silvantroxler.ch/2016/insert-or-update-with-mongodb-and-mongoose/
       let promisedInserts = insertData(model, data);
+      let results = await Promise.all(promisedInserts);
+      await calculateResults(job, results);
 
-      await Promise.all(promisedInserts)
-        .then((result) => calculateResults(job, result))
-        .catch((err) => {
-          logger.error("Could not insert document. ", err);
-          throw err;
-        });
+      logger.info(`${job} has completed.`);
     } catch (err) {
       throw new Error(`${job} could not insert documents into MongoDB.`);
     }
@@ -34,10 +31,6 @@ export const setupListeners = async (queue) => {
 
   queue.on("global:active", (job) => {
     logger.info(`${job} has started.`); // (${job.data.name}) has started.`);
-  });
-
-  queue.on("global:completed", (job) => {
-    logger.info(`${job} has completed.`); // (${job.data.name}) has started.`);
   });
 
   queue.on("global:stalled", (job) => {

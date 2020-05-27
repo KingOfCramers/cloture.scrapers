@@ -8,7 +8,7 @@ export const every = async (queue, data, every) => {
   };
 
   try {
-    await queue.add(data, options);
+    await queue.add(data.name, data, options);
     logger.info(
       `New job '${data.name}' recurring every ${every / 1000} seconds.`
     );
@@ -25,7 +25,7 @@ export const cron = async (queue, data, cron) => {
   };
 
   try {
-    await queue.add(data, options); // collection, { data }, options);
+    await queue.add(data.name, data, options); // collection, { data }, options);
     logger.info(`Created job '${data.collection}' recurring at ${cron}.`);
   } catch (err) {
     logger.info(`Could not schedule ${data.collection} cron job`);

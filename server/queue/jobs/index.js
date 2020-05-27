@@ -1,10 +1,12 @@
 export default [
   {
     data: {
-      name: "House Foreign Affairs Committee Hearings",
-      collection: "hfac",
-      link: "https://foreignaffairs.house.gov/hearings",
+      type: "puppeteerv1", // Scraping routine
+      collection: "hfac", // MongoDB collection
+      name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
+      link: "https://foreignaffairs.house.gov/hearings", // Initial Link
       selectors: {
+        // Scrapers used in the routine
         layerOne: {
           depth: 5, // Max number of rows checked
           rows: "table tbody tr",
@@ -24,8 +26,9 @@ export default [
   },
   {
     data: {
-      name: "House Foreign Affairs Committee Markups",
+      type: "puppeteerv1",
       collection: "hfac",
+      name: "House Foreign Affairs Committee Markups",
       link: "https://foreignaffairs.house.gov/markups",
       selectors: {
         layerOne: {

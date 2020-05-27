@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
 
 let senateCommitteeSchema = new Schema({
   type: {
@@ -32,9 +31,6 @@ let senateCommitteeSchema = new Schema({
     },
   ],
 });
-
-// Pagination plugin
-senateCommitteeSchema.plugin(mongoosePaginate);
 
 export const Sfrc = mongoose.model("SFRC", senateCommitteeSchema);
 export const Sasc = mongoose.model("SASC", senateCommitteeSchema);

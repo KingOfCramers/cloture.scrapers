@@ -1,8 +1,8 @@
 import mongoose, { Schema } from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
 
 let houseCommitteeSchema = new Schema({
   title: {
+    unique: true,
     type: String,
     require: true,
   },
@@ -32,9 +32,6 @@ let houseCommitteeSchema = new Schema({
     require: true,
   },
 });
-
-// Pagination plugin
-houseCommitteeSchema.plugin(mongoosePaginate);
 
 export const Hasc = mongoose.model("HASC", houseCommitteeSchema);
 export const Hfac = mongoose.model("HFAC", houseCommitteeSchema);

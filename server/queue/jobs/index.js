@@ -126,4 +126,23 @@ export default [
     },
     schedule: { type: "every", value: 2000 },
   },
+  {
+    data: {
+      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      collection: "hhsc",
+      name: "House Homeland Security Committee Markups",
+      link: "http://homeland.house.gov/activities/markups",
+      selectors: {
+        layerOne: {
+          depth: 5,
+          rows: "tr.vevent",
+          date: "time.dtstart",
+          time: "time.dtstart",
+          location: "span.location",
+          dateFormat: "MMM DD YYYY",
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
 ];

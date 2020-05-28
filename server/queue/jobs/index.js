@@ -48,25 +48,41 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv1",
+  //collection: "hasc",
+  //name: "House Armed Services Committee",
+  //link: "https://armedservices.house.gov/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "table tbody tr",
+  //dateSelector: "td.recordListDate",
+  //dateFormat: "MM/DD/YYYY",
+  //},
+  //layerTwo: {
+  //title: ".title",
+  //date: "span.date:first-of-type",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv1",
-      collection: "hasc",
-      name: "House Armed Services Committee",
-      link: "https://armedservices.house.gov/hearings",
+      type: "puppeteerv2",
+      collection: "hvac",
+      name: "House Veterans Affairs Committee Hearings",
+      link: "https://veterans.house.gov/events/hearings",
       selectors: {
         layerOne: {
           depth: 5,
-          rows: "table tbody tr",
-          dateSelector: "td.recordListDate",
-          dateFormat: "MM/DD/YYYY",
-        },
-        layerTwo: {
-          title: ".title",
-          date: "span.date",
-          time: "span.time",
-          location: "span.location strong",
-          witnesses: "div.witnesses strong",
+          rows: "tr.vevent",
+          date: "time.dtstart",
+          time: "time.dtstart",
+          location: "span.location",
+          dateFormat: "MMM D",
         },
       },
     },

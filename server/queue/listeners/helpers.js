@@ -20,7 +20,6 @@ export const calculateResults = async (job, result) => {
   }, 0);
 
   // Print results
-  logger.info(`${job} completed.`);
   if (numberUpserted > 0) {
     logger.info(`Added ${numberUpserted} records: ${upserted.toString()}`);
   }

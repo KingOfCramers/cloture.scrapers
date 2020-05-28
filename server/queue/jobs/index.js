@@ -69,12 +69,50 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "hvac",
+  //name: "House Veterans Affairs Committee Hearings",
+  //link: "https://veterans.house.gov/events/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: "time.dtstart",
+  //location: "span.location",
+  //dateFormat: "MMM D",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "hvac",
+  //name: "House Veterans Affairs Committee Markups",
+  //link: "https://veterans.house.gov/events/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: "time.dtstart",
+  //location: "span.location",
+  //dateFormat: "MMM D",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv2",
-      collection: "hvac",
-      name: "House Veterans Affairs Committee Hearings",
-      link: "https://veterans.house.gov/events/hearings",
+      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      collection: "hhsc",
+      name: "House Homeland Security Committee Hearings",
+      link: "http://homeland.house.gov/activities/hearings",
       selectors: {
         layerOne: {
           depth: 5,
@@ -82,7 +120,7 @@ export default [
           date: "time.dtstart",
           time: "time.dtstart",
           location: "span.location",
-          dateFormat: "MMM D",
+          dateFormat: "MMM DD YYYY",
         },
       },
     },

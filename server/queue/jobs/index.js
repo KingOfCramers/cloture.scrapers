@@ -239,24 +239,66 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv1",
+  //collection: "help",
+  //name: "House Education and Labor Committee Hearings",
+  //link: "https://edlabor.house.gov/hearings-and-events",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //},
+  //layerTwo: {
+  //labels: true,
+  //title: "h1.main_page_title",
+  //date: "span.date",
+  //dateFormat: "dddd, MMMM D, YYYY",
+  //time: "span.time",
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv1",
+  //collection: "help",
+  //name: "House Education and Labor Committee Markups",
+  //link: "https://edlabor.house.gov/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //},
+  //layerTwo: {
+  //labels: true,
+  //title: "h1.main_page_title",
+  //date: "span.date",
+  //dateFormat: "dddd, MMMM D, YYYY",
+  //time: "span.time",
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv1", // Scraping routine
-      collection: "help", // MongoDB collection
-      name: "House Education and Labor Committee Hearings", // Stored in Redis, must be unique
-      link: "https://edlabor.house.gov/hearings-and-events", // Initial Link
+      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      collection: "nrgy",
+      name: "House Energy and Commerce Committee Hearings",
+      link: "https://energycommerce.house.gov/committee-activity/hearings",
       selectors: {
         layerOne: {
-          depth: 5, // Max number of rows checked
-          rows: "tr.vevent",
-        },
-        layerTwo: {
-          labels: true,
-          title: "h1.main_page_title",
-          date: "span.date",
-          dateFormat: "dddd, MMMM D, YYYY",
-          time: "span.time",
-          location: "span.location",
+          depth: 5,
+          rows: ".pane-congress-hearings-panel-pane-hearings-upcoming",
+          date: ".date-display-single",
+          splitDate: "-",
+          location: ".views-field-field-congress-meeting-location",
+          dateFormat: "ddd, DD/MM/YYYY",
         },
       },
     },

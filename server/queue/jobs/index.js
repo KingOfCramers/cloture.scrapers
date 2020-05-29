@@ -107,39 +107,57 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "hhsc",
+  //name: "House Homeland Security Committee Hearings",
+  //link: "http://homeland.house.gov/activities/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: "time.dtstart",
+  //location: "span.location",
+  //dateFormat: "MMM DD YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "hhsc",
+  //name: "House Homeland Security Committee Markups",
+  //link: "http://homeland.house.gov/activities/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: "time.dtstart",
+  //location: "span.location",
+  //dateFormat: "MMM DD YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "hhsc",
-      name: "House Homeland Security Committee Hearings",
-      link: "http://homeland.house.gov/activities/hearings",
+      type: "puppeteerv3", // This version is best when the second page is un-parseable due to shitty HTML
+      collection: "hagc",
+      name: "House Agriculture Committee Hearings",
+      link: "https://agriculture.house.gov/calendar/",
       selectors: {
         layerOne: {
           depth: 5,
-          rows: "tr.vevent",
-          date: "time.dtstart",
-          time: "time.dtstart",
-          location: "span.location",
-          dateFormat: "MMM DD YYYY",
-        },
-      },
-    },
-    schedule: { type: "every", value: 2000 },
-  },
-  {
-    data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "hhsc",
-      name: "House Homeland Security Committee Markups",
-      link: "http://homeland.house.gov/activities/markups",
-      selectors: {
-        layerOne: {
-          depth: 5,
-          rows: "tr.vevent",
-          date: "time.dtstart",
-          time: "time.dtstart",
-          location: "span.location",
-          dateFormat: "MMM DD YYYY",
+          rows: "ul.calendar-listing li",
+          date: "div.newsie-details span:nth-child(1)",
+          time: "div.newsie-details span:nth-child(2)",
+          dateFormat: "MMMM DD, YYYY",
         },
       },
     },

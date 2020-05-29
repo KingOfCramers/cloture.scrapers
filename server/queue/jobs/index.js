@@ -182,12 +182,50 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv4",
+  //collection: "hapc",
+  //name: "House Appropriations Committee Markups",
+  //link: "https://appropriations.house.gov/events/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv4", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "hapc",
-      name: "House Appropriations Committee Markups",
-      link: "https://appropriations.house.gov/events/markups",
+      type: "puppeteerv4",
+      collection: "hbuc",
+      name: "House Budget Committee Hearings",
+      link: "https://budget.house.gov/legislation/hearings",
+      selectors: {
+        layerOne: {
+          depth: 5,
+          upcomingHearings: ".pane-content",
+          hearings: ".views-row",
+          dateTime: ".views-field-field-congress-meeting-date",
+          time: "div.newsie-details span:nth-child(2)",
+          dateFormat: "ddd, DD/MM/YYYY",
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
+  {
+    data: {
+      type: "puppeteerv4",
+      collection: "hbuc",
+      name: "House Budget Committee Markups",
+      link: "https://budget.house.gov/legislation/markups",
       selectors: {
         layerOne: {
           depth: 5,

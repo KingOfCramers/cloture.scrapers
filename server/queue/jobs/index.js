@@ -145,19 +145,57 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv3", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "hagc",
+  //name: "House Agriculture Committee Hearings",
+  //link: "https://agriculture.house.gov/calendar/",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "ul.calendar-listing li",
+  //date: "div.newsie-details span:nth-child(1)",
+  //time: "div.newsie-details span:nth-child(2)",
+  //dateFormat: "MMMM DD, YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv4", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "hapc",
+  //name: "House Appropriations Committee Hearings",
+  //link: "https://appropriations.house.gov/events/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv3", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "hagc",
-      name: "House Agriculture Committee Hearings",
-      link: "https://agriculture.house.gov/calendar/",
+      type: "puppeteerv4", // This version is best when the second page is un-parseable due to shitty HTML
+      collection: "hapc",
+      name: "House Appropriations Committee Markups",
+      link: "https://appropriations.house.gov/events/markups",
       selectors: {
         layerOne: {
           depth: 5,
-          rows: "ul.calendar-listing li",
-          date: "div.newsie-details span:nth-child(1)",
+          upcomingHearings: ".pane-content",
+          hearings: ".views-row",
+          dateTime: ".views-field-field-congress-meeting-date",
           time: "div.newsie-details span:nth-child(2)",
-          dateFormat: "MMMM DD, YYYY",
+          dateFormat: "ddd, DD/MM/YYYY",
         },
       },
     },

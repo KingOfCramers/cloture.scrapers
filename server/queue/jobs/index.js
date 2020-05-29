@@ -201,39 +201,62 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv4",
+  //collection: "hbuc",
+  //name: "House Budget Committee Hearings",
+  //link: "https://budget.house.gov/legislation/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv4",
+  //collection: "hbuc",
+  //name: "House Budget Committee Markups",
+  //link: "https://budget.house.gov/legislation/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv4",
-      collection: "hbuc",
-      name: "House Budget Committee Hearings",
-      link: "https://budget.house.gov/legislation/hearings",
+      type: "puppeteerv1", // Scraping routine
+      collection: "help", // MongoDB collection
+      name: "House Education and Labor Committee Hearings", // Stored in Redis, must be unique
+      link: "https://edlabor.house.gov/hearings-and-events", // Initial Link
       selectors: {
         layerOne: {
-          depth: 5,
-          upcomingHearings: ".pane-content",
-          hearings: ".views-row",
-          dateTime: ".views-field-field-congress-meeting-date",
-          time: "div.newsie-details span:nth-child(2)",
-          dateFormat: "ddd, DD/MM/YYYY",
+          depth: 5, // Max number of rows checked
+          rows: "tr.vevent",
         },
-      },
-    },
-    schedule: { type: "every", value: 2000 },
-  },
-  {
-    data: {
-      type: "puppeteerv4",
-      collection: "hbuc",
-      name: "House Budget Committee Markups",
-      link: "https://budget.house.gov/legislation/markups",
-      selectors: {
-        layerOne: {
-          depth: 5,
-          upcomingHearings: ".pane-content",
-          hearings: ".views-row",
-          dateTime: ".views-field-field-congress-meeting-date",
-          time: "div.newsie-details span:nth-child(2)",
-          dateFormat: "ddd, DD/MM/YYYY",
+        layerTwo: {
+          labels: true,
+          title: "h1.main_page_title",
+          date: "span.date",
+          dateFormat: "dddd, MMMM D, YYYY",
+          time: "span.time",
+          location: "span.location",
         },
       },
     },

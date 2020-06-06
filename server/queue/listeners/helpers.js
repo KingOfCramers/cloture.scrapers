@@ -3,6 +3,7 @@ import { logger } from "../../loggers/winston";
 export const calculateResults = async (job, result) => {
   // Number of records modified in MongoDB
   let upserted = [];
+  console.log(JSON.stringify(result));
   let numberModified = result.reduce((agg, x) => {
     agg = agg + x.nModified;
     return agg;

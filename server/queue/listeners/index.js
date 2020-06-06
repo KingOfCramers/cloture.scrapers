@@ -7,14 +7,14 @@ export const setupListeners = async (queue) => {
     let { data, meta } = JSON.parse(result);
 
     if (!data || !meta) {
-      throw new Error(`${job} returned null field.`);
+      logger.error(`${job} returned null field.`);
     }
 
     let collection = meta.collection;
     let model = pickModel(collection);
 
     if (!model) {
-      throw new Error(`${job} could not find schema, tried ${collection}`);
+      logger.error(`${job} could not find schema, tried ${collection}`);
     }
 
     try {
@@ -25,7 +25,7 @@ export const setupListeners = async (queue) => {
 
       logger.info(`${job} has completed.`);
     } catch (err) {
-      throw new Error(`${job} could not insert documents into MongoDB.`);
+      logger.error(`${job} could not insert documents into MongoDB.`, err);
     }
   });
 

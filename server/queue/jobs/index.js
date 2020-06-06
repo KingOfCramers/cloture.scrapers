@@ -285,20 +285,59 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "nrgy",
+  //name: "House Energy and Commerce Committee Hearings",
+  //link: "https://energycommerce.house.gov/committee-activity/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: ".pane-congress-hearings-panel-pane-hearings-upcoming",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv2",
+  //collection: "nrgy",
+  //name: "House Energy and Commerce Committee Markups",
+  //link: "https://energycommerce.house.gov/committee-activity/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: ".pane-congress-hearings-panel-pane-hearings-upcoming",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "nrgy",
-      name: "House Energy and Commerce Committee Hearings",
-      link: "https://energycommerce.house.gov/committee-activity/hearings",
+      type: "puppeteerv5",
+      collection: "fisv",
+      name: "House Financial Services Committee Hearings",
+      link:
+        "https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
       selectors: {
         layerOne: {
-          depth: 5,
-          rows: ".pane-congress-hearings-panel-pane-hearings-upcoming",
-          date: ".date-display-single",
-          splitDate: "-",
-          location: ".views-field-field-congress-meeting-location",
-          dateFormat: "ddd, DD/MM/YYYY",
+          depth: 8,
+          rows: ".newsie-titler",
+        },
+        layerTwo: {
+          title: "h3.news-titler",
+          jquerySelector: ".topnewstext",
         },
       },
     },

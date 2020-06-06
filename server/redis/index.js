@@ -17,6 +17,7 @@ export const configureRedis = async () => {
 
   try {
     await flusher();
+    //console.log("Run");
   } catch (err) {
     logger.error("Could not flush Redis cache.");
     throw err;

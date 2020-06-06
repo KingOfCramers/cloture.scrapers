@@ -403,21 +403,44 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "ntty",
+  //name: "House Natural Resources Committee Hearings",
+  //link: "https://naturalresources.house.gov/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: "time.dtstart",
+  //splitDate: " ",
+  //location: "span.location",
+  //dateFormat: "DD/MM/YY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  ///// WARNING UNTESTED
   {
     data: {
       type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "ntty",
-      name: "House Natural Resources Committee Hearings",
-      link: "https://naturalresources.house.gov/hearings",
+      collection: "ovst",
+      name: "House Oversight Committeee Hearings",
+      link: "https://oversight.house.gov/legislation/hearings",
       selectors: {
         layerOne: {
           depth: 5,
-          rows: "tr.vevent",
-          date: "time.dtstart",
-          time: "time.dtstart",
-          splitDate: " ",
-          location: "span.location",
-          dateFormat: "DD/MM/YY",
+          rows:
+            ".pane-congress-hearings-panel-pane-hearings-upcoming .views-row",
+          date: "span.date-display-single",
+          time: "span.date-display-single",
+          splitDate: "-",
+          location:
+            ".views-field-field-congress-meeting-location .field-content",
+          dateFormat: "ddd, DD/MM/YYYY",
         },
       },
     },

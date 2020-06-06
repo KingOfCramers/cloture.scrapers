@@ -503,4 +503,23 @@ export default [
     },
     schedule: { type: "every", value: 2000 },
   },
+  {
+    data: {
+      type: "puppeteerv2",
+      collection: "scnc",
+      name: "House Science Committee Markups",
+      link: "https://science.house.gov/markups",
+      selectors: {
+        layerOne: {
+          depth: 5,
+          rows: "#hearings--upcoming div.hearing",
+          date: ".hearing__date",
+          time: { selector: ".hearing__time time", instance: 0 },
+          location: ".hearing__location",
+          dateFormat: "MMMM DD, YYYY",
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
 ];

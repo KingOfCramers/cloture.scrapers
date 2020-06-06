@@ -428,7 +428,7 @@ export default [
     data: {
       type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
       collection: "ovst",
-      name: "House Oversight Committeee Hearings",
+      name: "House Oversight Committee Hearings",
       link: "https://oversight.house.gov/legislation/hearings",
       selectors: {
         layerOne: {
@@ -440,6 +440,48 @@ export default [
           splitDate: "-",
           location:
             ".views-field-field-congress-meeting-location .field-content",
+          dateFormat: "ddd, DD/MM/YYYY",
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
+  {
+    data: {
+      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      collection: "ovst",
+      name: "House Oversight Committee Markups",
+      link: "https://oversight.house.gov/legislation/business-meetings",
+      selectors: {
+        layerOne: {
+          depth: 5,
+          rows:
+            ".pane-cng-meetings-panel-pane-business-meetings-upcoming .views-row",
+          date: "span.date-display-single",
+          time: "span.date-display-single",
+          splitDate: "-",
+          location:
+            ".views-field-field-congress-meeting-location .field-content",
+          dateFormat: "ddd, DD/MM/YYYY",
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
+  {
+    data: {
+      type: "puppeteerv2",
+      collection: "ovst",
+      name: "House Oversight Committee Briefings",
+      link: "https://oversight.house.gov/legislation/briefings",
+      selectors: {
+        layerOne: {
+          depth: 5,
+          rows: ".views-row",
+          date: "span.date-display-single",
+          time: "span.date-display-single",
+          splitDate: "-",
+          location: null,
           dateFormat: "ddd, DD/MM/YYYY",
         },
       },

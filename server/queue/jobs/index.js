@@ -323,13 +323,33 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv5",
+  //collection: "fisv",
+  //name: "House Financial Services Committee Hearings",
+  //link:
+  //"https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
+  //selectors: {
+  //layerOne: {
+  //depth: 8,
+  //rows: ".newsie-titler",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
       type: "puppeteerv5",
       collection: "fisv",
-      name: "House Financial Services Committee Hearings",
+      name: "House Financial Services Committee Markups",
       link:
-        "https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
+        "https://financialservices.house.gov/calendar/?EventTypeID=575&Congress=116",
       selectors: {
         layerOne: {
           depth: 8,

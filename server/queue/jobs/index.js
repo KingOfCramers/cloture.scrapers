@@ -363,41 +363,61 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "admn",
+  //name: "House Administration Committee Hearings",
+  //link: "https://cha.house.gov/committee-activity/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows:
+  //".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //collection: "admn",
+  //name: "House Administration Committee Markups",
+  //link: "https://cha.house.gov/committee-activity/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows:
+  //".pane-congress-markups-panel-pane-markups-upcoming .view-content",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //dateFormat: "ddd, DD/MM/YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
       type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "admn",
-      name: "House Administration Committee Hearings",
-      link: "https://cha.house.gov/committee-activity/hearings",
+      collection: "ntty",
+      name: "House Natural Resources Committee Hearings",
+      link: "https://naturalresources.house.gov/hearings",
       selectors: {
         layerOne: {
           depth: 5,
-          rows:
-            ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
-          date: ".date-display-single",
-          splitDate: "-",
-          location: ".views-field-field-congress-meeting-location",
-          dateFormat: "ddd, DD/MM/YYYY",
-        },
-      },
-    },
-    schedule: { type: "every", value: 2000 },
-  },
-  {
-    data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
-      collection: "admn",
-      name: "House Administration Committee Markups",
-      link: "https://cha.house.gov/committee-activity/markups",
-      selectors: {
-        layerOne: {
-          depth: 5,
-          rows:
-            ".pane-congress-markups-panel-pane-markups-upcoming .view-content",
-          date: ".date-display-single",
-          splitDate: "-",
-          location: ".views-field-field-congress-meeting-location",
-          dateFormat: "ddd, DD/MM/YYYY",
+          rows: "tr.vevent",
+          date: "time.dtstart",
+          time: "time.dtstart",
+          splitDate: " ",
+          location: "span.location",
+          dateFormat: "DD/MM/YY",
         },
       },
     },

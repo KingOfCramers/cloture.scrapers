@@ -294,7 +294,7 @@ export default [
   //selectors: {
   //layerOne: {
   //depth: 5,
-  //rows: ".pane-congress-hearings-panel-pane-hearings-upcoming",
+  //rows: ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
   //date: ".date-display-single",
   //splitDate: "-",
   //location: ".views-field-field-congress-meeting-location",
@@ -313,7 +313,7 @@ export default [
   //selectors: {
   //layerOne: {
   //depth: 5,
-  //rows: ".pane-congress-hearings-panel-pane-hearings-upcoming",
+  //rows: ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
   //date: ".date-display-single",
   //splitDate: "-",
   //location: ".views-field-field-congress-meeting-location",

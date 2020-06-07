@@ -323,46 +323,52 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
-  //{
-  //data: {
-  //type: "puppeteerv5",
-  //collection: "fisv",
-  //name: "House Financial Services Committee Hearings",
-  //link:
-  //"https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
-  //selectors: {
-  //layerOne: {
-  //depth: 8,
-  //rows: ".newsie-titler",
-  //},
-  //layerTwo: {
-  //title: "h3.news-titler",
-  //jquerySelector: ".topnewstext",
-  //},
-  //},
-  //},
-  //schedule: { type: "every", value: 2000 },
-  //},
-  //{
-  //data: {
-  //type: "puppeteerv5",
-  //collection: "fisv",
-  //name: "House Financial Services Committee Markups",
-  //link:
-  //"https://financialservices.house.gov/calendar/?EventTypeID=575&Congress=116",
-  //selectors: {
-  //layerOne: {
-  //depth: 8,
-  //rows: ".newsie-titler",
-  //},
-  //layerTwo: {
-  //title: "h3.news-titler",
-  //jquerySelector: ".topnewstext",
-  //},
-  //},
-  //},
-  //schedule: { type: "every", value: 2000 },
-  //},
+  {
+    data: {
+      type: "puppeteerv5",
+      collection: "fisv",
+      name: "House Financial Services Committee Hearings",
+      link:
+        "https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
+      selectors: {
+        layerOne: {
+          depth: 8,
+          rows: ".newsie-titler",
+        },
+        layerTwo: {
+          title: "h3.news-titler",
+          jquerySelector: ".topnewstext",
+          locationIndex: 0,
+          dateIndex: 1,
+          timeIndex: 2,
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
+  {
+    data: {
+      type: "puppeteerv5",
+      collection: "fisv",
+      name: "House Financial Services Committee Markups",
+      link:
+        "https://financialservices.house.gov/calendar/?EventTypeID=575&Congress=116",
+      selectors: {
+        layerOne: {
+          depth: 8,
+          rows: ".newsie-titler",
+        },
+        layerTwo: {
+          title: "h3.news-titler",
+          jquerySelector: ".topnewstext",
+          locationIndex: 0,
+          dateIndex: 1,
+          timeIndex: 2,
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
   //{
   //data: {
   //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
@@ -484,39 +490,61 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv2",
+  //collection: "scnc",
+  //name: "House Science Committee Hearings",
+  //link: "https://science.house.gov/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "#hearings--upcoming div.hearing",
+  //date: ".hearing__date",
+  //time: { selector: ".hearing__time time", instance: 0 },
+  //location: ".hearing__location",
+  //dateFormat: "MMMM DD, YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv2",
+  //collection: "scnc",
+  //name: "House Science Committee Markups",
+  //link: "https://science.house.gov/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "#hearings--upcoming div.hearing",
+  //date: ".hearing__date",
+  //time: { selector: ".hearing__time time", instance: 0 },
+  //location: ".hearing__location",
+  //dateFormat: "MMMM DD, YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv2",
-      collection: "scnc",
-      name: "House Science Committee Hearings",
-      link: "https://science.house.gov/hearings",
+      type: "puppeteerv5",
+      collection: "smbs",
+      name: "House Small Business Committee Hearings and Markups",
+      link: "https://smallbusiness.house.gov/activity/",
       selectors: {
         layerOne: {
-          depth: 5,
-          rows: "#hearings--upcoming div.hearing",
-          date: ".hearing__date",
-          time: { selector: ".hearing__time time", instance: 0 },
-          location: ".hearing__location",
-          dateFormat: "MMMM DD, YYYY",
+          depth: 3,
+          rows: "ul.calendar-listing li",
         },
-      },
-    },
-    schedule: { type: "every", value: 2000 },
-  },
-  {
-    data: {
-      type: "puppeteerv2",
-      collection: "scnc",
-      name: "House Science Committee Markups",
-      link: "https://science.house.gov/markups",
-      selectors: {
-        layerOne: {
-          depth: 5,
-          rows: "#hearings--upcoming div.hearing",
-          date: ".hearing__date",
-          time: { selector: ".hearing__time time", instance: 0 },
-          location: ".hearing__location",
-          dateFormat: "MMMM DD, YYYY",
+        layerTwo: {
+          title: "h3.news-titler",
+          jquerySelector: ".topnewstext",
+          locationIndex: null,
+          dateIndex: 0,
+          timeIndex: 1,
         },
       },
     },

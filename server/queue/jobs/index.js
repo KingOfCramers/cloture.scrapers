@@ -1,29 +1,29 @@
 export default [
-  //{
-  //data: {
-  //type: "puppeteerv1", // Scraping routine
-  //collection: "hfac", // MongoDB collection
-  //name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
-  //link: "https://foreignaffairs.house.gov/hearings", // Initial Link
-  //selectors: {
-  //// Scrapers used in the routine
-  //layerOne: {
-  //depth: 5, // Max number of rows checked
-  //rows: "table tbody tr",
-  //dateSelector: "td.recordListDate",
-  //dateFormat: "MM/DD/YYYY",
-  //},
-  //layerTwo: {
-  //title: ".title",
-  //date: "span.date",
-  //time: "span.time",
-  //location: "span.location strong",
-  //witnesses: "div.witnesses strong",
-  //},
-  //},
-  //},
-  //schedule: { type: "every", value: 2000 },
-  //},
+  {
+    data: {
+      type: "puppeteerv1", // Scraping routine
+      collection: "hfac", // MongoDB collection
+      name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
+      link: "https://foreignaffairs.house.gov/hearings", // Initial Link
+      selectors: {
+        // Scrapers used in the routine
+        layerOne: {
+          depth: 5, // Max number of rows checked
+          rows: "table tbody tr",
+          dateSelector: "td.recordListDate",
+          dateFormat: "MM/DD/YYYY",
+        },
+        layerTwo: {
+          title: ".title",
+          date: "span.date",
+          time: "span.time",
+          location: "span.location strong",
+          witnesses: "div.witnesses strong",
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
   //{
   //data: {
   //type: "puppeteerv1",
@@ -266,32 +266,32 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  {
+    data: {
+      type: "puppeteerv1",
+      collection: "help",
+      name: "House Education and Labor Committee Markups",
+      link: "https://edlabor.house.gov/markups",
+      selectors: {
+        layerOne: {
+          depth: 5,
+          rows: "tr.vevent",
+        },
+        layerTwo: {
+          labels: true,
+          title: "h1.main_page_title",
+          date: "span.date",
+          dateFormat: "dddd, MMMM D, YYYY",
+          time: "span.time",
+          location: "span.location b", // Get next sibling (label)
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
   //{
   //data: {
-  //type: "puppeteerv1",
-  //collection: "help",
-  //name: "House Education and Labor Committee Markups",
-  //link: "https://edlabor.house.gov/markups",
-  //selectors: {
-  //layerOne: {
-  //depth: 5,
-  //rows: "tr.vevent",
-  //},
-  //layerTwo: {
-  //labels: true,
-  //title: "h1.main_page_title",
-  //date: "span.date",
-  //dateFormat: "dddd, MMMM D, YYYY",
-  //time: "span.time",
-  //location: "span.location",
-  //},
-  //},
-  //},
-  //schedule: { type: "every", value: 2000 },
-  //},
-  //{
-  //data: {
-  //type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+  //type: "puppeteerv2",
   //collection: "nrgy",
   //name: "House Energy and Commerce Committee Hearings",
   //link: "https://energycommerce.house.gov/committee-activity/hearings",
@@ -591,4 +591,27 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  {
+    data: {
+      type: "puppeteerv1",
+      collection: "wymn",
+      name: "House Ways and Means Committee Hearings",
+      link: "https://waysandmeans.house.gov/legislation/hearings",
+      selectors: {
+        layerOne: {
+          depth: 5,
+          rows:
+            ".pane-congress-hearings-panel-pane-hearings-upcoming .views-row",
+        },
+        layerTwo: {
+          title: "h1.title",
+          date: "span.date-display-single",
+          splitDate: "-",
+          dateFormat: "dddd, MMMM D, YYYY",
+          location: ".field-name-field-congress-meeting-location .field-label",
+        },
+      },
+    },
+    schedule: { type: "every", value: 2000 },
+  },
 ];

@@ -147,7 +147,7 @@ export default [
   //},
   //{
   //data: {
-  //type: "puppeteerv3", // This version is best when the second page is un-parseable due to shitty HTML
+  //type: "puppeteerv5",
   //collection: "hagc",
   //name: "House Agriculture Committee Hearings",
   //link: "https://agriculture.house.gov/calendar/",
@@ -155,9 +155,13 @@ export default [
   //layerOne: {
   //depth: 5,
   //rows: "ul.calendar-listing li",
-  //date: "div.newsie-details span:nth-child(1)",
-  //time: "div.newsie-details span:nth-child(2)",
-  //dateFormat: "MMMM DD, YYYY",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: null,
+  //dateIndex: 0,
+  //timeIndex: 1,
   //},
   //},
   //},
@@ -165,7 +169,7 @@ export default [
   //},
   //{
   //data: {
-  //type: "puppeteerv4", // This version is best when the second page is un-parseable due to shitty HTML
+  //type: "puppeteerv4",
   //collection: "hapc",
   //name: "House Appropriations Committee Hearings",
   //link: "https://appropriations.house.gov/events/hearings",
@@ -549,42 +553,42 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
-  {
-    data: {
-      type: "puppeteerv2",
-      collection: "trns",
-      name: "House Transportation Committee Hearings",
-      link: "https://transportation.house.gov/committee-activity/hearings",
-      selectors: {
-        layerOne: {
-          depth: 5,
-          rows: "div.hearings-table table tr.vevent",
-          date: "time.dtstart",
-          time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
-          location: "span.location",
-          dateFormat: "MMM DD YYYY",
-        },
-      },
-    },
-    schedule: { type: "every", value: 2000 },
-  },
-  {
-    data: {
-      type: "puppeteerv2",
-      collection: "trns",
-      name: "House Transportation Committee Markups",
-      link: "https://transportation.house.gov/committee-activity/markups",
-      selectors: {
-        layerOne: {
-          depth: 5,
-          rows: "div.hearings-table table tr.vevent",
-          date: "time.dtstart",
-          time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
-          location: "span.location",
-          dateFormat: "MMM DD YYYY",
-        },
-      },
-    },
-    schedule: { type: "every", value: 2000 },
-  },
+  //{
+  //data: {
+  //type: "puppeteerv2",
+  //collection: "trns",
+  //name: "House Transportation Committee Hearings",
+  //link: "https://transportation.house.gov/committee-activity/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "div.hearings-table table tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
+  //location: "span.location",
+  //dateFormat: "MMM DD YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
+  //{
+  //data: {
+  //type: "puppeteerv2",
+  //collection: "trns",
+  //name: "House Transportation Committee Markups",
+  //link: "https://transportation.house.gov/committee-activity/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "div.hearings-table table tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
+  //location: "span.location",
+  //dateFormat: "MMM DD YYYY",
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
 ];

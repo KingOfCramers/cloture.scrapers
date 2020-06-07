@@ -527,23 +527,42 @@ export default [
   //},
   //schedule: { type: "every", value: 2000 },
   //},
+  //{
+  //data: {
+  //type: "puppeteerv5",
+  //collection: "smbs",
+  //name: "House Small Business Committee Hearings and Markups",
+  //link: "https://smallbusiness.house.gov/activity/",
+  //selectors: {
+  //layerOne: {
+  //depth: 3,
+  //rows: "ul.calendar-listing li",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: null,
+  //dateIndex: 0,
+  //timeIndex: 1,
+  //},
+  //},
+  //},
+  //schedule: { type: "every", value: 2000 },
+  //},
   {
     data: {
-      type: "puppeteerv5",
-      collection: "smbs",
-      name: "House Small Business Committee Hearings and Markups",
-      link: "https://smallbusiness.house.gov/activity/",
+      type: "puppeteerv2",
+      collection: "trns",
+      name: "House Transportation Committee Hearings",
+      link: "https://transportation.house.gov/committee-activity/hearings",
       selectors: {
         layerOne: {
-          depth: 3,
-          rows: "ul.calendar-listing li",
-        },
-        layerTwo: {
-          title: "h3.news-titler",
-          jquerySelector: ".topnewstext",
-          locationIndex: null,
-          dateIndex: 0,
-          timeIndex: 1,
+          depth: 5,
+          rows: "div.hearings-table table tr.vevent",
+          date: "time.dtstart",
+          time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
+          location: "span.location",
+          dateFormat: "MMM DD YYYY",
         },
       },
     },
@@ -554,7 +573,7 @@ export default [
       type: "puppeteerv2",
       collection: "trns",
       name: "House Transportation Committee Markups",
-      link: "https://transportation.house.gov/committee-activity/hearings",
+      link: "https://transportation.house.gov/committee-activity/markups",
       selectors: {
         layerOne: {
           depth: 5,

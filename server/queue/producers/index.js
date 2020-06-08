@@ -18,7 +18,6 @@ export const every = async (queue, data, every) => {
   }
 };
 export const cron = async (queue, data, cron) => {
-  console.log(cron)
   const options = {
     repeat: { cron }, // Cron is a string like "45 15 * * *", means run every day at 3:45 pm
     removeOnComplete: true, // Remove the job once it's completed.

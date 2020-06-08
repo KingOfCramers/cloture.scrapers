@@ -29,7 +29,8 @@ module.exports = {
       repo: process.env.GIT_REPO,
       path: process.env.PROJECT_PATH,
       "pre-deploy-local": `./deployEnvs.sh ${process.env.PROJECT_PATH} ${hostsBashArgs}`,
-      "post-deploy": `yarn install --ignore-engines && \
+      "post-deploy": `source ~/.zshrc && \
+       yarn install --ignore-engines && \
        yarn prod:build && \
        yarn prod:serve`,
     },

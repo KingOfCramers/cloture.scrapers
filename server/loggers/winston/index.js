@@ -11,7 +11,7 @@ let consoleOptions = {
   silent: process.env.SILENT === "true",
   format: format.combine(
     format.colorize(),
-    format.timestamp(),
+    format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
     format.printf((info) => {
       const { level, message, timestamp } = info;
       return `[${level}] ${moment(timestamp).format(
@@ -21,6 +21,7 @@ let consoleOptions = {
   ),
 };
 let consoleTransport = new winston.transports.Console(consoleOptions);
+winston.add(consoleTransport);
 
 // Setup file transport
 const transport = new winston.transports.DailyRotateFile({
@@ -31,7 +32,10 @@ const transport = new winston.transports.DailyRotateFile({
   zippedArchive: true,
   maxSize: "10m",
   maxFiles: "14d",
-  format: format.combine(format.timestamp(), format.json()),
+  format: format.combine(
+    format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    format.json()
+  ),
 });
 
 transport.on("rotate", (oldFileName, newFilename) => {

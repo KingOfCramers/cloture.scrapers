@@ -1,17 +1,24 @@
-export default [
+// Run jobs every 30 minutes in production
+const schedule =
+  process.env.NODE_ENV === "production"
+    ? { type: "cron", value: "*/30 * * * *" }
+    : { type: "every", value: 2000 };
+
+const jobs = [
   {
     data: {
       type: "puppeteerv1", // Scraping routine
       collection: "hfac", // MongoDB collection
       name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
       link: "https://foreignaffairs.house.gov/hearings", // Initial Link
+      formats: {
+        date: "MM/DD/YYYY", // Necessary to convert the date string
+        time: "LT", // Necessary to convert the date string
+      },
       selectors: {
-        // Scrapers used in the routine
         layerOne: {
           depth: 5, // Max number of rows checked
-          rows: "table tbody tr",
-          dateSelector: "td.recordListDate",
-          dateFormat: "MM/DD/YYYY",
+          rows: "table tbody tr", // Rows to check
         },
         layerTwo: {
           title: ".title",
@@ -22,7 +29,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -30,6 +36,10 @@ export default [
       collection: "hfac",
       name: "House Foreign Affairs Committee Markups",
       link: "https://foreignaffairs.house.gov/markups",
+      formats: {
+        date: "MM/DD/YYYY",
+        time: "LT",
+      },
       selectors: {
         layerOne: {
           depth: 1,
@@ -46,7 +56,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -67,11 +76,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "hvac",
       name: "House Veterans Affairs Committee Hearings",
       link: "https://veterans.house.gov/events/hearings",
@@ -86,11 +94,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "hvac",
       name: "House Veterans Affairs Committee Markups",
       link: "https://veterans.house.gov/events/markups",
@@ -105,11 +112,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "hhsc",
       name: "House Homeland Security Committee Hearings",
       link: "http://homeland.house.gov/activities/hearings",
@@ -124,11 +130,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "hhsc",
       name: "House Homeland Security Committee Markups",
       link: "http://homeland.house.gov/activities/markups",
@@ -143,7 +148,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -165,7 +169,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -184,7 +187,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -203,7 +205,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -222,7 +223,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -241,7 +241,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -264,7 +263,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -287,7 +285,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -307,7 +304,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -327,7 +323,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -350,7 +345,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -373,11 +367,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "admn",
       name: "House Administration Committee Hearings",
       link: "https://cha.house.gov/committee-activity/hearings",
@@ -393,11 +386,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "admn",
       name: "House Administration Committee Markups",
       link: "https://cha.house.gov/committee-activity/markups",
@@ -413,11 +405,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "ntty",
       name: "House Natural Resources Committee Hearings",
       link: "https://naturalresources.house.gov/hearings",
@@ -432,11 +423,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "ovst",
       name: "House Oversight Committee Hearings",
       link: "https://oversight.house.gov/legislation/hearings",
@@ -453,11 +443,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
-      type: "puppeteerv2", // This version is best when the second page is un-parseable due to shitty HTML
+      type: "puppeteerv2",
       collection: "ovst",
       name: "House Oversight Committee Markups",
       link: "https://oversight.house.gov/legislation/business-meetings",
@@ -474,7 +463,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -493,7 +481,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -512,7 +499,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -531,7 +517,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -553,7 +538,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -572,7 +556,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -591,7 +574,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -614,7 +596,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -636,7 +617,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -655,6 +635,10 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "*/30 * * * *" },
   },
-];
+].map((x) => {
+  x.schedule = schedule;
+  return x;
+});
+
+export default jobs;

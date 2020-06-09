@@ -22,7 +22,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -46,7 +46,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -67,7 +67,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -86,7 +86,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -105,7 +105,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -124,7 +124,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -143,7 +143,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -165,7 +165,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -184,7 +184,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -203,7 +203,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -222,7 +222,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -241,7 +241,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -264,7 +264,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -287,7 +287,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -307,7 +307,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -327,7 +327,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -350,7 +350,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -373,7 +373,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -393,7 +393,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -413,7 +413,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -432,7 +432,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -453,7 +453,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -474,7 +474,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -493,7 +493,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -512,7 +512,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -531,7 +531,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -553,7 +553,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -572,7 +572,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -591,7 +591,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -614,7 +614,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -636,7 +636,7 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
   {
     data: {
@@ -655,6 +655,6 @@ export default [
         },
       },
     },
-    schedule: { type: "cron", value: "20 * * * *" },
+    schedule: { type: "cron", value: "*/30 * * * *" },
   },
 ];

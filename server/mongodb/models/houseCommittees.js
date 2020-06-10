@@ -12,24 +12,19 @@ let houseCommitteeSchema = new Schema({
   },
   location: {
     type: String,
-    required: false,
+    require: false,
   },
   time: {
-    type: String,
-    require: true,
+    type: Date,
+    require: false,
   },
   date: {
-    type: String,
-    require: true,
+    type: Date,
+    require: false,
   },
-  witnesses: [
-    {
-      type: String,
-    },
-  ],
   type: {
     type: String,
-    require: true,
+    require: false,
   },
 });
 

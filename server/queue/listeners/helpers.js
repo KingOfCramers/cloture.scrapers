@@ -1,3 +1,4 @@
+import moment from "moment";
 import { logger } from "../../loggers/winston";
 
 export const calculateResults = async (job, result) => {
@@ -26,6 +27,25 @@ export const calculateResults = async (job, result) => {
   if (numberModified > 0) {
     logger.info(`Modified ${numberModified} records`);
   }
+};
+
+// For each field, check that format is valid from parsed data. If not, return null for field instead.
+export const cleanDateTime = (meta, data) => {
+  let fieldsToCheck = Object.keys(meta.formats);
+  let cleaned = data.map((datum) => {
+    fieldsToCheck.forEach((field) => {
+      let valueFromPage = datum[field];
+      let isValidFormat = moment(valueFromPage, meta.formats[field]).isValid();
+      if (!isValidFormat) {
+        datum[field] = null;
+      } else {
+        let value = moment(valueFromPage, meta.formats[field]).toISOString(); /// Convert to date string for storage in MongoDB
+        datum[field] = value;
+      }
+    });
+    return datum;
+  });
+  return cleaned;
 };
 
 export const insertData = (model, data) =>

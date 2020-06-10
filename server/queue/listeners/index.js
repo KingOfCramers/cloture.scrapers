@@ -1,25 +1,29 @@
 import { logger } from "../../loggers/winston";
 import { pickModel } from "../../mongodb/util";
-import { calculateResults, insertData } from "./helpers";
+import { calculateResults, insertData, cleanDateTime } from "./helpers";
 
 export const setupListeners = async (queue) => {
   queue.on("global:completed", async (job, result) => {
     let { data, meta } = JSON.parse(result);
 
     if (!data || !meta) {
-      logger.error(`${job} returned null field.`);
+      logger.error(`${job} failed to return data or meta information.`);
     }
+
+    //console.log(meta);
 
     let collection = meta.collection;
     let model = pickModel(collection);
 
     if (!model) {
-      logger.error(`${job} could not find schema, tried ${collection}`);
+      logger.error(
+        `${job} could not find schema, tried to find: ${collection}`
+      );
     }
 
     try {
-      // See: https://silvantroxler.ch/2016/insert-or-update-with-mongodb-and-mongoose/
-      let promisedInserts = insertData(model, data);
+      let cleanedData = cleanDateTime(meta, data);
+      let promisedInserts = insertData(model, cleanedData);
       let results = await Promise.all(promisedInserts);
       await calculateResults(job, results);
 

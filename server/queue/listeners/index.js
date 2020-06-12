@@ -10,8 +10,6 @@ export const setupListeners = async (queue) => {
       logger.error(`${job} failed to return data or meta information.`);
     }
 
-    //console.log(meta);
-
     let collection = meta.collection;
     let model = pickModel(collection);
 
@@ -23,6 +21,7 @@ export const setupListeners = async (queue) => {
 
     try {
       let cleanedData = cleanDateTime(meta, data);
+      console.log(cleanedData);
       let promisedInserts = insertData(model, cleanedData);
       let results = await Promise.all(promisedInserts);
       await calculateResults(job, results);

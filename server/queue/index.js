@@ -4,7 +4,7 @@ import { logger } from "../loggers/winston";
 
 import { setupProducers } from "./producers";
 import { setupListeners } from "./listeners";
-import jobs from "./jobs";
+import { jobs } from "./jobs";
 
 export const setupQueue = async () => {
   try {

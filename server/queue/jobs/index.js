@@ -4,31 +4,30 @@ const schedule =
     ? { type: "cron", value: "*/30 * * * *" }
     : { type: "every", value: 2000 };
 
+const validFormats = {
+  date: ["MMM D, YYYY"], // Necessary to convert the date string
+  time: ["LT"], // Max number of rows checked
+};
+
 const jobs = [
-  //{
-  //data: {
-  //type: "puppeteerv1", // Scraping routine
-  //collection: "hfac", // MongoDB collection
-  //name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
-  //link: "https://foreignaffairs.house.gov/hearings", // Initial Link
-  //formats: {
-  //date: "MMM D, YYYY", // Necessary to convert the date string
-  //time: "LT", // Necessary to convert the date string
-  //},
-  //selectors: {
-  //layerOne: {
-  //depth: 5, // Max number of rows checked
-  //rows: "table tbody tr", // Rows to check
-  //},
-  //layerTwo: {
-  //title: ".title",
-  //date: "span.date",
-  //time: "span.time",
-  //location: "span.location strong",
-  //},
-  //},
-  //},
-  //},
+  {
+    type: "puppeteerv1", // Scraping routine
+    collection: "hfac", // MongoDB collection
+    name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
+    link: "https://foreignaffairs.house.gov/hearings", // Initial Link
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "table tbody tr", // Rows to check
+      },
+      layerTwo: {
+        title: ".title",
+        date: "span.date",
+        time: "span.time",
+        location: "span.location strong",
+      },
+    },
+  },
   //{
   //data: {
   //type: "puppeteerv1",
@@ -77,30 +76,30 @@ const jobs = [
   //},
   //},
   //},
-  {
-    data: {
-      type: "puppeteerv1",
-      collection: "hvac",
-      name: "House Veterans Affairs Committee Hearings",
-      link: "https://veterans.house.gov/events/hearings",
-      formats: {
-        date: "MMM D, YYYY",
-        time: "hh:mm A",
-      },
-      selectors: {
-        layerOne: {
-          depth: 5,
-          rows: "tr.vevent",
-        },
-        layerTwo: {
-          date: "p.hearing__date date",
-          time: "p.hearing__time time b",
-          location: "p.hearing__location b",
-          dateFormat: "MMM D",
-        },
-      },
-    },
-  },
+  //{
+  //data: {
+  //type: "puppeteerv1",
+  //collection: "hvac",
+  //name: "House Veterans Affairs Committee Hearings",
+  //link: "https://veterans.house.gov/events/hearings",
+  //formats: {
+  //date: "MMM D, YYYY",
+  //time: "hh:mm A",
+  //},
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //},
+  //layerTwo: {
+  //date: "p.hearing__date date",
+  //time: "p.hearing__time time b",
+  //location: "p.hearing__location b",
+  //dateFormat: "MMM D",
+  //},
+  //},
+  //},
+  //},
   //{
   //data: {
   //type: "puppeteerv2",
@@ -642,9 +641,6 @@ const jobs = [
   //},
   //},
   //},
-].map((x) => {
-  x.schedule = schedule;
-  return x;
-});
+].map((x) => ({ schedule, validFormats, ...x }));
 
-export default jobs;
+export { jobs };

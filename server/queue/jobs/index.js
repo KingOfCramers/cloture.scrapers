@@ -5,50 +5,59 @@ const schedule =
     : { type: "every", value: 2000 };
 
 const validFormats = {
-  date: ["MMM D, YYYY"], // Necessary to convert the date string
-  time: ["LT"], // Max number of rows checked
+  date: [
+    "MMM D, YYYY",
+    "MM/DD/YYYY",
+    "MMM D, YYYY",
+    "MMM D",
+    "MMM DD YYYY",
+    "ddd, DD/MM/YYYY",
+    "dddd, MMMM D, YYYY",
+    "DD/MM/YY",
+    "MMMM DD, YYYY",
+  ],
+  time: ["LT", "hh:mm A"],
 };
 
 const jobs = [
-  {
-    type: "puppeteerv1", // Scraping routine
-    collection: "hfac", // MongoDB collection
-    name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
-    link: "https://foreignaffairs.house.gov/hearings", // Initial Link
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "table tbody tr", // Rows to check
-      },
-      layerTwo: {
-        title: ".title",
-        date: "span.date",
-        time: "span.time",
-        location: "span.location strong",
-      },
-    },
-  },
-  {
-    type: "puppeteerv1",
-    collection: "hfac",
-    name: "House Foreign Affairs Committee Markups",
-    link: "https://foreignaffairs.house.gov/markups",
-    selectors: {
-      layerOne: {
-        depth: 1,
-        rows: "table tbody tr",
-        dateSelector: "td.recordListDate",
-        dateFormat: "MM/DD/YYYY",
-      },
-      layerTwo: {
-        title: ".title",
-        date: "span.date",
-        time: "span.time",
-        location: "span.location strong",
-        witnesses: "div.witnesses strong",
-      },
-    },
-  },
+  //{
+  //type: "puppeteerv1", // Scraping routine
+  //collection: "hfac", // MongoDB collection
+  //name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
+  //link: "https://foreignaffairs.house.gov/hearings", // Initial Link
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "table tbody tr", // Rows to check
+  //},
+  //layerTwo: {
+  //title: ".title",
+  //date: "span.date",
+  //time: "span.time",
+  //location: "span.location strong",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv1",
+  //collection: "hfac",
+  //name: "House Foreign Affairs Committee Markups",
+  //link: "https://foreignaffairs.house.gov/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 1,
+  //rows: "table tbody tr",
+  //dateSelector: "td.recordListDate",
+  //},
+  //layerTwo: {
+  //title: ".title",
+  //date: "span.date",
+  //time: "span.time",
+  //location: "span.location strong",
+  //witnesses: "div.witnesses strong",
+  //},
+  //},
+  //},
   {
     type: "puppeteerv1",
     collection: "hasc",
@@ -86,7 +95,6 @@ const jobs = [
         date: "p.hearing__date date",
         time: "p.hearing__time time b",
         location: "p.hearing__location b",
-        dateFormat: "MMM D",
       },
     },
   },
@@ -102,7 +110,6 @@ const jobs = [
         date: "time.dtstart",
         time: { selector: "time.dtstart", instance: 1 },
         location: "span.location",
-        dateFormat: "MMM D",
       },
     },
   },
@@ -118,7 +125,6 @@ const jobs = [
         date: "time.dtstart",
         time: { selector: "time.dtstart", instance: 1 },
         location: "span.location",
-        dateFormat: "MMM DD YYYY",
       },
     },
   },
@@ -134,7 +140,6 @@ const jobs = [
         date: "time.dtstart",
         time: { selector: "time.dtstart", instance: 1 },
         location: "span.location",
-        dateFormat: "MMM DD YYYY",
       },
     },
   },
@@ -169,7 +174,6 @@ const jobs = [
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
         time: "div.newsie-details span:nth-child(2)",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -185,7 +189,6 @@ const jobs = [
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
         time: "div.newsie-details span:nth-child(2)",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -201,7 +204,6 @@ const jobs = [
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
         time: "div.newsie-details span:nth-child(2)",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -217,7 +219,6 @@ const jobs = [
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
         time: "div.newsie-details span:nth-child(2)",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -235,7 +236,6 @@ const jobs = [
         labels: true,
         title: "h1.main_page_title",
         date: "span.date",
-        dateFormat: "dddd, MMMM D, YYYY",
         time: "span.time",
         location: "span.location",
       },
@@ -255,7 +255,6 @@ const jobs = [
         labels: true,
         title: "h1.main_page_title",
         date: "span.date",
-        dateFormat: "dddd, MMMM D, YYYY",
         time: "span.time",
         location: "span.location b", // Get next sibling (label)
       },
@@ -274,7 +273,6 @@ const jobs = [
         date: ".date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -331,7 +329,6 @@ const jobs = [
         date: ".date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -348,7 +345,6 @@ const jobs = [
         date: ".date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -364,7 +360,6 @@ const jobs = [
         date: "time.dtstart",
         splitDate: " ",
         location: "span.location",
-        dateFormat: "DD/MM/YY",
       },
     },
   },
@@ -380,7 +375,6 @@ const jobs = [
         date: "span.date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location .field-content",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -397,7 +391,6 @@ const jobs = [
         date: "span.date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location .field-content",
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -413,7 +406,6 @@ const jobs = [
         date: "span.date-display-single",
         splitDate: "-",
         location: null,
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },
@@ -429,7 +421,6 @@ const jobs = [
         date: ".hearing__date",
         time: { selector: ".hearing__time time", instance: 0 },
         location: ".hearing__location",
-        dateFormat: "MMMM DD, YYYY",
       },
     },
   },
@@ -445,7 +436,6 @@ const jobs = [
         date: ".hearing__date",
         time: { selector: ".hearing__time time", instance: 0 },
         location: ".hearing__location",
-        dateFormat: "MMMM DD, YYYY",
       },
     },
   },
@@ -480,7 +470,6 @@ const jobs = [
         date: "time.dtstart",
         time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
         location: "span.location",
-        dateFormat: "MMM DD YYYY",
       },
     },
   },
@@ -496,7 +485,6 @@ const jobs = [
         date: "time.dtstart",
         time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
         location: "span.location",
-        dateFormat: "MMM DD YYYY",
       },
     },
   },
@@ -514,7 +502,6 @@ const jobs = [
         title: "h1.title",
         date: "span.date-display-single",
         splitDate: "-",
-        dateFormat: "dddd, MMMM D, YYYY",
         location: ".field-name-field-congress-meeting-location .field-label",
       },
     },
@@ -533,7 +520,6 @@ const jobs = [
         title: "h1.title",
         date: "span.date-display-single",
         splitDate: "-",
-        dateFormat: "dddd, MMMM D, YYYY",
         location: ".field-name-field-congress-meeting-location .field-label",
       },
     },
@@ -550,7 +536,6 @@ const jobs = [
         date: "span.date-display-single",
         splitDate: "-",
         location: null,
-        dateFormat: "ddd, DD/MM/YYYY",
       },
     },
   },

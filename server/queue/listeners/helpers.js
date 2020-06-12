@@ -35,17 +35,18 @@ export const calculateResults = async (job, result) => {
 // If not, return null. Otherwise, return value with ISOString().
 export const cleanDateTime = (meta, data) => {
   let fieldsToCheck = Object.keys(meta.validFormats);
-  console.log(fieldsToCheck);
   return data.map((datum) => {
     fieldsToCheck.forEach((field) => {
       let valueFromScraper = datum[field];
       let validFormat = meta.validFormats[field].find((format) =>
-        moment(valueFromScraper, format, true)
+        moment(valueFromScraper, format, true).isValid()
       );
       if (!validFormat) {
         // If time doesn't match set to null
         datum[field] = null;
       } else {
+        console.log(validFormat);
+        console.log(datum[field]);
         datum[field] = moment(valueFromScraper, validFormat);
       }
     });

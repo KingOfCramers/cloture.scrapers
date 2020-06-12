@@ -17,7 +17,7 @@ const validFormats = {
     "MMMM DD, YYYY",
     "MMMM D, YYYY",
   ],
-  time: ["LT", "hh:mm A"],
+  time: ["LT", "hh:mm A", "hh:mmA", "hh:mm"],
 };
 
 const jobs = [
@@ -59,163 +59,163 @@ const jobs = [
   //},
   //},
   //},
-  {
-    type: "puppeteerv1",
-    collection: "hasc",
-    name: "House Armed Services Committee",
-    link: "https://armedservices.house.gov/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "table tbody tr",
-      },
-      layerTwo: {
-        title: ".title",
-        date: "span.date:first-of-type",
-      },
-    },
-  },
-  {
-    type: "puppeteerv1",
-    collection: "hvac",
-    name: "House Veterans Affairs Committee Hearings",
-    link: "https://veterans.house.gov/events/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "tr.vevent",
-      },
-      layerTwo: {
-        date: "p.hearing__date date",
-        time: "p.hearing__time time b",
-        location: "p.hearing__location b",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "hvac",
-    name: "House Veterans Affairs Committee Markups",
-    link: "https://veterans.house.gov/events/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "tr.vevent",
-        date: "time.dtstart",
-        time: { selector: "time.dtstart", instance: 1 },
-        location: "span.location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "hhsc",
-    name: "House Homeland Security Committee Hearings",
-    link: "http://homeland.house.gov/activities/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "tr.vevent",
-        date: "time.dtstart",
-        time: { selector: "time.dtstart", instance: 1 },
-        location: "span.location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "hhsc",
-    name: "House Homeland Security Committee Markups",
-    link: "http://homeland.house.gov/activities/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "tr.vevent",
-        date: "time.dtstart",
-        time: { selector: "time.dtstart", instance: 1 },
-        location: "span.location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv5",
-    collection: "hagc",
-    name: "House Agriculture Committee Hearings",
-    link: "https://agriculture.house.gov/calendar/",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "ul.calendar-listing li",
-      },
-      layerTwo: {
-        title: "h3.news-titler",
-        jquerySelector: ".topnewstext",
-        locationIndex: null,
-        dateIndex: 0,
-        timeIndex: 1,
-      },
-    },
-  },
-  {
-    type: "puppeteerv4",
-    collection: "hapc",
-    name: "House Appropriations Committee Hearings",
-    link: "https://appropriations.house.gov/events/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        upcomingHearings: ".pane-content",
-        hearings: ".views-row",
-        dateTime: ".views-field-field-congress-meeting-date",
-        time: "div.newsie-details span:nth-child(2)",
-      },
-    },
-  },
-  {
-    type: "puppeteerv4",
-    collection: "hapc",
-    name: "House Appropriations Committee Markups",
-    link: "https://appropriations.house.gov/events/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        upcomingHearings: ".pane-content",
-        hearings: ".views-row",
-        dateTime: ".views-field-field-congress-meeting-date",
-        time: "div.newsie-details span:nth-child(2)",
-      },
-    },
-  },
-  {
-    type: "puppeteerv4",
-    collection: "hbuc",
-    name: "House Budget Committee Hearings",
-    link: "https://budget.house.gov/legislation/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        upcomingHearings: ".pane-content",
-        hearings: ".views-row",
-        dateTime: ".views-field-field-congress-meeting-date",
-        time: "div.newsie-details span:nth-child(2)",
-      },
-    },
-  },
-  {
-    type: "puppeteerv4",
-    collection: "hbuc",
-    name: "House Budget Committee Markups",
-    link: "https://budget.house.gov/legislation/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        upcomingHearings: ".pane-content",
-        hearings: ".views-row",
-        dateTime: ".views-field-field-congress-meeting-date",
-        time: "div.newsie-details span:nth-child(2)",
-      },
-    },
-  },
+  //{
+  //type: "puppeteerv1",
+  //collection: "hasc",
+  //name: "House Armed Services Committee",
+  //link: "https://armedservices.house.gov/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "table tbody tr",
+  //},
+  //layerTwo: {
+  //title: ".title",
+  //date: "span.date:first-of-type",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv1",
+  //collection: "hvac",
+  //name: "House Veterans Affairs Committee Hearings",
+  //link: "https://veterans.house.gov/events/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //},
+  //layerTwo: {
+  //date: "p.hearing__date date",
+  //time: "p.hearing__time time b",
+  //location: "p.hearing__location b",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "hvac",
+  //name: "House Veterans Affairs Committee Markups",
+  //link: "https://veterans.house.gov/events/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 },
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "hhsc",
+  //name: "House Homeland Security Committee Hearings",
+  //link: "http://homeland.house.gov/activities/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 },
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "hhsc",
+  //name: "House Homeland Security Committee Markups",
+  //link: "http://homeland.house.gov/activities/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 },
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv5",
+  //collection: "hagc",
+  //name: "House Agriculture Committee Hearings",
+  //link: "https://agriculture.house.gov/calendar/",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "ul.calendar-listing li",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: null,
+  //dateIndex: 0,
+  //timeIndex: 1,
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv4",
+  //collection: "hapc",
+  //name: "House Appropriations Committee Hearings",
+  //link: "https://appropriations.house.gov/events/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv4",
+  //collection: "hapc",
+  //name: "House Appropriations Committee Markups",
+  //link: "https://appropriations.house.gov/events/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv4",
+  //collection: "hbuc",
+  //name: "House Budget Committee Hearings",
+  //link: "https://budget.house.gov/legislation/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv4",
+  //collection: "hbuc",
+  //name: "House Budget Committee Markups",
+  //link: "https://budget.house.gov/legislation/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //upcomingHearings: ".pane-content",
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //},
   {
     type: "puppeteerv1",
     collection: "help",
@@ -229,8 +229,8 @@ const jobs = [
       layerTwo: {
         labels: true,
         title: "h1.main_page_title",
-        date: "span.date",
-        time: "span.time",
+        date: "span.date b",
+        time: "span.time b",
         location: "span.location",
       },
     },

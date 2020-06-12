@@ -7,18 +7,31 @@ const schedule =
 const validFormats = {
   date: [
     "MMM D, YYYY",
-    "MM/DD/YYYY",
-    "MMM D, YYYY",
+    "MMM D YYYY",
     "MMM D",
     "MMM DD YYYY",
-    "ddd, DD/MM/YYYY",
-    "ddd, MM/DD/YYYY",
-    "dddd, MMMM D, YYYY",
-    "DD/MM/YY",
     "MMMM DD, YYYY",
     "MMMM D, YYYY",
+    "MM/DD/YYYY",
+    "MM/DD/YY",
+    "ddd, DD/MM/YYYY",
+    "ddd, MM/DD/YYYY",
+    "dddd, MMMM DD, YYYY",
+    "dddd, MMMM D, YYYY",
+    "DD/MM/YY",
   ],
-  time: ["LT", "hh:mm A", "hh:mmA", "hh:mm"],
+  time: [
+    "LT",
+    "hh:mm A",
+    "h:mm A",
+    "hh:mm a",
+    "h:mm a",
+    "hh:mmA",
+    "h:mmA",
+    "hh:mma",
+    "h:mma",
+    "hh:mm",
+  ],
 };
 
 const jobs = [
@@ -255,270 +268,270 @@ const jobs = [
   //},
   //},
   //},
-  {
-    type: "puppeteerv2",
-    collection: "nrgy",
-    name: "House Energy and Commerce Committee Hearings",
-    link: "https://energycommerce.house.gov/committee-activity/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows:
-          ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
-        date: ".date-display-single",
-        splitDate: "-",
-        location: ".views-field-field-congress-meeting-location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv5",
-    collection: "fisv",
-    name: "House Financial Services Committee Hearings",
-    link:
-      "https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
-    selectors: {
-      layerOne: {
-        depth: 8,
-        rows: ".newsie-titler",
-      },
-      layerTwo: {
-        title: "h3.news-titler",
-        jquerySelector: ".topnewstext",
-        locationIndex: 0,
-        dateIndex: 1,
-        timeIndex: 2,
-      },
-    },
-  },
-  {
-    type: "puppeteerv5",
-    collection: "fisv",
-    name: "House Financial Services Committee Markups",
-    link:
-      "https://financialservices.house.gov/calendar/?EventTypeID=575&Congress=116",
-    selectors: {
-      layerOne: {
-        depth: 8,
-        rows: ".newsie-titler",
-      },
-      layerTwo: {
-        title: "h3.news-titler",
-        jquerySelector: ".topnewstext",
-        locationIndex: 0,
-        dateIndex: 1,
-        timeIndex: 2,
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "admn",
-    name: "House Administration Committee Hearings",
-    link: "https://cha.house.gov/committee-activity/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows:
-          ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
-        date: ".date-display-single",
-        splitDate: "-",
-        location: ".views-field-field-congress-meeting-location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "admn",
-    name: "House Administration Committee Markups",
-    link: "https://cha.house.gov/committee-activity/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows:
-          ".pane-congress-markups-panel-pane-markups-upcoming .view-content",
-        date: ".date-display-single",
-        splitDate: "-",
-        location: ".views-field-field-congress-meeting-location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "ntty",
-    name: "House Natural Resources Committee Hearings",
-    link: "https://naturalresources.house.gov/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "tr.vevent",
-        date: "time.dtstart",
-        splitDate: " ",
-        location: "span.location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "ovst",
-    name: "House Oversight Committee Hearings",
-    link: "https://oversight.house.gov/legislation/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: ".pane-congress-hearings-panel-pane-hearings-upcoming .views-row",
-        date: "span.date-display-single",
-        splitDate: "-",
-        location: ".views-field-field-congress-meeting-location .field-content",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "ovst",
-    name: "House Oversight Committee Markups",
-    link: "https://oversight.house.gov/legislation/business-meetings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows:
-          ".pane-cng-meetings-panel-pane-business-meetings-upcoming .views-row",
-        date: "span.date-display-single",
-        splitDate: "-",
-        location: ".views-field-field-congress-meeting-location .field-content",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "ovst",
-    name: "House Oversight Committee Briefings",
-    link: "https://oversight.house.gov/legislation/briefings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: ".views-row",
-        date: "span.date-display-single",
-        splitDate: "-",
-        location: null,
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "scnc",
-    name: "House Science Committee Hearings",
-    link: "https://science.house.gov/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "#hearings--upcoming div.hearing",
-        date: ".hearing__date",
-        time: { selector: ".hearing__time time", instance: 0 },
-        location: ".hearing__location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "scnc",
-    name: "House Science Committee Markups",
-    link: "https://science.house.gov/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "#hearings--upcoming div.hearing",
-        date: ".hearing__date",
-        time: { selector: ".hearing__time time", instance: 0 },
-        location: ".hearing__location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv5",
-    collection: "smbs",
-    name: "House Small Business Committee Hearings and Markups",
-    link: "https://smallbusiness.house.gov/activity/",
-    selectors: {
-      layerOne: {
-        depth: 3,
-        rows: "ul.calendar-listing li",
-      },
-      layerTwo: {
-        title: "h3.news-titler",
-        jquerySelector: ".topnewstext",
-        locationIndex: null,
-        dateIndex: 0,
-        timeIndex: 1,
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "trns",
-    name: "House Transportation Committee Hearings",
-    link: "https://transportation.house.gov/committee-activity/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "div.hearings-table table tr.vevent",
-        date: "time.dtstart",
-        time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
-        location: "span.location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv2",
-    collection: "trns",
-    name: "House Transportation Committee Markups",
-    link: "https://transportation.house.gov/committee-activity/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "div.hearings-table table tr.vevent",
-        date: "time.dtstart",
-        time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
-        location: "span.location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv1",
-    collection: "wymn",
-    name: "House Ways and Means Committee Hearings",
-    link: "https://waysandmeans.house.gov/legislation/hearings",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: ".pane-congress-hearings-panel-pane-hearings-upcoming .views-row",
-      },
-      layerTwo: {
-        title: "h1.title",
-        date: "span.date-display-single",
-        splitDate: "-",
-        location: ".field-name-field-congress-meeting-location .field-label",
-      },
-    },
-  },
-  {
-    type: "puppeteerv1",
-    collection: "wymn",
-    name: "House Ways and Means Committee Markups",
-    link: "https://waysandmeans.house.gov/legislation/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: ".pane-congress-markups-panel-pane-markups-upcoming .views-row",
-      },
-      layerTwo: {
-        title: "h1.title",
-        date: "span.date-display-single",
-        splitDate: "-",
-        location: ".field-name-field-congress-meeting-location .field-label",
-      },
-    },
-  },
+  //{
+  //type: "puppeteerv2",
+  //collection: "nrgy",
+  //name: "House Energy and Commerce Committee Hearings",
+  //link: "https://energycommerce.house.gov/committee-activity/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows:
+  //".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv5",
+  //collection: "fisv",
+  //name: "House Financial Services Committee Hearings",
+  //link:
+  //"https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
+  //selectors: {
+  //layerOne: {
+  //depth: 8,
+  //rows: ".newsie-titler",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: 0,
+  //dateIndex: 1,
+  //timeIndex: 2,
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv5",
+  //collection: "fisv",
+  //name: "House Financial Services Committee Markups",
+  //link:
+  //"https://financialservices.house.gov/calendar/?EventTypeID=575&Congress=116",
+  //selectors: {
+  //layerOne: {
+  //depth: 8,
+  //rows: ".newsie-titler",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: 0,
+  //dateIndex: 1,
+  //timeIndex: 2,
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "admn",
+  //name: "House Administration Committee Hearings",
+  //link: "https://cha.house.gov/committee-activity/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows:
+  //".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "admn",
+  //name: "House Administration Committee Markups",
+  //link: "https://cha.house.gov/committee-activity/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows:
+  //".pane-congress-markups-panel-pane-markups-upcoming .view-content",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "ntty",
+  //name: "House Natural Resources Committee Hearings",
+  //link: "https://naturalresources.house.gov/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //splitDate: " ",
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "ovst",
+  //name: "House Oversight Committee Hearings",
+  //link: "https://oversight.house.gov/legislation/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: ".views-row",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location .field-content",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "ovst",
+  //name: "House Oversight Committee Markups",
+  //link: "https://oversight.house.gov/legislation/business-meetings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows:
+  //".pane-cng-meetings-panel-pane-business-meetings-upcoming .views-row",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location .field-content",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "ovst",
+  //name: "House Oversight Committee Briefings",
+  //link: "https://oversight.house.gov/legislation/briefings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: ".views-row",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: null,
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "scnc",
+  //name: "House Science Committee Hearings",
+  //link: "https://science.house.gov/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "#hearings--upcoming div.hearing",
+  //date: ".hearing__date",
+  //time: { selector: ".hearing__time time", instance: 0 },
+  //location: ".hearing__location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "scnc",
+  //name: "House Science Committee Markups",
+  //link: "https://science.house.gov/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "#hearings--upcoming div.hearing",
+  //date: ".hearing__date",
+  //time: { selector: ".hearing__time time", instance: 0 },
+  //location: ".hearing__location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv5",
+  //collection: "smbs",
+  //name: "House Small Business Committee Hearings and Markups",
+  //link: "https://smallbusiness.house.gov/activity/",
+  //selectors: {
+  //layerOne: {
+  //depth: 3,
+  //rows: "ul.calendar-listing li",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: null,
+  //dateIndex: 0,
+  //timeIndex: 1,
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "trns",
+  //name: "House Transportation Committee Hearings",
+  //link: "https://transportation.house.gov/committee-activity/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "div.hearings-table table tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv2",
+  //collection: "trns",
+  //name: "House Transportation Committee Markups",
+  //link: "https://transportation.house.gov/committee-activity/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "div.hearings-table table tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv1",
+  //collection: "wymn",
+  //name: "House Ways and Means Committee Hearings",
+  //link: "https://waysandmeans.house.gov/legislation/hearings",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: ".pane-congress-hearings-panel-pane-hearings-upcoming .views-row",
+  //},
+  //layerTwo: {
+  //title: "h1.title",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: ".field-name-field-congress-meeting-location .field-label",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv1",
+  //collection: "wymn",
+  //name: "House Ways and Means Committee Markups",
+  //link: "https://waysandmeans.house.gov/legislation/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: ".pane-congress-markups-panel-pane-markups-upcoming .views-row",
+  //},
+  //layerTwo: {
+  //title: "h1.title",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: ".field-name-field-congress-meeting-location .field-label",
+  //},
+  //},
+  //},
   {
     type: "puppeteerv2",
     collection: "clmt",

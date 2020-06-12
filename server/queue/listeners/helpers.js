@@ -30,6 +30,16 @@ export const calculateResults = async (job, result) => {
   }
 };
 
+export const stripWhiteSpace = (data) =>
+  data.map((x) => {
+    for (let key in x) {
+      if (typeof x[key] === "string") {
+        x[key] = x[key].trim();
+      }
+    }
+    return x;
+  });
+
 // Check to see if date and time fields pulled from page
 // match the valid values provided in each job (validFormats).
 // If not, return null. Otherwise, return value with ISOString().

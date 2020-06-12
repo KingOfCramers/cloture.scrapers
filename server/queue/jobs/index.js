@@ -12,6 +12,7 @@ const validFormats = {
     "MMM D",
     "MMM DD YYYY",
     "ddd, DD/MM/YYYY",
+    "ddd, MM/DD/YYYY",
     "dddd, MMMM D, YYYY",
     "DD/MM/YY",
     "MMMM DD, YYYY",
@@ -216,44 +217,44 @@ const jobs = [
   //},
   //},
   //},
-  {
-    type: "puppeteerv1",
-    collection: "help",
-    name: "House Education and Labor Committee Hearings",
-    link: "https://edlabor.house.gov/hearings-and-events",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "tr.vevent",
-      },
-      layerTwo: {
-        labels: true,
-        title: "h1.main_page_title",
-        date: "span.date b",
-        time: "span.time b",
-        location: "span.location",
-      },
-    },
-  },
-  {
-    type: "puppeteerv1",
-    collection: "help",
-    name: "House Education and Labor Committee Markups",
-    link: "https://edlabor.house.gov/markups",
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "tr.vevent",
-      },
-      layerTwo: {
-        labels: true,
-        title: "h1.main_page_title",
-        date: "span.date",
-        time: "span.time",
-        location: "span.location b", // Get next sibling (label)
-      },
-    },
-  },
+  //{
+  //type: "puppeteerv1",
+  //collection: "help",
+  //name: "House Education and Labor Committee Hearings",
+  //link: "https://edlabor.house.gov/hearings-and-events",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //},
+  //layerTwo: {
+  //labels: true,
+  //title: "h1.main_page_title",
+  //date: "span.date b",
+  //time: "span.time b",
+  //location: "span.location",
+  //},
+  //},
+  //},
+  //{
+  //type: "puppeteerv1",
+  //collection: "help",
+  //name: "House Education and Labor Committee Markups",
+  //link: "https://edlabor.house.gov/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "tr.vevent",
+  //},
+  //layerTwo: {
+  //labels: true,
+  //title: "h1.main_page_title",
+  //date: "span.date b",
+  //time: "span.time b",
+  //location: "span.location b", // Get next sibling (label)
+  //},
+  //},
+  //},
   {
     type: "puppeteerv2",
     collection: "nrgy",

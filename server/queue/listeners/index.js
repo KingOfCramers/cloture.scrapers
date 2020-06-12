@@ -1,6 +1,11 @@
 import { logger } from "../../loggers/winston";
 import { pickModel } from "../../mongodb/util";
-import { calculateResults, insertData, cleanDateTime } from "./helpers";
+import {
+  calculateResults,
+  insertData,
+  stripWhiteSpace,
+  cleanDateTime,
+} from "./helpers";
 
 export const setupListeners = async (queue) => {
   queue.on("global:completed", async (job, result) => {
@@ -20,6 +25,7 @@ export const setupListeners = async (queue) => {
     }
 
     try {
+      let strippedData = stripWhiteSpace(data);
       let cleanedData = cleanDateTime(meta, data);
       let promisedInserts = insertData(model, cleanedData);
       let results = await Promise.all(promisedInserts);

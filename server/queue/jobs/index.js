@@ -15,6 +15,7 @@ const validFormats = {
     "dddd, MMMM D, YYYY",
     "DD/MM/YY",
     "MMMM DD, YYYY",
+    "MMMM D, YYYY",
   ],
   time: ["LT", "hh:mm A"],
 };
@@ -63,9 +64,6 @@ const jobs = [
     collection: "hasc",
     name: "House Armed Services Committee",
     link: "https://armedservices.house.gov/hearings",
-    formats: {
-      date: "MMM D, YYYY",
-    },
     selectors: {
       layerOne: {
         depth: 5,
@@ -82,10 +80,6 @@ const jobs = [
     collection: "hvac",
     name: "House Veterans Affairs Committee Hearings",
     link: "https://veterans.house.gov/events/hearings",
-    formats: {
-      date: "MMM D, YYYY",
-      time: "hh:mm A",
-    },
     selectors: {
       layerOne: {
         depth: 5,

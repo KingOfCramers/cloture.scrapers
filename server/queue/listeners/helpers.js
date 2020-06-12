@@ -45,8 +45,6 @@ export const cleanDateTime = (meta, data) => {
         // If time doesn't match set to null
         datum[field] = null;
       } else {
-        console.log(validFormat);
-        console.log(datum[field]);
         datum[field] = moment(valueFromScraper, validFormat);
       }
     });

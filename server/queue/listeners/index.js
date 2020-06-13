@@ -26,7 +26,7 @@ export const setupListeners = async (queue) => {
 
     try {
       let strippedData = stripWhiteSpace(data);
-      let cleanedData = cleanDateTime(meta, data);
+      let cleanedData = cleanDateTime(meta, strippedData);
       let promisedInserts = insertData(model, cleanedData);
       let results = await Promise.all(promisedInserts);
       await calculateResults(job, results);

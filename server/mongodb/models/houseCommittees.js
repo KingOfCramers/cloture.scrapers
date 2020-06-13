@@ -28,6 +28,10 @@ let houseCommitteeSchema = new Schema({
   },
 });
 
+houseCommitteeSchema.post("updateOne", (val) => {
+  console.log(val);
+});
+
 export const Hasc = mongoose.model("HASC", houseCommitteeSchema);
 export const Hfac = mongoose.model("HFAC", houseCommitteeSchema);
 export const Hvac = mongoose.model("HVAC", houseCommitteeSchema);

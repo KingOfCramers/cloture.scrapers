@@ -1,11 +1,6 @@
 import { logger } from "../../loggers/winston";
-import { pickModel } from "../../mongodb/util";
-import {
-  calculateResults,
-  insertData,
-  stripWhiteSpace,
-  cleanDateTime,
-} from "./helpers";
+import { houseCommittee, senateCommittee } from "../../mongodb/models";
+import { insertData, stripWhiteSpace, cleanDateTime } from "./helpers";
 
 export const setupListeners = async (queue) => {
   queue.on("global:completed", async (job, result) => {
@@ -15,12 +10,12 @@ export const setupListeners = async (queue) => {
       logger.error(`${job} failed to return data or meta information`);
     }
 
-    let collection = meta.collection;
-    let model = pickModel(collection);
+    let model =
+      meta.collection === "houseCommittee" ? houseCommittee : senateCommittee;
 
     if (!model) {
       logger.error(
-        `${job} could not find schema, tried to find: ${collection}`
+        `${job} could not find model, tried to find: ${meta.collection}`
       );
     }
 
@@ -31,9 +26,9 @@ export const setupListeners = async (queue) => {
       let results = await Promise.all(promisedInserts);
       //await addToNew(results, collection);
 
-      logger.info(`${job} has completed [${collection}]`);
+      logger.info(`${job} has completed [${meta.name}]`);
     } catch (err) {
-      logger.error(`${job} could not insert documents into MongoDB`, err);
+      logger.error(`${job} could not insert documents into MongoDB: `, err);
     }
   });
 

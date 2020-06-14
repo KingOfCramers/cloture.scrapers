@@ -38,7 +38,8 @@ const validFormats = {
 const jobs = [
   {
     type: "puppeteerv1", // Scraping routine
-    collection: "hfac", // MongoDB collection
+    committee: "hfac",
+    collection: "houseCommittee",
     name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
     link: "https://foreignaffairs.house.gov/hearings", // Initial Link
     selectors: {
@@ -56,7 +57,8 @@ const jobs = [
   },
   {
     type: "puppeteerv1",
-    collection: "hfac",
+    committee: "hfac",
+    collection: "houseCommittee",
     name: "House Foreign Affairs Committee Markups",
     link: "https://foreignaffairs.house.gov/markups",
     selectors: {
@@ -76,7 +78,8 @@ const jobs = [
   },
   {
     type: "puppeteerv1",
-    collection: "hasc",
+    committee: "hasc",
+    collection: "houseCommittee",
     name: "House Armed Services Committee",
     link: "https://armedservices.house.gov/hearings",
     selectors: {
@@ -92,7 +95,8 @@ const jobs = [
   },
   {
     type: "puppeteerv1",
-    collection: "hvac",
+    committee: "hvac",
+    collection: "houseCommittee",
     name: "House Veterans Affairs Committee Hearings",
     link: "https://veterans.house.gov/events/hearings",
     selectors: {
@@ -110,7 +114,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "hvac",
+    committee: "hvac",
+    collection: "houseCommittee",
     name: "House Veterans Affairs Committee Markups",
     link: "https://veterans.house.gov/events/markups",
     selectors: {
@@ -125,7 +130,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "hhsc",
+    committee: "hhsc",
+    collection: "houseCommittee",
     name: "House Homeland Security Committee Hearings",
     link: "http://homeland.house.gov/activities/hearings",
     selectors: {
@@ -140,7 +146,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "hhsc",
+    committee: "hhsc",
+    collection: "houseCommittee",
     name: "House Homeland Security Committee Markups",
     link: "http://homeland.house.gov/activities/markups",
     selectors: {
@@ -155,7 +162,8 @@ const jobs = [
   },
   {
     type: "puppeteerv5",
-    collection: "hagc",
+    committee: "hagc",
+    collection: "houseCommittee",
     name: "House Agriculture Committee Hearings",
     link: "https://agriculture.house.gov/calendar/",
     selectors: {
@@ -174,7 +182,8 @@ const jobs = [
   },
   {
     type: "puppeteerv4",
-    collection: "hapc",
+    committee: "hapc",
+    collection: "houseCommittee",
     name: "House Appropriations Committee Hearings",
     link: "https://appropriations.house.gov/events/hearings",
     selectors: {
@@ -189,7 +198,8 @@ const jobs = [
   },
   {
     type: "puppeteerv4",
-    collection: "hapc",
+    committee: "hapc",
+    collection: "houseCommittee",
     name: "House Appropriations Committee Markups",
     link: "https://appropriations.house.gov/events/markups",
     selectors: {
@@ -204,7 +214,8 @@ const jobs = [
   },
   {
     type: "puppeteerv4",
-    collection: "hbuc",
+    committee: "hbuc",
+    collection: "houseCommittee",
     name: "House Budget Committee Hearings",
     link: "https://budget.house.gov/legislation/hearings",
     selectors: {
@@ -219,7 +230,8 @@ const jobs = [
   },
   {
     type: "puppeteerv4",
-    collection: "hbuc",
+    committee: "hbuc",
+    collection: "houseCommittee",
     name: "House Budget Committee Markups",
     link: "https://budget.house.gov/legislation/markups",
     selectors: {
@@ -234,7 +246,8 @@ const jobs = [
   },
   {
     type: "puppeteerv1",
-    collection: "help",
+    committee: "help",
+    collection: "houseCommittee",
     name: "House Education and Labor Committee Hearings",
     link: "https://edlabor.house.gov/hearings-and-events",
     selectors: {
@@ -252,7 +265,8 @@ const jobs = [
   },
   {
     type: "puppeteerv1",
-    collection: "help",
+    committee: "help",
+    collection: "houseCommittee",
     name: "House Education and Labor Committee Markups",
     link: "https://edlabor.house.gov/markups",
     selectors: {
@@ -270,7 +284,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "nrgy",
+    committee: "nrgy",
+    collection: "houseCommittee",
     name: "House Energy and Commerce Committee Hearings",
     link: "https://energycommerce.house.gov/committee-activity/hearings",
     selectors: {
@@ -286,7 +301,8 @@ const jobs = [
   },
   {
     type: "puppeteerv5",
-    collection: "fisv",
+    committee: "fisv",
+    collection: "houseCommittee",
     name: "House Financial Services Committee Hearings",
     link:
       "https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
@@ -306,7 +322,8 @@ const jobs = [
   },
   {
     type: "puppeteerv5",
-    collection: "fisv",
+    committee: "fisv",
+    collection: "houseCommittee",
     name: "House Financial Services Committee Markups",
     link:
       "https://financialservices.house.gov/calendar/?EventTypeID=575&Congress=116",
@@ -326,7 +343,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "admn",
+    committee: "admn",
+    collection: "houseCommittee",
     name: "House Administration Committee Hearings",
     link: "https://cha.house.gov/committee-activity/hearings",
     selectors: {
@@ -342,7 +360,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "admn",
+    committee: "admn",
+    collection: "houseCommittee",
     name: "House Administration Committee Markups",
     link: "https://cha.house.gov/committee-activity/markups",
     selectors: {
@@ -358,7 +377,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "ntty",
+    committee: "ntty",
+    collection: "houseCommittee",
     name: "House Natural Resources Committee Hearings",
     link: "https://naturalresources.house.gov/hearings",
     selectors: {
@@ -373,7 +393,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "ovst",
+    committee: "ovst",
+    collection: "houseCommittee",
     name: "House Oversight Committee Hearings",
     link: "https://oversight.house.gov/legislation/hearings",
     selectors: {
@@ -388,7 +409,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "ovst",
+    committee: "ovst",
+    collection: "houseCommittee",
     name: "House Oversight Committee Markups",
     link: "https://oversight.house.gov/legislation/business-meetings",
     selectors: {
@@ -404,7 +426,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "ovst",
+    committee: "ovst",
+    collection: "houseCommittee",
     name: "House Oversight Committee Briefings",
     link: "https://oversight.house.gov/legislation/briefings",
     selectors: {
@@ -419,7 +442,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "scnc",
+    committee: "scnc",
+    collection: "houseCommittee",
     name: "House Science Committee Hearings",
     link: "https://science.house.gov/hearings",
     selectors: {
@@ -434,7 +458,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "scnc",
+    committee: "scnc",
+    collection: "houseCommittee",
     name: "House Science Committee Markups",
     link: "https://science.house.gov/markups",
     selectors: {
@@ -449,7 +474,8 @@ const jobs = [
   },
   {
     type: "puppeteerv5",
-    collection: "smbs",
+    committee: "smbs",
+    collection: "houseCommittee",
     name: "House Small Business Committee Hearings and Markups",
     link: "https://smallbusiness.house.gov/activity/",
     selectors: {
@@ -468,7 +494,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "trns",
+    committee: "trns",
+    collection: "houseCommittee",
     name: "House Transportation Committee Hearings",
     link: "https://transportation.house.gov/committee-activity/hearings",
     selectors: {
@@ -483,7 +510,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "trns",
+    committee: "trns",
+    collection: "houseCommittee",
     name: "House Transportation Committee Markups",
     link: "https://transportation.house.gov/committee-activity/markups",
     selectors: {
@@ -498,7 +526,8 @@ const jobs = [
   },
   {
     type: "puppeteerv1",
-    collection: "wymn",
+    committee: "wymn",
+    collection: "houseCommittee",
     name: "House Ways and Means Committee Hearings",
     link: "https://waysandmeans.house.gov/legislation/hearings",
     selectors: {
@@ -516,7 +545,8 @@ const jobs = [
   },
   {
     type: "puppeteerv1",
-    collection: "wymn",
+    committee: "wymn",
+    collection: "houseCommittee",
     name: "House Ways and Means Committee Markups",
     link: "https://waysandmeans.house.gov/legislation/markups",
     selectors: {
@@ -534,7 +564,8 @@ const jobs = [
   },
   {
     type: "puppeteerv2",
-    collection: "clmt",
+    committee: "clmt",
+    collection: "houseCommittee",
     name: "House Climate Committee Hearings",
     link: "https://climatecrisis.house.gov/committee-activity/hearings",
     selectors: {

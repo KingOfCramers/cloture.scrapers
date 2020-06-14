@@ -28,6 +28,7 @@ export const cleanDateTime = (meta, data) => {
         datum[field] = moment(valueFromScraper, validFormat);
       }
     });
+
     return datum;
   });
 };

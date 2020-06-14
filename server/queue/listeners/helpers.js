@@ -1,34 +1,4 @@
 import moment from "moment";
-import { logger } from "../../loggers/winston";
-
-// Calculate the number of records that were
-// modified or added to the database. And then
-// print those results to the screen
-export const calculateResults = async (job, result) => {
-  let upserted = [];
-  let numberModified = result.reduce((agg, x) => {
-    agg = agg + x.nModified;
-    return agg;
-  }, 0);
-
-  let numberUpserted = result.reduce((agg, x) => {
-    let hasUpsert = x.upserted;
-    if (hasUpsert) {
-      let numberUpserted = x.upserted.length;
-      x.upserted.map((y) => upserted.push(y._id));
-      agg = agg + numberUpserted;
-    }
-    return agg;
-  }, 0);
-
-  // Print results
-  if (numberUpserted > 0) {
-    logger.info(`Added ${numberUpserted} records: ${upserted.toString()}`);
-  }
-  if (numberModified > 0) {
-    logger.info(`Modified ${numberModified} records`);
-  }
-};
 
 export const stripWhiteSpace = (data) =>
   data.map((x) => {

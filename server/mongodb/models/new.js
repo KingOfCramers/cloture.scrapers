@@ -1,15 +1,21 @@
 import mongoose, { Schema } from "mongoose";
+import { logger } from "../../loggers/winston";
 
-let newUploadsSchema = new Schema({
+let newUploadSchema = new Schema({
   type: {
+    required: true,
     type: String,
-    require: false,
+  },
+  reference: {
+    required: true,
+    type: Schema.Types.ObjectId,
   },
 });
 
-newUploadsSchema.post("save", (val) => {
-  console.log("New document added!");
-  console.log(val);
+newUploadSchema.post("save", (val) => {
+  logger.info(
+    `New ${val.type} added to newUploads ${val._id} with reference ${val.reference}`
+  );
 });
 
-export const newUploads = mongoose.model("newUploads", newUploadsSchema);
+export const newUpload = mongoose.model("newUpload", newUploadSchema);

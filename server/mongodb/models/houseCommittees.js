@@ -1,4 +1,6 @@
+import { logger } from "../../loggers/winston";
 import mongoose, { Schema } from "mongoose";
+import { newUpload } from "./new";
 
 let committees = [
   "Hasc",
@@ -50,10 +52,22 @@ let models = committees.map((committee) => {
     },
   });
 
-  schema.post("updateOne", (val) => {
-    console.log("Update One Hook:");
-    console.log(committee);
-    console.log(val);
+  schema.post("updateOne", async (val) => {
+    if (val.upserted) {
+      let allUploads = val.upserted.map(async (x) => {
+        logger.info(`Upserted new document in ${committee}: ${x._id}`);
+        let upload = new newUpload({ type: committee, reference: x._id });
+        return await upload.save();
+      });
+      Promise.all(allUploads)
+        .then(() => logger.info(`${committee} is done uploading.`))
+        .catch((err) =>
+          logger.error(
+            `${committee} had problem updoading to newUpload collection: `,
+            err
+          )
+        );
+    }
   });
 
   return mongoose.model(committee, schema);

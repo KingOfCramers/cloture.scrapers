@@ -12,7 +12,7 @@ export const setupListeners = async (queue) => {
     let { data, meta } = JSON.parse(result);
 
     if (!data || !meta) {
-      logger.error(`${job} failed to return data or meta information.`);
+      logger.error(`${job} failed to return data or meta information`);
     }
 
     let collection = meta.collection;
@@ -30,20 +30,19 @@ export const setupListeners = async (queue) => {
       let promisedInserts = insertData(model, cleanedData);
       let results = await Promise.all(promisedInserts);
       //await addToNew(results, collection);
-      await calculateResults(job, results);
 
-      logger.info(`${job} has completed.`);
+      logger.info(`${job} has completed [${collection}]`);
     } catch (err) {
-      logger.error(`${job} could not insert documents into MongoDB.`, err);
+      logger.error(`${job} could not insert documents into MongoDB`, err);
     }
   });
 
   queue.on("global:active", (job) => {
-    logger.info(`${job} has started.`); // (${job.data.name}) has started.`);
+    logger.info(`${job} has started`); // (${job.data.name}) has started`);
   });
 
   queue.on("global:stalled", (job) => {
-    logger.error(`${job} has stalled.`);
+    logger.error(`${job} has stalled`);
     // A job has been marked as stalled. This is useful for debugging job workers that crash or pause the event loop.
   });
 

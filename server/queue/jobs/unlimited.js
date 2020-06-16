@@ -418,24 +418,211 @@ const unlimited = [
   //location: ".views-field-field-congress-meeting-location",
   //},
   //},
-  {
-    type: "unlimitedv2",
-    committee: "admn",
-    collection: "houseCommittee",
-    name: `House Administration Committee Business Meetings`,
-    phaseOne: {
-      range: [796, 803],
-      baseLink:
-        "https://cha.house.gov/committee-activity/business-meetings?subcommittee=All&congress_number=SUBSTITUTE",
-    },
-    phaseTwo: {
-      depth: 100,
-      rows: ".views-row",
-      date: ".date-display-single",
-      splitDate: "-",
-      location: ".views-field-field-congress-meeting-location",
-    },
-  },
+  //{
+  //type: "unlimitedv2",
+  //committee: "admn",
+  //collection: "houseCommittee",
+  //name: `House Administration Committee Business Meetings`,
+  //phaseOne: {
+  //range: [796, 803],
+  //baseLink:
+  //"https://cha.house.gov/committee-activity/business-meetings?subcommittee=All&congress_number=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //},
+  //...makeJobs(21, 1, 5).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "ntty",
+  //collection: "houseCommittee",
+  //name: `House Natural Resources ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://naturalresources.house.gov/hearings?PageNum_rs=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //splitDate: " ",
+  //location: "span.location",
+  //},
+  //})),
+  //...makeJobs(44, 1, 5).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "ovst",
+  //collection: "houseCommittee",
+  //name: `House Oversight ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://oversight.house.gov/legislation/hearings?page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location .field-content",
+  //},
+  //})),
+  //{
+  //type: "unlimitedv2",
+  //committee: "ovst",
+  //collection: "houseCommittee",
+  //name: `House Oversight Business`,
+  //phaseOne: {
+  //range: [null],
+  //baseLink: "https://oversight.house.gov/legislation/business-meetings",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location .field-content",
+  //},
+  //},
+  //...makeJobs(34, 1, 5).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "ovst",
+  //collection: "houseCommittee",
+  //name: `House Science Committee ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink: "https://science.house.gov/hearings?PageNum_rs=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "div.hearing",
+  //date: ".hearing__date",
+  //time: { selector: ".hearing__time time", instance: 0 },
+  //location: ".hearing__location",
+  //},
+  //})),
+  //...makeJobs(8, 1, 3).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "scnc",
+  //collection: "houseCommittee",
+  //name: `House Science Committee Markups ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink: "https://science.house.gov/markups?PageNum_rs=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "div.hearing",
+  //date: ".hearing__date",
+  //time: { selector: ".hearing__time time", instance: 0 },
+  //location: ".hearing__location",
+  //},
+  //})),
+  //...makeJobs(9, 1, 3).map((range, i) => ({
+  //type: "unlimitedv5",
+  //committee: "smbs",
+  //collection: "houseCommittee",
+  //name: `House Small Business Committee${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://smallbusiness.house.gov/activity/default.aspx?Page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "ul.calendar-listing li",
+  //},
+  //phaseThree: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: null,
+  //dateIndex: 0,
+  //timeIndex: 1,
+  //},
+  //})),
+  //...makeJobs(17, 1, 5).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "trns",
+  //collection: "houseCommittee",
+  //name: `House Transportation Committee Hearings ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://transportation.house.gov/committee-activity/hearings?PageNum_rs=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "div.hearings-table table tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
+  //location: "span.location",
+  //},
+  //})),
+  //...makeJobs(17, 1, 3).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "wymn",
+  //collection: "houseCommittee",
+  //name: `House Ways and Means ${i}`,
+  //phaseOne: {
+  //baseLink:
+  //"https://waysandmeans.house.gov/legislation/hearings?page=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //},
+  //phaseThree: {
+  //date: { label: false, value: "span.date-display-single" },
+  //title: "h1.title",
+  //splitDate: "-",
+  //location: ".field-name-field-congress-meeting-location .field-label",
+  //},
+  //})),
+  //...makeJobs(16, 1, 3).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "wymn",
+  //collection: "houseCommittee",
+  //name: `House Ways and Means Markups ${i}`,
+  //phaseOne: {
+  //baseLink:
+  //"https://waysandmeans.house.gov/legislation/markups?page=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //},
+  //phaseThree: {
+  //date: { label: false, value: "span.date-display-single" },
+  //title: "h1.title",
+  //splitDate: "-",
+  //location: ".field-name-field-congress-meeting-location .field-label",
+  //},
+  //})),
+  //{
+  //type: "unlimitedv2",
+  //committee: "clmt",
+  //collection: "houseCommittee",
+  //name: `House Climate Committee Hearings `,
+  //phaseOne: {
+  //range: [180],
+  //baseLink:
+  //"https://climatecrisis.house.gov/committee-activity/hearings?congress_number=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: "span.date-display-single",
+  //splitDate: "-",
+  //location: null,
+  //},
+  //},
   //{
   //type: "puppeteerv5",
   //committee: "hagc",

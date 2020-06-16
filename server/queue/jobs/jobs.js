@@ -544,7 +544,6 @@ const jobs = [
   //rows: "div.hearings-table table tr.vevent",
   //date: "time.dtstart",
   //time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
-  //location: "span.location",
   //},
   //},
   //},

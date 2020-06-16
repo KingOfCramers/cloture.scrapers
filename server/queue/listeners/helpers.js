@@ -35,7 +35,7 @@ export const cleanDateTime = (meta, data) => {
 
 export const insertData = (model, data) =>
   data.map(async (datum) =>
-    model.updateOne({ title: datum.title }, datum, {
+    model.updateOne({ link: datum.link }, datum, {
       upsert: true,
       new: true,
       runValidators: true,

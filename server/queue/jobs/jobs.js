@@ -180,6 +180,7 @@ const jobs = [
   //},
   //},
   //},
+  /////// This is not working
   //{
   //type: "puppeteerv4",
   //committee: "hapc",
@@ -193,9 +194,11 @@ const jobs = [
   //hearings: ".views-row",
   //dateTime: ".views-field-field-congress-meeting-date",
   //time: "div.newsie-details span:nth-child(2)",
+  //location: ".views-field-field-congress-meeting-location",
   //},
   //},
   //},
+  ////// This is not working
   //{
   //type: "puppeteerv4",
   //committee: "hapc",
@@ -209,6 +212,7 @@ const jobs = [
   //hearings: ".views-row",
   //dateTime: ".views-field-field-congress-meeting-date",
   //time: "div.newsie-details span:nth-child(2)",
+  //location: ".views-field-field-congress-meeting-location",
   //},
   //},
   //},
@@ -300,6 +304,23 @@ const jobs = [
   //},
   //},
   //{
+  //type: "puppeteerv2",
+  //committee: "nrgy",
+  //collection: "houseCommittee",
+  //name: "House Energy and Commerce Committee Markups",
+  //link: "https://energycommerce.house.gov/committee-activity/markups",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows:
+  //".pane-congress-markups-panel-pane-markups-upcoming .view-content",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //},
+  //},
+  //{
   //type: "puppeteerv5",
   //committee: "fisv",
   //collection: "houseCommittee",
@@ -341,23 +362,25 @@ const jobs = [
   //},
   //},
   //},
-  //{
-  //type: "puppeteerv2",
-  //committee: "admn",
-  //collection: "houseCommittee",
-  //name: "House Administration Committee Hearings",
-  //link: "https://cha.house.gov/committee-activity/hearings",
-  //selectors: {
-  //layerOne: {
-  //depth: 5,
-  //rows:
-  //".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
-  //date: ".date-display-single",
-  //splitDate: "-",
-  //location: ".views-field-field-congress-meeting-location",
-  //},
-  //},
-  //},
+  {
+    type: "puppeteerv2",
+    committee: "admn",
+    collection: "houseCommittee",
+    name: "House Administration Committee Hearings",
+    link: "https://cha.house.gov/committee-activity/hearings",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        // This might actually be .views-row, not view-content
+        rows:
+          ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
+        date: ".date-display-single",
+        splitDate: "-",
+        location: ".views-field-field-congress-meeting-location",
+      },
+    },
+  },
+  /// MUST ADD BUSINESS MEETINGS
   //{
   //type: "puppeteerv2",
   //committee: "admn",
@@ -368,6 +391,7 @@ const jobs = [
   //layerOne: {
   //depth: 5,
   //rows:
+  // This might actually be .views-row, not view-content
   //".pane-congress-markups-panel-pane-markups-upcoming .view-content",
   //date: ".date-display-single",
   //splitDate: "-",

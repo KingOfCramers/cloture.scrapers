@@ -111,7 +111,7 @@ const unlimited = [
   //date: { label: false, value: "span.date:first-of-type" },
   //},
   //})),
-  //...makeJobs(11, 7, 3).map((range, i) => ({
+  //...makeJobs(11, 1, 3).map((range, i) => ({
   //type: "unlimitedv1",
   //committee: "hvac",
   //collection: "houseCommittee",
@@ -132,23 +132,348 @@ const unlimited = [
   //location: "p.hearing__location b",
   //},
   //})),
-  ...makeJobs(1, 1, 1).map((range, i) => ({
+  //...makeJobs(1, 1, 1).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "hvac",
+  //collection: "houseCommittee",
+  //name: `House Veterans Affairs Markups ${i}`,
+  //phaseOne: {
+  //baseLink: "https://veterans.house.gov/events/markups?page=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //rows: "tr.vevent",
+  //depth: 100,
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 },
+  //location: "span.location",
+  //},
+  //})),
+  //...makeJobs(3, 1, 3).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "hhsc",
+  //collection: "houseCommittee",
+  //name: `House Homeland Security Markups ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://homeland.house.gov/activities/markups?PageNum_rs=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 },
+  //location: "span.location",
+  //},
+  //})),
+  //...makeJobs(18, 1, 3).map((range, i) => ({
+  //type: "unlimitedv5",
+  //committee: "hagc",
+  //collection: "houseCommittee",
+  //name: `House Agriculture Committee ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://agriculture.house.gov/calendar/default.aspx?Page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "ul.calendar-listing li",
+  //},
+  //phaseThree: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: null,
+  //dateIndex: 0,
+  //timeIndex: 1,
+  //},
+  //})),
+  //{
+  //// Weird system
+  //type: "unlimitedv4",
+  //committee: "hapc",
+  //collection: "houseCommittee",
+  //name: `House Appropriations Committee`,
+  //phaseOne: {
+  //range: [null],
+  //baseLink:
+  //"https://appropriations.house.gov/events/hearings?subcommittee=All&congress_number=752&__ncforminfo=wpeKKQCEbvD-XvJbu_uHk-hv2D29ftMt58-8zKF6BdxniFRAouHN6NELw4ysPpbbvfsC1mnVQ1ncqm_NkItsufcGZgtVv2Tr",
+  //},
+  //phaseTwo: {
+  //depth: 200,
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //location: ".views-field-field-congress-meeting-location",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //{
+  //// Weird system
+  //type: "unlimitedv4",
+  //committee: "hapc",
+  //collection: "houseCommittee",
+  //name: `House Appropriations Committee Markup`,
+  //phaseOne: {
+  //range: [null],
+  //baseLink:
+  //"https://appropriations.house.gov/events/markups?subcommittee=All&congress_number=752",
+  //},
+  //phaseTwo: {
+  //depth: 200,
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //location: ".views-field-field-congress-meeting-location",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //{
+  //type: "unlimitedv4",
+  //committee: "hbuc",
+  //collection: "houseCommittee",
+  //name: `House Budget Committee`,
+  //phaseOne: {
+  //range: [839, 818, 672, 180, 799, 800, 823, 824],
+  //baseLink:
+  //"https://budget.house.gov/legislation/hearings?congress_number=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 200,
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //{
+  //type: "unlimitedv4",
+  //committee: "hbuc",
+  //collection: "houseCommittee",
+  //name: `House Budget Committee Markups`,
+  //phaseOne: {
+  //range: [839, 818, 672, 180, 799, 800, 823, 824],
+  //baseLink:
+  //"https://budget.house.gov/legislation/markups?congress_number=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 200,
+  //hearings: ".views-row",
+  //dateTime: ".views-field-field-congress-meeting-date",
+  //time: "div.newsie-details span:nth-child(2)",
+  //},
+  //},
+  //...makeJobs(17, 1, 3).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "help",
+  //collection: "houseCommittee",
+  //name: `House Education and Labor ${i}`,
+  //phaseOne: {
+  //baseLink:
+  //"https://edlabor.house.gov/full-committee-hearings?PageNum_rs=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "tr.vevent",
+  //},
+  //phaseThree: {
+  //title: "h1.main_page_title",
+  //date: { label: true, value: "span.date b" },
+  //time: { label: true, value: "span.time b" },
+  //location: "span.location", // Next location (b)
+  //},
+  //})),
+  //...makeJobs(5, 1, 2).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "help",
+  //collection: "houseCommittee",
+  //name: `House Education and Labor Markups ${i}`,
+  //phaseOne: {
+  //baseLink: "https://edlabor.house.gov/markups?PageNum_rs=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "tr.vevent",
+  //},
+  //phaseThree: {
+  //title: "h1.main_page_title",
+  //date: { label: true, value: "span.date b" },
+  //time: { label: true, value: "span.time b" },
+  //location: "span.location", // Next location (b)
+  //},
+  //})),
+  //...makeJobs(48, 1, 5).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "nrgy",
+  //collection: "houseCommittee",
+  //name: `House Energy Committee ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://energycommerce.house.gov/committee-activity/hearings?page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //})),
+  //...makeJobs(10, 0, 3).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "nrgy",
+  //collection: "houseCommittee",
+  //name: `House Energy Committee ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://energycommerce.house.gov/committee-activity/markups?page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //})),
+  //...makeJobs(10, 1, 3).map((range, i) => ({
+  //type: "unlimitedv5",
+  //committee: "fisv",
+  //collection: "houseCommittee",
+  //name: `House Financial Services Committee ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://financialservices.house.gov/calendar/default.aspx?EventTypeID=577&Congress=116&Page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".newsie-titler",
+  //},
+  //phaseThree: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: 0,
+  //dateIndex: 1,
+  //timeIndex: 2,
+  //},
+  //})),
+  //...makeJobs(2, 1, 1).map((range, i) => ({
+  //type: "unlimitedv5",
+  //committee: "fisv",
+  //collection: "houseCommittee",
+  //name: `House Financial Services Committee Markups ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://financialservices.house.gov/calendar/default.aspx?EventTypeID=575&Congress=116&Page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".newsie-titler",
+  //},
+  //phaseThree: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: 0,
+  //dateIndex: 1,
+  //timeIndex: 2,
+  //},
+  //})),
+  //...makeJobs(7, 0, 3).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "admn",
+  //collection: "houseCommittee",
+  //name: `House Administration Committee ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://cha.house.gov/committee-activity/hearings?page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //})),
+  //{
+  //type: "unlimitedv2",
+  //committee: "admn",
+  //collection: "houseCommittee",
+  //name: `House Administration Committee Markups`,
+  //phaseOne: {
+  //range: [796, 803],
+  //baseLink:
+  //"https://cha.house.gov/committee-activity/markups?subcommittee=All&congress_number=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: ".views-row",
+  //date: ".date-display-single",
+  //splitDate: "-",
+  //location: ".views-field-field-congress-meeting-location",
+  //},
+  //},
+  {
     type: "unlimitedv2",
-    committee: "hvac",
+    committee: "admn",
     collection: "houseCommittee",
-    name: `House Veterans Affairs Markups ${i}`,
+    name: `House Administration Committee Business Meetings`,
     phaseOne: {
-      baseLink: "https://veterans.house.gov/events/markups?page=SUBSTITUTE",
-      range,
+      range: [796, 803],
+      baseLink:
+        "https://cha.house.gov/committee-activity/business-meetings?subcommittee=All&congress_number=SUBSTITUTE",
     },
     phaseTwo: {
-      rows: "tr.vevent",
       depth: 100,
-      date: "time.dtstart",
-      time: { selector: "time.dtstart", instance: 1 },
-      location: "span.location",
+      rows: ".views-row",
+      date: ".date-display-single",
+      splitDate: "-",
+      location: ".views-field-field-congress-meeting-location",
     },
-  })),
+  },
+  //{
+  //type: "puppeteerv5",
+  //committee: "hagc",
+  //collection: "houseCommittee",
+  //name: "House Agriculture Committee Hearings",
+  //link: "https://agriculture.house.gov/calendar/",
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "ul.calendar-listing li",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //jquerySelector: ".topnewstext",
+  //locationIndex: null,
+  //dateIndex: 0,
+  //timeIndex: 1,
+  //},
+  //},
+  //},
+  //...makeJobs(19, 1, 5).map((range, i) => ({
+  //type: "unlimitedv2",
+  //committee: "hhsc",
+  //collection: "houseCommittee",
+  //name: `House Homeland Security ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://homeland.house.gov/activities/hearings?PageNum_rs=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "tr.vevent",
+  //date: "time.dtstart",
+  //time: { selector: "time.dtstart", instance: 1 },
+  //location: "span.location",
+  //},
+  //})),
 ].map((x) => ({ schedule, validFormats, ...x }));
 
 export default unlimited;

@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { logger } from "../../loggers/winston";
 import moment from "moment";
 
 let houseCommitteeSchema = new Schema({
@@ -67,21 +66,7 @@ houseCommitteeSchema
   .get((v) => (moment(v).isValid() ? moment(v).format("LT") : null));
 
 houseCommitteeSchema.post("updateOne", async (val) => {
-  //if (val.upserted) {
-  //let allUploads = val.upserted.map(async (x) => {
-  //logger.info(`Upserted new document in ${committee}: ${x._id}`);
-  //let upload = new newUpload({ type: committee, reference: x._id });
-  //return await upload.save();
-  //});
-  //Promise.all(allUploads)
-  //.then(() => logger.info(`${committee} is done uploading.`))
-  //.catch((err) =>
-  //logger.error(
-  //`${committee} had problem updoading to newUpload collection: `,
-  //err
-  //)
-  //);
-  //}
+  console.log(val);
 });
 
 // Make model and export

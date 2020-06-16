@@ -4,7 +4,12 @@ import { logger } from "../loggers/winston";
 
 import { setupProducers } from "./producers";
 import { setupListeners } from "./listeners";
-import { jobs } from "./jobs";
+
+// Different job types
+import jobs from "./jobs/jobs";
+import unlimited from "./jobs/unlimited";
+
+//console.log(unlimited.map((x) => x.phaseOne));
 
 export const setupQueue = async () => {
   try {
@@ -22,7 +27,10 @@ export const setupQueue = async () => {
   }
 
   try {
-    await setupProducers(queue, jobs);
+    await setupProducers(
+      queue,
+      process.env.SCRAPE === "true" ? unlimited : jobs
+    );
   } catch (err) {
     logger.error("Could not setup producers.");
     throw err;

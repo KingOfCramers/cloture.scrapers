@@ -36,25 +36,25 @@ const validFormats = {
 };
 
 const jobs = [
-  {
-    type: "puppeteerv1", // Scraping routine
-    committee: "hfac",
-    collection: "houseCommittee",
-    name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
-    link: "https://foreignaffairs.house.gov/hearings", // Initial Link
-    selectors: {
-      layerOne: {
-        depth: 5,
-        rows: "table tbody tr", // Rows to check
-      },
-      layerTwo: {
-        title: ".title",
-        date: { label: false, value: "span.date" },
-        time: { label: false, value: "span.time" },
-        location: "span.location strong",
-      },
-    },
-  },
+  //{
+  //type: "puppeteerv1", // Scraping routine
+  //committee: "hfac",
+  //collection: "houseCommittee",
+  //name: "House Foreign Affairs Committee Hearings", // Stored in Redis, must be unique
+  //link: "https://foreignaffairs.house.gov/hearings", // Initial Link
+  //selectors: {
+  //layerOne: {
+  //depth: 5,
+  //rows: "table tbody tr", // Rows to check
+  //},
+  //layerTwo: {
+  //title: ".title",
+  //date: { label: false, value: "span.date" },
+  //time: { label: false, value: "span.time" },
+  //location: "span.location strong",
+  //},
+  //},
+  //},
   //{
   //type: "puppeteerv1",
   //committee: "hfac",

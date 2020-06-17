@@ -66,7 +66,13 @@ houseCommitteeSchema
   .get((v) => (moment(v).isValid() ? moment(v).format("LT") : null));
 
 houseCommitteeSchema.post("updateOne", async (val) => {
-  console.log(val);
+  if (val.nModified > 0) {
+    console.log(`Modification made to record`);
+  }
+  if (val.upserted) {
+    console.log(`New document upserted:`);
+    console.log(val);
+  }
 });
 
 // Make model and export

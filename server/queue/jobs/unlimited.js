@@ -15,11 +15,9 @@ const validFormats = {
     "MMMM D, YYYY",
     "MM/DD/YYYY",
     "MM/DD/YY",
-    "ddd, DD/MM/YYYY",
     "ddd, MM/DD/YYYY",
     "dddd, MMMM DD, YYYY",
     "dddd, MMMM D, YYYY",
-    "DD/MM/YY",
   ],
   time: [
     "LT",
@@ -129,7 +127,7 @@ const unlimited = [
   //title: "h1.main_page_title",
   //date: { label: false, value: "p.hearing__date date" },
   //time: { label: true, value: "p.hearing__time time b" },
-  //location: "p.hearing__location b",
+  //location: { label: true, value: "p.hearing__location b" },
   //},
   //})),
   //...makeJobs(1, 1, 1).map((range, i) => ({
@@ -190,7 +188,6 @@ const unlimited = [
   //},
   //})),
   //{
-  //// Weird system
   //type: "unlimitedv4",
   //committee: "hapc",
   //collection: "houseCommittee",
@@ -302,42 +299,42 @@ const unlimited = [
   //location: "span.location", // Next location (b)
   //},
   //})),
-  //...makeJobs(48, 1, 5).map((range, i) => ({
-  //type: "unlimitedv2",
-  //committee: "nrgy",
-  //collection: "houseCommittee",
-  //name: `House Energy Committee ${i}`,
-  //phaseOne: {
-  //range,
-  //baseLink:
-  //"https://energycommerce.house.gov/committee-activity/hearings?page=SUBSTITUTE",
-  //},
-  //phaseTwo: {
-  //depth: 100,
-  //rows: ".views-row",
-  //date: ".date-display-single",
-  //splitDate: "-",
-  //location: ".views-field-field-congress-meeting-location",
-  //},
-  //})),
-  //...makeJobs(10, 0, 3).map((range, i) => ({
-  //type: "unlimitedv2",
-  //committee: "nrgy",
-  //collection: "houseCommittee",
-  //name: `House Energy Committee ${i}`,
-  //phaseOne: {
-  //range,
-  //baseLink:
-  //"https://energycommerce.house.gov/committee-activity/markups?page=SUBSTITUTE",
-  //},
-  //phaseTwo: {
-  //depth: 100,
-  //rows: ".views-row",
-  //date: ".date-display-single",
-  //splitDate: "-",
-  //location: ".views-field-field-congress-meeting-location",
-  //},
-  //})),
+  ...makeJobs(48, 1, 5).map((range, i) => ({
+    type: "unlimitedv2",
+    committee: "nrgy",
+    collection: "houseCommittee",
+    name: `House Energy Committee ${i}`,
+    phaseOne: {
+      range,
+      baseLink:
+        "https://energycommerce.house.gov/committee-activity/hearings?page=SUBSTITUTE",
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: ".views-row",
+      date: ".date-display-single",
+      splitDate: "-",
+      location: ".views-field-field-congress-meeting-location",
+    },
+  })),
+  ...makeJobs(10, 0, 3).map((range, i) => ({
+    type: "unlimitedv2",
+    committee: "nrgy",
+    collection: "houseCommittee",
+    name: `House Energy Committee ${i}`,
+    phaseOne: {
+      range,
+      baseLink:
+        "https://energycommerce.house.gov/committee-activity/markups?page=SUBSTITUTE",
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: ".views-row",
+      date: ".date-display-single",
+      splitDate: "-",
+      location: ".views-field-field-congress-meeting-location",
+    },
+  })),
   //...makeJobs(10, 1, 3).map((range, i) => ({
   //type: "unlimitedv5",
   //committee: "fisv",

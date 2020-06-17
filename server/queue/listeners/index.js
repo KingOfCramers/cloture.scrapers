@@ -1,4 +1,5 @@
 import { logger } from "../../loggers/winston";
+import moment from "moment";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
 import { insertData, stripWhiteSpace, cleanDateTime } from "./helpers";
 

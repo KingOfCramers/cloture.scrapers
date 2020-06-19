@@ -40,20 +40,15 @@ let houseCommitteeSchema = new Schema({
   },
   time: {
     type: Date,
-    require: true,
+    require: false,
   },
   date: {
     type: Date,
-    require: true,
+    require: false,
   },
-  witnesses: [
-    {
-      type: String,
-    },
-  ],
-  type: {
+  text: {
     type: String,
-    require: true,
+    require: false,
   },
 });
 

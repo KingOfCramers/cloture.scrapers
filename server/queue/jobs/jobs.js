@@ -297,8 +297,7 @@ const jobs = [
     selectors: {
       layerOne: {
         depth: 5,
-        rows:
-          ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
+        rows: ".views-row",
         date: ".date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
@@ -314,8 +313,7 @@ const jobs = [
     selectors: {
       layerOne: {
         depth: 5,
-        rows:
-          ".pane-congress-markups-panel-pane-markups-upcoming .view-content",
+        rows: ".views-row",
         date: ".date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
@@ -373,9 +371,7 @@ const jobs = [
     selectors: {
       layerOne: {
         depth: 5,
-        // This might actually be .views-row, not view-content
-        rows:
-          ".pane-congress-hearings-panel-pane-hearings-upcoming .view-content",
+        rows: ".view-content",
         date: ".date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
@@ -392,9 +388,7 @@ const jobs = [
     selectors: {
       layerOne: {
         depth: 5,
-        rows:
-          // This might actually be .views-row, not view-content
-          ".pane-congress-markups-panel-pane-markups-upcoming .view-content",
+        rows: ".views-row",
         date: ".date-display-single",
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",

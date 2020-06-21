@@ -24,7 +24,7 @@ export const setupListeners = async (queue) => {
       let strippedData = stripWhiteSpace(data);
       let cleanedData = cleanDateTime(meta, strippedData);
       let promisedInserts = insertData(model, cleanedData);
-      let results = await Promise.all(promisedInserts);
+      await Promise.all(promisedInserts);
 
       logger.info(`${job} has completed [${meta.name}]`);
     } catch (err) {

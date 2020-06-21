@@ -61,15 +61,20 @@ houseCommitteeSchema
   .path("time")
   .get((v) => (moment(v).isValid() ? moment(v).format("LT") : null));
 
-houseCommitteeSchema.post("updateOne", async (val) => {
-  if (val.nModified > 0) {
-    logger.info(`Modification made to record`);
-  }
-  if (val.upserted) {
-    logger.info(`New document upserted:`);
-    logger.info(val);
-  }
+houseCommitteeSchema.post("save", (val) => {
+  console.log(`Document saved with id ${val._id}`);
 });
+
+//houseCommitteeSchema.post("findOneAndUpdate", async (val) => {
+//if (val.nModified > 0) {
+//logger.info(`Modification made to record`);
+//console.log("Val is ", val);
+//}
+//if (val.upserted) {
+//logger.info(`New document upserted:`);
+//logger.info(val);
+//}
+//});
 
 // Make model and export
 const houseCommittee = mongoose.model("houseCommittee", houseCommitteeSchema);

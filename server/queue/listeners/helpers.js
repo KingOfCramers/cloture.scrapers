@@ -1,4 +1,5 @@
 import moment from "moment";
+import { logger } from "../../loggers/winston";
 
 export const stripWhiteSpace = (data) =>
   data.map((x) => {
@@ -34,10 +35,21 @@ export const cleanDateTime = (meta, data) => {
 };
 
 export const insertData = (model, data) =>
-  data.map(async (datum) =>
-    model.updateOne({ link: datum.link }, datum, {
-      upsert: true,
-      new: true,
-      runValidators: true,
-    })
-  );
+  data.map(async (datum) => {
+    let doc = await model.findOne({ link: datum.link });
+    if (!doc) {
+      let newDoc = new model({ ...datum });
+      /// Logging is handled in mongoose 'post' save hook
+      return await newDoc.save();
+    } else {
+      let updated = await model.updateOne({ link: datum.link }, datum, {
+        new: true,
+        runValidators: true,
+        upsert: false,
+      });
+      if (updated.nModified > 0) {
+        logger.info(`Document modified with id ${doc.id}`);
+      }
+      return updated;
+    }
+  });

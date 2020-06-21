@@ -9,8 +9,6 @@ import { setupListeners } from "./listeners";
 import jobs from "./jobs/jobs";
 import unlimited from "./jobs/unlimited";
 
-//console.log(unlimited.map((x) => x.phaseOne));
-
 export const setupQueue = async () => {
   try {
     var queue = new Bull("myQueue", {

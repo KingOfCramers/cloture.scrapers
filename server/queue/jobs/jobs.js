@@ -91,6 +91,7 @@ const jobs = [
         title: ".title",
         date: { label: false, value: "span.date:first-of-type" },
         location: { label: false, value: null },
+        regexTime: true,
       },
     },
   },

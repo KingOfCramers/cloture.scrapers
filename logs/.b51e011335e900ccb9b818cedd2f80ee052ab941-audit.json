@@ -1,0 +1,74 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "dist/logs/.b51e011335e900ccb9b818cedd2f80ee052ab941-audit.json",
+    "files": [
+        {
+            "date": 1591709712098,
+            "name": "dist/logs/API_production.log.2020-06-09",
+            "hash": "ab9df13a7b21cbaf19d15e7e912ed8b3"
+        },
+        {
+            "date": 1591761600052,
+            "name": "dist/logs/API_production.log.2020-06-10",
+            "hash": "d3c4778628fa2e1a545de07811532bc6"
+        },
+        {
+            "date": 1591848000042,
+            "name": "dist/logs/API_production.log.2020-06-11",
+            "hash": "58ba4242c7dbdd5442eeb62ea5db3164"
+        },
+        {
+            "date": 1591934400043,
+            "name": "dist/logs/API_production.log.2020-06-12",
+            "hash": "b1d00906f16c839f28de0811772ff6bd"
+        },
+        {
+            "date": 1592020800043,
+            "name": "dist/logs/API_production.log.2020-06-13",
+            "hash": "dcea0719b12b5d265cf7eb0ba55f7db0"
+        },
+        {
+            "date": 1592107200047,
+            "name": "dist/logs/API_production.log.2020-06-14",
+            "hash": "7cc34c4a3121fb7f869093181bc9d651"
+        },
+        {
+            "date": 1592193600040,
+            "name": "dist/logs/API_production.log.2020-06-15",
+            "hash": "87b0199ceb02abd5281b26eb8e88e9e0"
+        },
+        {
+            "date": 1592280000042,
+            "name": "dist/logs/API_production.log.2020-06-16",
+            "hash": "3c70ea4ea4f286b2f4241c32857e2ebf"
+        },
+        {
+            "date": 1592366400052,
+            "name": "dist/logs/API_production.log.2020-06-17",
+            "hash": "059cc3e009002ed63fa583e2a54529c4"
+        },
+        {
+            "date": 1592452800046,
+            "name": "dist/logs/API_production.log.2020-06-18",
+            "hash": "cd62406dbe3ded6d221d79373bd7577f"
+        },
+        {
+            "date": 1592539200043,
+            "name": "dist/logs/API_production.log.2020-06-19",
+            "hash": "5183ea1439e636ec68b368511356ef99"
+        },
+        {
+            "date": 1592625600043,
+            "name": "dist/logs/API_production.log.2020-06-20",
+            "hash": "8c2d7c178cc833c74c968e07a28cb99b"
+        },
+        {
+            "date": 1592712000043,
+            "name": "dist/logs/API_production.log.2020-06-21",
+            "hash": "0e8e4f15f769018c37c2a76c8021e0e1"
+        }
+    ]
+}

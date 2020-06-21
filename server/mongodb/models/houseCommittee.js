@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { logger } from "../../loggers/winston";
 import moment from "moment";
 
 let houseCommitteeSchema = new Schema({
@@ -62,11 +63,11 @@ houseCommitteeSchema
 
 houseCommitteeSchema.post("updateOne", async (val) => {
   if (val.nModified > 0) {
-    console.log(`Modification made to record`);
+    logger.info(`Modification made to record`);
   }
   if (val.upserted) {
-    console.log(`New document upserted:`);
-    console.log(val);
+    logger.info(`New document upserted:`);
+    logger.info(val);
   }
 });
 

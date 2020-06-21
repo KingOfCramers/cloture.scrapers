@@ -51,46 +51,46 @@ const makeJobs = (max, start, chunk) => {
 };
 
 const unlimited = [
-  ...makeJobs(118, 1, 5).map((range, i) => ({
-    type: "unlimitedv1",
-    committee: "hfac",
-    collection: "houseCommittee",
-    name: `House Foreign Affairs ${i}`,
-    phaseOne: {
-      baseLink: "https://foreignaffairs.house.gov/hearings?page=SUBSTITUTE",
-      range,
-    },
-    phaseTwo: {
-      depth: 100,
-      rows: "table tbody tr",
-    },
-    phaseThree: {
-      title: ".title",
-      date: { label: false, value: "span.date" },
-      time: { label: false, value: "span.time" },
-      location: "span.location strong",
-    },
-  })),
-  ...makeJobs(22, 1, 5).map((range, i) => ({
-    type: "unlimitedv1",
-    committee: "hfac",
-    collection: "houseCommittee",
-    name: `House Foreign Affairs Markups ${i}`,
-    phaseOne: {
-      baseLink: "https://foreignaffairs.house.gov/markups?page=SUBSTITUTE",
-      range,
-    },
-    phaseTwo: {
-      depth: 100,
-      rows: "table tbody tr",
-    },
-    phaseThree: {
-      title: ".title",
-      date: { label: false, value: "span.date" },
-      time: { label: false, value: "span.time" },
-      location: "span.location strong",
-    },
-  })),
+  //...makeJobs(118, 1, 5).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "hfac",
+  //collection: "houseCommittee",
+  //name: `House Foreign Affairs ${i}`,
+  //phaseOne: {
+  //baseLink: "https://foreignaffairs.house.gov/hearings?page=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "table tbody tr",
+  //},
+  //phaseThree: {
+  //title: ".title",
+  //date: { label: false, value: "span.date" },
+  //time: { label: false, value: "span.time" },
+  //location: "span.location strong",
+  //},
+  //})),
+  //...makeJobs(22, 1, 5).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "hfac",
+  //collection: "houseCommittee",
+  //name: `House Foreign Affairs Markups ${i}`,
+  //phaseOne: {
+  //baseLink: "https://foreignaffairs.house.gov/markups?page=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "table tbody tr",
+  //},
+  //phaseThree: {
+  //title: ".title",
+  //date: { label: false, value: "span.date" },
+  //time: { label: false, value: "span.time" },
+  //location: "span.location strong",
+  //},
+  //})),
   ...makeJobs(22, 1, 5).map((range, i) => ({
     type: "unlimitedv1",
     committee: "hasc",
@@ -107,6 +107,7 @@ const unlimited = [
     phaseThree: {
       title: ".title",
       date: { label: false, value: "span.date:first-of-type" },
+      regexTime: true,
     },
   })),
   ...makeJobs(11, 1, 3).map((range, i) => ({
@@ -131,20 +132,24 @@ const unlimited = [
     },
   })),
   ...makeJobs(1, 1, 1).map((range, i) => ({
-    type: "unlimitedv2",
+    type: "unlimitedv1",
     committee: "hvac",
     collection: "houseCommittee",
-    name: `House Veterans Affairs Markups ${i}`,
+    name: `House Veterans Affairs ${i}`,
     phaseOne: {
-      baseLink: "https://veterans.house.gov/events/markups?page=SUBSTITUTE",
+      baseLink:
+        "https://veterans.house.gov/events/markups?PageNum_rs=SUBSTITUTE",
       range,
     },
     phaseTwo: {
-      rows: "tr.vevent",
       depth: 100,
-      date: "time.dtstart",
-      time: { selector: "time.dtstart", instance: 1 },
-      location: "span.location",
+      rows: "tr.vevent",
+    },
+    phaseThree: {
+      title: "h1.main_page_title",
+      date: { label: false, value: "p.hearing__date date" },
+      time: { label: true, value: "p.hearing__time time b" },
+      location: { label: false, value: "p.hearing__location b" },
     },
   })),
   ...makeJobs(19, 1, 5).map((range, i) => ({

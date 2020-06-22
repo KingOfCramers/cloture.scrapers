@@ -39,17 +39,12 @@ export const insertData = (model, data) =>
     let doc = await model.findOne({ link: datum.link });
     if (!doc) {
       let newDoc = new model({ ...datum });
-      /// Logging is handled in mongoose 'post' save hook
       return await newDoc.save();
     } else {
-      let updated = await model.updateOne({ link: datum.link }, datum, {
+      return await model.updateOne({ link: datum.link }, datum, {
         new: true,
         runValidators: true,
         upsert: false,
       });
-      if (updated.nModified > 0) {
-        logger.info(`Document modified with id ${doc.id}`);
-      }
-      return updated;
     }
   });

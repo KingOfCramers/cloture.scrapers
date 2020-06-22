@@ -68,10 +68,6 @@ senateCommitteeSchema
   .path("time")
   .get((v) => (moment(v).isValid() ? moment(v).format("LT") : null));
 
-senateCommitteeSchema.post("updateOne", async (val) => {
-  console.log(val);
-});
-
 // Make model and export
 const senateCommittee = mongoose.model(
   "senateCommittee",

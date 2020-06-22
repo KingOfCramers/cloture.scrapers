@@ -16,10 +16,8 @@ const validFormats = {
     "MM/DD/YYYY",
     "MM/DD/YY",
     "ddd, MM/DD/YYYY",
-    //"ddd, DD/MM/YYYY",
     "dddd, MMMM DD, YYYY",
     "dddd, MMMM D, YYYY",
-    //"DD/MM/YY",
   ],
   time: [
     "LT",
@@ -166,7 +164,7 @@ const jobs = [
     },
   },
   {
-    type: "puppeteerv5",
+    type: "puppeteerv1",
     committee: "hagc",
     collection: "houseCommittee",
     name: "House Agriculture Committee Hearings",
@@ -178,10 +176,8 @@ const jobs = [
       },
       layerTwo: {
         title: "h3.news-titler",
-        jquerySelector: ".topnewstext",
-        locationIndex: null,
-        dateIndex: 0,
-        timeIndex: 1,
+        regexTime: true,
+        regexDate: true,
       },
     },
   },

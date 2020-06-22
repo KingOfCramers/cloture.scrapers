@@ -91,25 +91,25 @@ const unlimited = [
   //location: "span.location strong",
   //},
   //})),
-  ...makeJobs(22, 1, 5).map((range, i) => ({
-    type: "unlimitedv1",
-    committee: "hasc",
-    collection: "houseCommittee",
-    name: `House Armed Services ${i}`,
-    phaseOne: {
-      baseLink: "https://armedservices.house.gov/hearings?page=SUBSTITUTE",
-      range,
-    },
-    phaseTwo: {
-      depth: 100,
-      rows: "table tbody tr",
-    },
-    phaseThree: {
-      title: ".title",
-      date: { label: false, value: "span.date:first-of-type" },
-      regexTime: true,
-    },
-  })),
+  //...makeJobs(22, 1, 5).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "hasc",
+  //collection: "houseCommittee",
+  //name: `House Armed Services ${i}`,
+  //phaseOne: {
+  //baseLink: "https://armedservices.house.gov/hearings?page=SUBSTITUTE",
+  //range,
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "table tbody tr",
+  //},
+  //phaseThree: {
+  //title: ".title",
+  //date: { label: false, value: "span.date:first-of-type" },
+  //regexTime: true,
+  //},
+  //})),
   //...makeJobs(11, 1, 3).map((range, i) => ({
   //type: "unlimitedv1",
   //committee: "hvac",
@@ -188,28 +188,26 @@ const unlimited = [
   //location: "span.location",
   //},
   //})),
-  //...makeJobs(18, 1, 3).map((range, i) => ({
-  //type: "unlimitedv5",
-  //committee: "hagc",
-  //collection: "houseCommittee",
-  //name: `House Agriculture Committee ${i}`,
-  //phaseOne: {
-  //range,
-  //baseLink:
-  //"https://agriculture.house.gov/calendar/default.aspx?Page=SUBSTITUTE",
-  //},
-  //phaseTwo: {
-  //depth: 100,
-  //rows: "ul.calendar-listing li",
-  //},
-  //phaseThree: {
-  //title: "h3.news-titler",
-  //jquerySelector: ".topnewstext",
-  //locationIndex: null,
-  //dateIndex: 0,
-  //timeIndex: 1,
-  //},
-  //})),
+  ...makeJobs(18, 1, 3).map((range, i) => ({
+    type: "unlimitedv1",
+    committee: "hagc",
+    collection: "houseCommittee",
+    name: `House Agriculture Committee ${i}`,
+    phaseOne: {
+      range,
+      baseLink:
+        "https://agriculture.house.gov/calendar/default.aspx?Page=SUBSTITUTE",
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: "ul.calendar-listing li",
+    },
+    phaseThree: {
+      title: "h3.news-titler",
+      regexTime: true,
+      regexDate: true,
+    },
+  })),
   //{
   //type: "unlimitedv4",
   //committee: "hapc",

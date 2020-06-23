@@ -11,6 +11,21 @@ export const stripWhiteSpace = (data) =>
     return x;
   });
 
+export const insertData = (model, data) =>
+  data.map(async (datum) => {
+    let doc = await model.findOne({ link: datum.link });
+    if (!doc) {
+      let newDoc = new model({ ...datum });
+      return await newDoc.save();
+    } else {
+      return await model.updateOne({ link: datum.link }, datum, {
+        new: true,
+        runValidators: true,
+        upsert: false,
+      });
+    }
+  });
+
 // Check to see if date and time fields pulled from page
 // match the valid values provided in each job (validFormats).
 // If not, return null. Otherwise, return value with ISOString().
@@ -44,9 +59,9 @@ const validFormats = {
   ],
 };
 
-export const cleanDateTime = (data) => {
-  return data.map((datum) => {
-    const { date, time } = datum;
+export const cleanDateTime = (data) =>
+  data.map((doc) => {
+    const { date, time } = doc;
     const validTime = validFormats.time.find((format) =>
       moment(time, format, true).isValid()
     );
@@ -54,23 +69,7 @@ export const cleanDateTime = (data) => {
       moment(date, format, true).isValid()
     );
 
-    datum.time = validTime ? moment(time, validTime).toISOString() : null;
-    datum.date = validDate ? moment(date, validDate).toISOString() : null;
-    return datum;
-  });
-};
-
-export const insertData = (model, data) =>
-  data.map(async (datum) => {
-    let doc = await model.findOne({ link: datum.link });
-    if (!doc) {
-      let newDoc = new model({ ...datum });
-      return await newDoc.save();
-    } else {
-      return await model.updateOne({ link: datum.link }, datum, {
-        new: true,
-        runValidators: true,
-        upsert: false,
-      });
-    }
+    doc.time = validTime ? moment(time, validTime).toISOString() : null;
+    doc.date = validDate ? moment(date, validDate).toISOString() : null;
+    return doc;
   });

@@ -4,35 +4,6 @@ const schedule =
     ? { type: "cron", value: "*/30 * * * *" }
     : { type: "every", value: 2000 };
 
-const validFormats = {
-  date: [
-    "MMM D, YYYY",
-    "MM.DD.YY",
-    "MMM D YYYY",
-    "MMM D",
-    "MMM DD YYYY",
-    "MMMM DD, YYYY",
-    "MMMM D, YYYY",
-    "MM/DD/YYYY",
-    "MM/DD/YY",
-    "ddd, MM/DD/YYYY",
-    "dddd, MMMM DD, YYYY",
-    "dddd, MMMM D, YYYY",
-  ],
-  time: [
-    "LT",
-    "hh:mm A",
-    "h:mm A",
-    "hh:mm a",
-    "h:mm a",
-    "hh:mmA",
-    "h:mmA",
-    "hh:mma",
-    "h:mma",
-    "hh:mm",
-  ],
-};
-
 // Creates an array of arrays, with the range of page numbers in each
 // The max represents the final page
 // The chunk is the number of pages to process before sending the results
@@ -51,46 +22,46 @@ const makeJobs = (max, start, chunk) => {
 };
 
 const unlimited = [
-  //...makeJobs(118, 1, 5).map((range, i) => ({
-  //type: "unlimitedv1",
-  //committee: "hfac",
-  //collection: "houseCommittee",
-  //name: `House Foreign Affairs ${i}`,
-  //phaseOne: {
-  //baseLink: "https://foreignaffairs.house.gov/hearings?page=SUBSTITUTE",
-  //range,
-  //},
-  //phaseTwo: {
-  //depth: 100,
-  //rows: "table tbody tr",
-  //},
-  //phaseThree: {
-  //title: ".title",
-  //date: { label: false, value: "span.date" },
-  //time: { label: false, value: "span.time" },
-  //location: "span.location strong",
-  //},
-  //})),
-  //...makeJobs(22, 1, 5).map((range, i) => ({
-  //type: "unlimitedv1",
-  //committee: "hfac",
-  //collection: "houseCommittee",
-  //name: `House Foreign Affairs Markups ${i}`,
-  //phaseOne: {
-  //baseLink: "https://foreignaffairs.house.gov/markups?page=SUBSTITUTE",
-  //range,
-  //},
-  //phaseTwo: {
-  //depth: 100,
-  //rows: "table tbody tr",
-  //},
-  //phaseThree: {
-  //title: ".title",
-  //date: { label: false, value: "span.date" },
-  //time: { label: false, value: "span.time" },
-  //location: "span.location strong",
-  //},
-  //})),
+  ...makeJobs(118, 1, 5).map((range, i) => ({
+    type: "unlimitedv1",
+    committee: "hfac",
+    collection: "houseCommittee",
+    name: `House Foreign Affairs ${i}`,
+    phaseOne: {
+      baseLink: "https://foreignaffairs.house.gov/hearings?page=SUBSTITUTE",
+      range,
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: "table tbody tr",
+    },
+    phaseThree: {
+      title: ".title",
+      date: { label: false, value: "span.date" },
+      time: { label: false, value: "span.time" },
+      location: "span.location strong",
+    },
+  })),
+  ...makeJobs(22, 1, 5).map((range, i) => ({
+    type: "unlimitedv1",
+    committee: "hfac",
+    collection: "houseCommittee",
+    name: `House Foreign Affairs Markups ${i}`,
+    phaseOne: {
+      baseLink: "https://foreignaffairs.house.gov/markups?page=SUBSTITUTE",
+      range,
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: "table tbody tr",
+    },
+    phaseThree: {
+      title: ".title",
+      date: { label: false, value: "span.date" },
+      time: { label: false, value: "span.time" },
+      location: "span.location strong",
+    },
+  })),
   //...makeJobs(22, 1, 5).map((range, i) => ({
   //type: "unlimitedv1",
   //committee: "hasc",
@@ -188,26 +159,26 @@ const unlimited = [
   //location: "span.location",
   //},
   //})),
-  ...makeJobs(18, 1, 3).map((range, i) => ({
-    type: "unlimitedv1",
-    committee: "hagc",
-    collection: "houseCommittee",
-    name: `House Agriculture Committee ${i}`,
-    phaseOne: {
-      range,
-      baseLink:
-        "https://agriculture.house.gov/calendar/default.aspx?Page=SUBSTITUTE",
-    },
-    phaseTwo: {
-      depth: 100,
-      rows: "ul.calendar-listing li",
-    },
-    phaseThree: {
-      title: "h3.news-titler",
-      regexTime: true,
-      regexDate: true,
-    },
-  })),
+  //...makeJobs(18, 1, 3).map((range, i) => ({
+  //type: "unlimitedv1",
+  //committee: "hagc",
+  //collection: "houseCommittee",
+  //name: `House Agriculture Committee ${i}`,
+  //phaseOne: {
+  //range,
+  //baseLink:
+  //"https://agriculture.house.gov/calendar/default.aspx?Page=SUBSTITUTE",
+  //},
+  //phaseTwo: {
+  //depth: 100,
+  //rows: "ul.calendar-listing li",
+  //},
+  //phaseThree: {
+  //title: "h3.news-titler",
+  //regexTime: true,
+  //regexDate: true,
+  //},
+  //})),
   //{
   //type: "unlimitedv4",
   //committee: "hapc",
@@ -661,6 +632,6 @@ const unlimited = [
   //},
   //},
   //},
-].map((x) => ({ schedule, validFormats, ...x }));
+].map((x) => ({ schedule, ...x }));
 
 export default unlimited;

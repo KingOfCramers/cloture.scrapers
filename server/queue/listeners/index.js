@@ -1,7 +1,7 @@
 import { logger } from "../../loggers/winston";
 import moment from "moment";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
-import { insertData, stripWhiteSpace, cleanDateTime } from "./helpers";
+import { insertData, cleanDateTime, stripWhiteSpace } from "./helpers";
 
 export const setupListeners = async (queue) => {
   queue.on("global:completed", async (job, result) => {
@@ -21,9 +21,8 @@ export const setupListeners = async (queue) => {
     }
 
     try {
-      let strippedData = stripWhiteSpace(data);
-      let cleanedData = cleanDateTime(strippedData);
-      let promisedInserts = insertData(model, cleanedData);
+      let cleanData = cleanDateTime(stripWhiteSpace(data));
+      let promisedInserts = insertData(model, cleanData);
       await Promise.all(promisedInserts);
 
       logger.info(`${job} has completed [${meta.name}]`);

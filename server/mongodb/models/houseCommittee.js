@@ -62,22 +62,21 @@ houseCommitteeSchema
   .get((v) => (moment(v).isValid() ? moment(v).format("LT") : null));
 
 const reformTime = (doc) => {
-  let momentified = moment(doc._update.time); // This should change for save
+  let momentified = moment(doc.time);
   let hours = parseInt(momentified.format("HH"));
   if (hours < 6) {
-    // If between the hours of 12 (midnight) and 6 am, add 12 hours
     momentified = momentified.add(12, "hours");
-    doc._update.time = new Date(momentified.toISOString());
+    doc.time = new Date(momentified.toISOString()); // If between the hours of 12 (midnight) and 6 am, add 12 hours
   }
 };
 
 houseCommitteeSchema.pre("save", function (next) {
-  reformTime(this);
+  reformTime(this, "save");
   next();
 });
 
 houseCommitteeSchema.pre("updateOne", function (next) {
-  reformTime(this);
+  reformTime(this._update, "updateOne");
   next();
 });
 

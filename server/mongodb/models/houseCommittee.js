@@ -75,6 +75,21 @@ houseCommitteeSchema.pre("save", function (next) {
   next();
 });
 
+houseCommitteeSchema.pre("updateOne", async function (next) {
+  let momentified = moment(this._update.time);
+  if (!momentified.isValid()) {
+    throw new Error("That is not a valid time.");
+  }
+  let hours = parseInt(momentified.format("HH"));
+  if (hours < 6) {
+    // If between the hours of 12 (midnight) and 6 am, add 12 hours
+    momentified = momentified.add(12, "hours");
+    this._update.time = new Date(momentified.toISOString());
+  }
+  console.log(moment(this._update.time).format("LT"));
+  next();
+});
+
 houseCommitteeSchema.post("updateOne", async function (val) {
   if (val.nModified > 0) {
     const updatedDoc = await this.model.findOne(this.getQuery());

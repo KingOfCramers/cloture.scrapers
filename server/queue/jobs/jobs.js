@@ -4,35 +4,6 @@ const schedule =
     ? { type: "cron", value: "*/30 * * * *" }
     : { type: "every", value: 2000 };
 
-const validFormats = {
-  date: [
-    "MMM D, YYYY",
-    "MM.DD.YY",
-    "MMM D YYYY",
-    "MMM D",
-    "MMM DD YYYY",
-    "MMMM DD, YYYY",
-    "MMMM D, YYYY",
-    "MM/DD/YYYY",
-    "MM/DD/YY",
-    "ddd, MM/DD/YYYY",
-    "dddd, MMMM DD, YYYY",
-    "dddd, MMMM D, YYYY",
-  ],
-  time: [
-    "LT",
-    "hh:mm A",
-    "h:mm A",
-    "hh:mm a",
-    "h:mm a",
-    "hh:mmA",
-    "h:mmA",
-    "hh:mma",
-    "h:mma",
-    "hh:mm",
-  ],
-};
-
 const jobs = [
   {
     type: "puppeteerv1", // Scraping routine
@@ -600,6 +571,6 @@ const jobs = [
       },
     },
   },
-].map((x) => ({ schedule, validFormats, ...x }));
+].map((x) => ({ schedule, ...x }));
 
 export default jobs;

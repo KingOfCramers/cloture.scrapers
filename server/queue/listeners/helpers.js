@@ -14,22 +14,48 @@ export const stripWhiteSpace = (data) =>
 // Check to see if date and time fields pulled from page
 // match the valid values provided in each job (validFormats).
 // If not, return null. Otherwise, return value with ISOString().
-export const cleanDateTime = (meta, data) => {
-  let fieldsToCheck = Object.keys(meta.validFormats);
-  return data.map((datum) => {
-    fieldsToCheck.forEach((field) => {
-      let valueFromScraper = datum[field];
-      let validFormat = meta.validFormats[field].find((format) =>
-        moment(valueFromScraper, format, true).isValid()
-      );
-      if (!validFormat) {
-        // If time doesn't match set to null
-        datum[field] = null;
-      } else {
-        datum[field] = moment(valueFromScraper, validFormat);
-      }
-    });
 
+const validFormats = {
+  date: [
+    "MMM D, YYYY",
+    "MM.DD.YY",
+    "MMM D YYYY",
+    "MMM D",
+    "MMM DD YYYY",
+    "MMMM DD, YYYY",
+    "MMMM D, YYYY",
+    "MM/DD/YYYY",
+    "MM/DD/YY",
+    "ddd, MM/DD/YYYY",
+    "dddd, MMMM DD, YYYY",
+    "dddd, MMMM D, YYYY",
+  ],
+  time: [
+    "LT",
+    "hh:mm A",
+    "h:mm A",
+    "hh:mm a",
+    "h:mm a",
+    "hh:mmA",
+    "h:mmA",
+    "hh:mma",
+    "h:mma",
+    "hh:mm",
+  ],
+};
+
+export const cleanDateTime = (data) => {
+  return data.map((datum) => {
+    const { date, time } = datum;
+    const validTime = validFormats.time.find((format) =>
+      moment(time, format, true).isValid()
+    );
+    const validDate = validFormats.date.find((format) =>
+      moment(date, format, true).isValid()
+    );
+
+    datum.time = validTime ? moment(time, validTime).toISOString() : null;
+    datum.date = validDate ? moment(date, validDate).toISOString() : null;
     return datum;
   });
 };

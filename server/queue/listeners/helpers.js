@@ -80,8 +80,7 @@ export const flipTimes = (data) =>
     if (momentified.isValid()) {
       let hours = parseInt(momentified.format("HH"));
       if (hours < 6) {
-        momentified = momentified.add(12, "hours");
-        doc.time = new Date(momentified.toISOString()); // If between the hours of 12 (midnight) and 6 am, add 12 hours
+        doc.time = momentified.add(12, "hours").toISOString();
         console.log(`Hours flipped from ${hours} AM`);
       }
     }

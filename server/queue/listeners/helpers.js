@@ -73,3 +73,17 @@ export const cleanDateTime = (data) =>
     doc.date = validDate ? moment(date, validDate).toISOString() : null;
     return doc;
   });
+
+export const flipTimes = (data) =>
+  data.map((doc) => {
+    let momentified = moment(doc.time);
+    if (momentified.isValid()) {
+      let hours = parseInt(momentified.format("HH"));
+      if (hours < 6) {
+        momentified = momentified.add(12, "hours");
+        doc.time = new Date(momentified.toISOString()); // If between the hours of 12 (midnight) and 6 am, add 12 hours
+        console.log(`Hours flipped from ${hours} AM`);
+      }
+    }
+    return doc;
+  });

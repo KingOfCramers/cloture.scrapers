@@ -1,7 +1,11 @@
 import { logger } from "../../loggers/winston";
-import moment from "moment";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
-import { insertData, cleanDateTime, stripWhiteSpace } from "./helpers";
+import {
+  insertData,
+  cleanDateTime,
+  flipTimes,
+  stripWhiteSpace,
+} from "./helpers";
 
 export const setupListeners = async (queue) => {
   queue.on("global:completed", async (job, result) => {
@@ -20,15 +24,36 @@ export const setupListeners = async (queue) => {
       );
     }
 
-    try {
-      let cleanData = cleanDateTime(stripWhiteSpace(data));
-      let promisedInserts = insertData(model, cleanData);
-      await Promise.all(promisedInserts);
+    let strippedData;
+    let cleanedDateAndTimeData;
+    let convertedTimeData;
 
-      logger.info(`${job} has completed [${meta.name}]`);
+    try {
+      strippedData = stripWhiteSpace(data);
     } catch (err) {
-      logger.error(`${job} could not insert documents into MongoDB: `, err);
+      logger.error(`${job} could not strip white space. `, err);
     }
+
+    try {
+      cleanedDateAndTimeData = cleanDateTime(strippedData);
+    } catch (err) {
+      logger.error(`${job} could not cleanedDateAndTimeData. `, err);
+    }
+
+    try {
+      convertedTimeData = flipTimes(cleanedDateAndTimeData);
+    } catch (err) {
+      logger.error(`${job} could not convert times. `, err);
+    }
+
+    try {
+      let promisedInserts = insertData(model, convertedTimeData);
+      await Promise.all(promisedInserts);
+    } catch (err) {
+      logger.error(`${job} could not insert data. `, err);
+    }
+
+    logger.info(`${job} has completed [${meta.name}]`);
   });
 
   queue.on("global:active", (job) => {

@@ -18,11 +18,8 @@ export const insertData = (model, data) =>
       let newDoc = new model({ ...datum });
       return await newDoc.save();
     } else {
-      return await model.updateOne({ link: datum.link }, datum, {
-        new: true,
-        runValidators: true,
-        upsert: false,
-      });
+      doc.set({ ...datum });
+      return await doc.save();
     }
   });
 

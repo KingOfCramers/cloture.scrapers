@@ -64,6 +64,26 @@ let houseCommitteeSchema = new Schema({
   },
 });
 
+houseCommitteeSchema.pre("save", function (next) {
+  this.wasNew = this.isNew; // Pass down newness to post-save for logging
+  if (!this.isNew) {
+    // If it's not new, then log the updates here.
+    let modifiedPaths = this.modifiedPaths();
+    if (modifiedPaths.length > 0) {
+      modifiedPaths.forEach((path) => {
+        logger.info(`${this.id} ${path} ––> ${JSON.stringify(this[path])}`);
+      });
+    }
+  }
+  next();
+});
+
+houseCommitteeSchema.post("save", function (val) {
+  if (this.wasNew) {
+    logger.info(`Document saved with id ${val._id}`);
+  }
+});
+
 // Convert dates + times upon fetch
 houseCommitteeSchema
   .path("date")
@@ -72,26 +92,6 @@ houseCommitteeSchema
   .path("time")
   .get((v) => (moment(v).isValid() ? moment(v).format("LT") : null));
 
-houseCommitteeSchema.pre("save", function (next) {
-  //console.log(this);
-  next();
-});
-
-houseCommitteeSchema.pre("updateOne", function (next) {
-  //console.log(this._update);
-  next();
-});
-
-houseCommitteeSchema.post("save", function (val) {
-  console.log(`Document saved with id ${val._id}`);
-});
-
-houseCommitteeSchema.post("updateOne", async function (val) {
-  if (val.nModified > 0) {
-    const updatedDoc = await this.model.findOne(this.getQuery());
-    logger.info(`Document updated with id ${updatedDoc.id}`);
-  }
-});
 // Make model and export
 const houseCommittee = mongoose.model("houseCommittee", houseCommitteeSchema);
 export { houseCommittee };

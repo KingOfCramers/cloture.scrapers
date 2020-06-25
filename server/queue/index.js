@@ -6,7 +6,8 @@ import { setupProducers } from "./producers";
 import { setupListeners } from "./listeners";
 
 // Different job types
-import jobs from "./jobs/jobs";
+import houseCommitteeJobs from "./jobs/houseCommitteeJobs";
+import senateCommitteeJobs from "./jobs/senateCommitteeJobs";
 import unlimited from "./jobs/unlimited";
 
 export const setupQueue = async () => {
@@ -27,7 +28,9 @@ export const setupQueue = async () => {
   try {
     await setupProducers(
       queue,
-      process.env.SCRAPE === "true" ? unlimited : jobs
+      process.env.SCRAPE === "true"
+        ? unlimited
+        : [...senateCommitteeJobs, ...houseCommitteeJobs]
     );
   } catch (err) {
     logger.error("Could not setup producers.");

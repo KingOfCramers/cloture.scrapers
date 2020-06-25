@@ -9,7 +9,6 @@ let senateCommitteeSchema = new Schema({
     enum: [
       "sfrc",
       "sasc",
-      "svac",
       "sagc",
       "sapc",
       "sbnk",
@@ -42,25 +41,51 @@ let senateCommitteeSchema = new Schema({
     required: false,
   },
   time: {
-    type: String,
-    require: true,
+    type: Date,
+    require: false,
+    set: (time) => {
+      let momentified = moment(time);
+      if (momentified.isValid()) {
+        let hours = momentified.hours();
+        if (hours < 6) {
+          // If the time is between 12 and 6am, it should be flipped to pm
+          time = momentified.add(12, "hours").toISOString();
+        }
+      }
+      return time;
+    },
   },
   date: {
-    type: String,
-    require: true,
+    type: Date,
+    require: false,
   },
-  witnesses: [
-    {
-      type: String,
-    },
-  ],
-  type: {
+  text: {
     type: String,
-    require: true,
+    require: false,
   },
 });
 
-// Convert dates + times
+senateCommitteeSchema.pre("save", function (next) {
+  this.wasNew = this.isNew; // Pass down newness to post-save for logging
+  if (!this.isNew) {
+    // If it's not new, then log the updates here.
+    let modifiedPaths = this.modifiedPaths();
+    if (modifiedPaths.length > 0) {
+      modifiedPaths.forEach((path) => {
+        logger.info(`${this.id} ${path} ––> ${JSON.stringify(this[path])}`);
+      });
+    }
+  }
+  next();
+});
+
+senateCommitteeSchema.post("save", function (val) {
+  if (this.wasNew) {
+    logger.info(`Document saved with id ${val._id}`);
+  }
+});
+
+// Convert dates + times upon fetch
 senateCommitteeSchema
   .path("date")
   .get((v) => (moment(v).isValid() ? moment(v).format("LL") : null));

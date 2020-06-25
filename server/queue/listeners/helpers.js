@@ -53,6 +53,10 @@ const validFormats = {
     "hh:mma",
     "h:mma",
     "hh:mm",
+    "h:mm [p.m.]",
+    "h:mm [a.m.]",
+    "h:mm [A.M.]",
+    "h:mm [P.M.]",
   ],
 };
 

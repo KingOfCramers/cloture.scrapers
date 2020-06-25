@@ -80,18 +80,81 @@ const jobs = [
       },
     },
   },
-  //{
-  //committee: "sapc",
-  //},
-  //{
-  //committee: "sbnk",
-  //},
-  //{
-  //committee: "sbdg",
-  //},
-  //{
-  //committee: "sstr",
-  //},
+  {
+    type: "puppeteerv1",
+    committee: "sbnk",
+    collection: "senateCommittee",
+    name: "Senate Banking Committee",
+    link: "https://www.banking.senate.gov/hearings?c=all&mode=list",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "div.upcoming-hearings div.row",
+      },
+      layerTwo: {
+        title: "h1.main_page_title",
+        date: { label: true, value: "span.col-md-12 span" },
+        time: { label: true, value: "span.time span" },
+        location: { label: true, value: "span.location span" },
+      },
+    },
+  },
+  {
+    type: "puppeteerv1",
+    committee: "sbdg",
+    collection: "senateCommittee",
+    name: "Senate Budget Committee",
+    link: "https://www.budget.senate.gov/hearings?c=all&mode=list",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "tbody tr.vevent",
+      },
+      layerTwo: {
+        title: "h1.main_page_title",
+        date: { label: true, value: "span.col-md-12 span" },
+        time: { label: true, value: "span.time span" },
+        location: { label: true, value: "span.location span" },
+      },
+    },
+  },
+  {
+    type: "puppeteerv1",
+    committee: "sbdg",
+    collection: "senateCommittee",
+    name: "Senate Budget Committee Markups",
+    link: "https://www.banking.senate.gov/markups?c=all&mode=list",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "tbody tr.vevent",
+      },
+      layerTwo: {
+        title: "h1.main_page_title",
+        date: { label: true, value: "span.col-md-12 span" },
+        time: { label: true, value: "span.time span" },
+        location: { label: true, value: "span.location span" },
+      },
+    },
+  },
+  {
+    committee: "sstr",
+    type: "puppeteerv1",
+    collection: "senateCommittee",
+    name: "Senate Transportation Committee Hearings",
+    link: "https://www.commerce.senate.gov/hearings?month=&year=&label_id=",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "div.elements element",
+      },
+      layerTwo: {
+        title: "h1.element-title",
+        regexTime: true,
+        regexDate: true,
+      },
+    },
+  },
   //{
   //committee: "snat",
   //},

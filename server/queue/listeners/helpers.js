@@ -38,6 +38,8 @@ const validFormats = {
     "MMMM D, YYYY",
     "MM/DD/YYYY",
     "MM/DD/YY",
+    "M/DD/YY",
+    "M/D/YY",
     "ddd, MM/DD/YYYY",
     "dddd, MMMM DD, YYYY",
     "dddd, MMMM D, YYYY",

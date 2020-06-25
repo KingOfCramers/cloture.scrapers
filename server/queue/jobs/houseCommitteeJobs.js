@@ -112,7 +112,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: "tr.vevent",
-        date: "time.dtstart",
+        date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 },
         location: "span.location",
       },
@@ -128,7 +128,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: "tr.vevent",
-        date: "time.dtstart",
+        date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 },
         location: "span.location",
       },
@@ -266,7 +266,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: ".views-row",
-        date: ".date-display-single",
+        date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
       },
@@ -282,7 +282,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: ".views-row",
-        date: ".date-display-single",
+        date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
       },
@@ -357,7 +357,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: ".views-row",
-        date: ".date-display-single",
+        date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
       },
@@ -373,7 +373,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: "tr.vevent",
-        date: "time.dtstart",
+        date: { selector: "time.dtstart", instance: 0 },
         splitDate: " ",
         location: "span.location",
       },
@@ -389,7 +389,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: ".views-row",
-        date: "span.date-display-single",
+        date: { selector: "span.date-display-single", instance: 0 },
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location .field-content",
       },
@@ -422,7 +422,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: ".views-row",
-        date: "span.date-display-single",
+        date: { selector: "span.date-display-single", instance: 0 },
         splitDate: "-",
         location: null,
       },
@@ -438,7 +438,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: "#hearings--upcoming div.hearing",
-        date: ".hearing__date",
+        date: { selector: ".hearing__date", instance: 0 },
         time: { selector: ".hearing__time time", instance: 0 },
         location: ".hearing__location",
       },
@@ -454,7 +454,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: "#hearings--upcoming div.hearing",
-        date: ".hearing__date",
+        date: { selector: ".hearing__date", instance: 0 },
         time: { selector: ".hearing__time time", instance: 0 },
         location: ".hearing__location",
       },
@@ -490,7 +490,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: "div.hearings-table table tr.vevent",
-        date: "time.dtstart",
+        date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
         location: "span.location",
       },
@@ -506,7 +506,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: "div.hearings-table table tr.vevent",
-        date: "time.dtstart",
+        date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
       },
     },
@@ -565,7 +565,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: ".views-row",
-        date: "span.date-display-single",
+        date: { selector: "span.date-display-single", instance: 0 },
         splitDate: "-",
         location: null,
       },

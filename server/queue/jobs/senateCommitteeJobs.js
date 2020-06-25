@@ -146,7 +146,7 @@ const jobs = [
     selectors: {
       layerOne: {
         depth: 5,
-        rows: "div.elements element",
+        rows: "div.elements .element",
       },
       layerTwo: {
         title: "h1.element-title",
@@ -155,9 +155,41 @@ const jobs = [
       },
     },
   },
-  //{
-  //committee: "snat",
-  //},
+  {
+    committee: "sstr",
+    type: "puppeteerv1",
+    collection: "senateCommittee",
+    name: "Senate Transportation Committee Markups",
+    link: "https://www.commerce.senate.gov/markups?month=&year=",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "div.elements .element",
+      },
+      layerTwo: {
+        title: "h1.element-title",
+        regexTime: true,
+        regexDate: true,
+      },
+    },
+  },
+  {
+    committee: "snat",
+    type: "puppeteerv2",
+    collection: "senateCommittee",
+    name: "Senate Natural Resources",
+    link:
+      "https://www.energy.senate.gov/public/index.cfm/hearings-and-business-meetings?MonthDisplay=0&YearDisplay=0",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "div.recordsContainer tbody tr",
+        date: "td.recordListDate",
+        time: { selector: "td.recordListTime", instance: 0 },
+        title: "td.recordListTitle a",
+      },
+    },
+  },
   //{
   //committee: "senv",
   //},

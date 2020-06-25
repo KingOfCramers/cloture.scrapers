@@ -35,6 +35,7 @@ let senateCommitteeSchema = new Schema({
   link: {
     type: String,
     require: true,
+    unique: true,
   },
   location: {
     type: String,

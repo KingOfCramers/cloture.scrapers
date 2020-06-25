@@ -23,6 +23,60 @@ const jobs = [
       },
     },
   },
+  {
+    committee: "sasc",
+  },
+  //{
+    //committee: "sagc",
+  //},
+  //{
+    //committee: "sapc",
+  //},
+  //{
+    //committee: "sbnk",
+  //},
+  //{
+    //committee: "sbdg",
+  //},
+  //{
+    //committee: "sstr",
+  //},
+  //{
+    //committee: "snat",
+  //},
+  //{
+    //committee: "senv",
+  //},
+  //{
+    //committee: "sfin",
+  //},
+  //{
+    //committee: "shlp",
+  //},
+  //{
+    //committee: "shsc",
+  //},
+  //{
+    //committee: "sind",
+  //},
+  //{
+    //committee: "sjud",
+  //},
+  //{
+    //committee: "srle",
+  //},
+  //{
+    //committee: "seth",
+  //},
+  //{
+    //committee: "ssci",
+  //},
+  //{
+    //committee: "ssbs",
+  //},
+  //{
+    //committee: "svet",
+  //},
 ].map((job) => ({ schedule, ...job }));
 
 export default jobs;

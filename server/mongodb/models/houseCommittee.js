@@ -42,6 +42,17 @@ let houseCommitteeSchema = new Schema({
   time: {
     type: Date,
     require: false,
+    set: (time) => {
+      let momentified = moment(time);
+      if (momentified.isValid()) {
+        let hours = momentified.hours();
+        if (hours < 6) {
+          // If the time is between 12 and 6am, it should be flipped to pm
+          time = momentified.add(12, "hours").toISOString();
+        }
+      }
+      return time;
+    },
   },
   date: {
     type: Date,

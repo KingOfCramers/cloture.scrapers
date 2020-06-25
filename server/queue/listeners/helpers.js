@@ -73,16 +73,3 @@ export const cleanDateTime = (data) =>
     doc.date = validDate ? moment(date, validDate).toISOString() : null;
     return doc;
   });
-
-export const flipTimes = (data) =>
-  data.map((doc) => {
-    let momentified = moment(doc.time);
-    if (momentified.isValid()) {
-      let hours = parseInt(momentified.format("HH"));
-      if (hours < 6) {
-        doc.time = momentified.add(12, "hours").toISOString();
-        console.log(`Hours flipped from ${hours} AM`);
-      }
-    }
-    return doc;
-  });

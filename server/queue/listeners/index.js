@@ -1,11 +1,6 @@
 import { logger } from "../../loggers/winston";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
-import {
-  insertData,
-  cleanDateTime,
-  flipTimes,
-  stripWhiteSpace,
-} from "./helpers";
+import { insertData, cleanDateTime, stripWhiteSpace } from "./helpers";
 
 export const setupListeners = async (queue) => {
   queue.on("global:completed", async (job, result) => {
@@ -26,7 +21,6 @@ export const setupListeners = async (queue) => {
 
     let strippedData;
     let cleanedDateAndTimeData;
-    let convertedTimeData;
 
     try {
       strippedData = stripWhiteSpace(data);
@@ -41,13 +35,7 @@ export const setupListeners = async (queue) => {
     }
 
     try {
-      convertedTimeData = flipTimes(cleanedDateAndTimeData);
-    } catch (err) {
-      logger.error(`${job} could not convert times. `, err);
-    }
-
-    try {
-      let promisedInserts = insertData(model, convertedTimeData);
+      let promisedInserts = insertData(model, cleanedDateAndTimeData);
       await Promise.all(promisedInserts);
     } catch (err) {
       logger.error(`${job} could not insert data. `, err);

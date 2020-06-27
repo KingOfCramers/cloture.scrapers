@@ -25,7 +25,7 @@ let senateCommitteeSchema = new Schema({
       "seth",
       "ssci",
       "ssbs",
-      "svet",
+      "svac",
     ],
   },
   title: {

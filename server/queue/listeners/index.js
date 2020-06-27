@@ -34,7 +34,6 @@ export const setupListeners = async (queue) => {
       logger.error(`${job} could not cleanedDateAndTimeData. `, err);
     }
 
-    console.log(cleanedDateAndTimeData);
     try {
       let promisedInserts = insertData(model, cleanedDateAndTimeData);
       await Promise.all(promisedInserts);

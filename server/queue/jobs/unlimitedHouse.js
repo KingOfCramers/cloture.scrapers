@@ -28,7 +28,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Foreign Affairs ${i}`,
     phaseOne: {
-      baseLink: "https://foreignaffairs.house.gov/hearings?page=SUBSTITUTE",
+      link: "https://foreignaffairs.house.gov/hearings?page=SUBSTITUTE",
       range,
     },
     phaseTwo: {
@@ -48,7 +48,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Foreign Affairs Markups ${i}`,
     phaseOne: {
-      baseLink: "https://foreignaffairs.house.gov/markups?page=SUBSTITUTE",
+      link: "https://foreignaffairs.house.gov/markups?page=SUBSTITUTE",
       range,
     },
     phaseTwo: {
@@ -68,7 +68,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Armed Services ${i}`,
     phaseOne: {
-      baseLink: "https://armedservices.house.gov/hearings?page=SUBSTITUTE",
+      link: "https://armedservices.house.gov/hearings?page=SUBSTITUTE",
       range,
     },
     phaseTwo: {
@@ -87,8 +87,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Veterans Affairs ${i}`,
     phaseOne: {
-      baseLink:
-        "https://veterans.house.gov/events/hearings?PageNum_rs=SUBSTITUTE",
+      link: "https://veterans.house.gov/events/hearings?PageNum_rs=SUBSTITUTE",
       range,
     },
     phaseTwo: {
@@ -108,8 +107,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Veterans Affairs ${i}`,
     phaseOne: {
-      baseLink:
-        "https://veterans.house.gov/events/markups?PageNum_rs=SUBSTITUTE",
+      link: "https://veterans.house.gov/events/markups?PageNum_rs=SUBSTITUTE",
       range,
     },
     phaseTwo: {
@@ -130,7 +128,7 @@ const unlimited = [
     name: `House Homeland Security ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://homeland.house.gov/activities/hearings?PageNum_rs=SUBSTITUTE",
     },
     phaseTwo: {
@@ -148,7 +146,7 @@ const unlimited = [
     name: `House Homeland Security Markups ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://homeland.house.gov/activities/markups?PageNum_rs=SUBSTITUTE",
     },
     phaseTwo: {
@@ -166,7 +164,7 @@ const unlimited = [
     name: `House Agriculture Committee ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://agriculture.house.gov/calendar/default.aspx?Page=SUBSTITUTE",
     },
     phaseTwo: {
@@ -186,7 +184,7 @@ const unlimited = [
     name: `House Appropriations Committee`,
     phaseOne: {
       range: [null],
-      baseLink:
+      link:
         "https://appropriations.house.gov/events/hearings?subcommittee=All&congress_number=752&__ncforminfo=wpeKKQCEbvD-XvJbu_uHk-hv2D29ftMt58-8zKF6BdxniFRAouHN6NELw4ysPpbbvfsC1mnVQ1ncqm_NkItsufcGZgtVv2Tr",
     },
     phaseTwo: {
@@ -205,7 +203,7 @@ const unlimited = [
     name: `House Appropriations Committee Markup`,
     phaseOne: {
       range: [null],
-      baseLink:
+      link:
         "https://appropriations.house.gov/events/markups?subcommittee=All&congress_number=752",
     },
     phaseTwo: {
@@ -223,7 +221,7 @@ const unlimited = [
     name: `House Budget Committee`,
     phaseOne: {
       range: [839, 818, 672, 180, 799, 800, 823, 824],
-      baseLink:
+      link:
         "https://budget.house.gov/legislation/hearings?congress_number=SUBSTITUTE",
     },
     phaseTwo: {
@@ -240,7 +238,7 @@ const unlimited = [
     name: `House Budget Committee Markups`,
     phaseOne: {
       range: [839, 818, 672, 180, 799, 800, 823, 824],
-      baseLink:
+      link:
         "https://budget.house.gov/legislation/markups?congress_number=SUBSTITUTE",
     },
     phaseTwo: {
@@ -256,7 +254,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Education and Labor ${i}`,
     phaseOne: {
-      baseLink:
+      link:
         "https://edlabor.house.gov/full-committee-hearings?PageNum_rs=SUBSTITUTE",
       range,
     },
@@ -277,7 +275,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Education and Labor Markups ${i}`,
     phaseOne: {
-      baseLink: "https://edlabor.house.gov/markups?PageNum_rs=SUBSTITUTE",
+      link: "https://edlabor.house.gov/markups?PageNum_rs=SUBSTITUTE",
       range,
     },
     phaseTwo: {
@@ -298,7 +296,7 @@ const unlimited = [
     name: `House Energy Committee ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://energycommerce.house.gov/committee-activity/hearings?page=SUBSTITUTE",
     },
     phaseTwo: {
@@ -316,7 +314,7 @@ const unlimited = [
     name: `House Energy Committee ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://energycommerce.house.gov/committee-activity/markups?page=SUBSTITUTE",
     },
     phaseTwo: {
@@ -334,7 +332,7 @@ const unlimited = [
     name: `House Financial Services Committee ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://financialservices.house.gov/calendar/default.aspx?EventTypeID=577&Congress=116&Page=SUBSTITUTE",
     },
     phaseTwo: {
@@ -356,7 +354,7 @@ const unlimited = [
     name: `House Financial Services Committee Markups ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://financialservices.house.gov/calendar/default.aspx?EventTypeID=575&Congress=116&Page=SUBSTITUTE",
     },
     phaseTwo: {
@@ -378,8 +376,7 @@ const unlimited = [
     name: `House Administration Committee ${i}`,
     phaseOne: {
       range,
-      baseLink:
-        "https://cha.house.gov/committee-activity/hearings?page=SUBSTITUTE",
+      link: "https://cha.house.gov/committee-activity/hearings?page=SUBSTITUTE",
     },
     phaseTwo: {
       depth: 100,
@@ -396,7 +393,7 @@ const unlimited = [
     name: `House Administration Committee Markups`,
     phaseOne: {
       range: [796, 803],
-      baseLink:
+      link:
         "https://cha.house.gov/committee-activity/markups?subcommittee=All&congress_number=SUBSTITUTE",
     },
     phaseTwo: {
@@ -414,7 +411,7 @@ const unlimited = [
     name: `House Administration Committee Business Meetings`,
     phaseOne: {
       range: [796, 803],
-      baseLink:
+      link:
         "https://cha.house.gov/committee-activity/business-meetings?subcommittee=All&congress_number=SUBSTITUTE",
     },
     phaseTwo: {
@@ -432,8 +429,7 @@ const unlimited = [
     name: `House Natural Resources ${i}`,
     phaseOne: {
       range,
-      baseLink:
-        "https://naturalresources.house.gov/hearings?PageNum_rs=SUBSTITUTE",
+      link: "https://naturalresources.house.gov/hearings?PageNum_rs=SUBSTITUTE",
     },
     phaseTwo: {
       depth: 100,
@@ -450,8 +446,7 @@ const unlimited = [
     name: `House Oversight ${i}`,
     phaseOne: {
       range,
-      baseLink:
-        "https://oversight.house.gov/legislation/hearings?page=SUBSTITUTE",
+      link: "https://oversight.house.gov/legislation/hearings?page=SUBSTITUTE",
     },
     phaseTwo: {
       depth: 100,
@@ -468,7 +463,7 @@ const unlimited = [
     name: `House Oversight Business`,
     phaseOne: {
       range: [null],
-      baseLink: "https://oversight.house.gov/legislation/business-meetings",
+      link: "https://oversight.house.gov/legislation/business-meetings",
     },
     phaseTwo: {
       depth: 100,
@@ -485,7 +480,7 @@ const unlimited = [
     name: `House Science Committee ${i}`,
     phaseOne: {
       range,
-      baseLink: "https://science.house.gov/hearings?PageNum_rs=SUBSTITUTE",
+      link: "https://science.house.gov/hearings?PageNum_rs=SUBSTITUTE",
     },
     phaseTwo: {
       depth: 100,
@@ -502,7 +497,7 @@ const unlimited = [
     name: `House Science Committee Markups ${i}`,
     phaseOne: {
       range,
-      baseLink: "https://science.house.gov/markups?PageNum_rs=SUBSTITUTE",
+      link: "https://science.house.gov/markups?PageNum_rs=SUBSTITUTE",
     },
     phaseTwo: {
       depth: 100,
@@ -519,7 +514,7 @@ const unlimited = [
     name: `House Small Business Committee${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://smallbusiness.house.gov/activity/default.aspx?Page=SUBSTITUTE",
     },
     phaseTwo: {
@@ -541,7 +536,7 @@ const unlimited = [
     name: `House Transportation Committee Hearings ${i}`,
     phaseOne: {
       range,
-      baseLink:
+      link:
         "https://transportation.house.gov/committee-activity/hearings?PageNum_rs=SUBSTITUTE",
     },
     phaseTwo: {
@@ -558,7 +553,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Ways and Means ${i}`,
     phaseOne: {
-      baseLink:
+      link:
         "https://waysandmeans.house.gov/legislation/hearings?page=SUBSTITUTE",
       range,
     },
@@ -579,7 +574,7 @@ const unlimited = [
     collection: "houseCommittee",
     name: `House Ways and Means Markups ${i}`,
     phaseOne: {
-      baseLink:
+      link:
         "https://waysandmeans.house.gov/legislation/markups?page=SUBSTITUTE",
       range,
     },
@@ -601,7 +596,7 @@ const unlimited = [
     name: `House Climate Committee Hearings `,
     phaseOne: {
       range: [180],
-      baseLink:
+      link:
         "https://climatecrisis.house.gov/committee-activity/hearings?congress_number=SUBSTITUTE",
     },
     phaseTwo: {

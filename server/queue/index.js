@@ -8,7 +8,8 @@ import { setupListeners } from "./listeners";
 // Different job types
 import houseCommitteeJobs from "./jobs/houseCommitteeJobs";
 import senateCommitteeJobs from "./jobs/senateCommitteeJobs";
-import unlimited from "./jobs/unlimited";
+import unlimitedHouse from "./jobs/unlimitedHouse";
+import unlimitedSenate from "./jobs/unlimitedSenate";
 
 export const setupQueue = async () => {
   try {
@@ -29,7 +30,7 @@ export const setupQueue = async () => {
     await setupProducers(
       queue,
       process.env.SCRAPE === "true"
-        ? unlimited
+        ? [...unlimitedSenate] // ...unlimitedHouse]
         : [...senateCommitteeJobs, ...houseCommitteeJobs]
     );
   } catch (err) {

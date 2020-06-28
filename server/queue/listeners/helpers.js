@@ -19,6 +19,7 @@ export const insertData = (model, data) =>
       return await newDoc.save();
     } else {
       doc.set({ ...datum });
+      debugger;
       return await doc.save();
     }
   });

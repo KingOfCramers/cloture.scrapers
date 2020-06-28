@@ -366,6 +366,6 @@ const jobs = [
       },
     },
   },
-].map((job) => ({ schedule, ...job }));
+].map((job) => ({ schedule, ...job, nice: parseInt(process.env.NICE) }));
 
 export default jobs;

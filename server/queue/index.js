@@ -20,7 +20,11 @@ export const setupQueue = async () => {
         password: process.env.REDIS_PASSWORD,
       },
     });
-    logger.info("Created new queue.");
+    logger.info(
+      `Created new queue with ${
+        process.env.NICE ? parseInt(process.env.NICE) : "no"
+      } delay`
+    );
   } catch (err) {
     logger.error("Could not create queue.");
     throw err;
@@ -30,7 +34,7 @@ export const setupQueue = async () => {
     await setupProducers(
       queue,
       process.env.SCRAPE === "true"
-        ? [...unlimitedSenate] // ...unlimitedHouse]
+        ? [...unlimitedSenate, ...unlimitedHouse]
         : [...senateCommitteeJobs, ...houseCommitteeJobs]
     );
   } catch (err) {

@@ -18,7 +18,6 @@ const makeJobs = (max, start, chunk) => {
       .filter((x) => x <= max); // Remove any values over the max size
     jobs.push(range);
   });
-  console.log(jobs);
   return jobs.filter((x) => x.length > 0);
 };
 

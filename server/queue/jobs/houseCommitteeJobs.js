@@ -340,7 +340,7 @@ const jobs = [
       layerOne: {
         depth: 5,
         rows: ".view-content",
-        date: ".date-display-single",
+        date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
         location: ".views-field-field-congress-meeting-location",
       },

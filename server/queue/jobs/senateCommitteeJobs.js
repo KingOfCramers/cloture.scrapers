@@ -89,7 +89,7 @@ const jobs = [
     selectors: {
       layerOne: {
         depth: 5,
-        rows: "div.upcoming-hearings div.row div.centered",
+        rows: "tbody tr.vevent",
       },
       layerTwo: {
         title: "h1.main_page_title",

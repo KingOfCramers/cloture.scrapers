@@ -22,6 +22,25 @@ const makeJobs = (max, start, chunk) => {
 };
 
 const unlimited = [
+  ...makeJobs(12, 1, 2).map((range, i) => ({
+    type: "unlimitedv1",
+    committee: "sage",
+    collection: "senateCommittee",
+    name: `Senate Aging Committee ${range[0]}`,
+    phaseOne: {
+      link: `https://www.aging.senate.gov/hearings?PageNum_rs=SUBSTITUTE`,
+      range,
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: "tr.vevent",
+    },
+    phaseThree: {
+      title: "div#content h1",
+      regexTime: true,
+      regexDate: true,
+    },
+  })),
   ...makeJobs(67, 18, 2).map((range, i) => ({
     type: "unlimitedv1",
     committee: "sfrc",

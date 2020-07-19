@@ -6,6 +6,24 @@ const schedule =
 const jobs = [
   {
     type: "puppeteerv1",
+    committee: "sage",
+    collection: "senateCommittee",
+    name: "Senate Aging Committee",
+    link: "https://www.aging.senate.gov/hearings",
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "tr.vevent",
+      },
+      layerTwo: {
+        title: "div#content h1",
+        regexTime: true,
+        regexDate: true,
+      },
+    },
+  },
+  {
+    type: "puppeteerv1",
     committee: "sfrc",
     collection: "senateCommittee",
     name: "Senate Foreign Relations Committee Hearings",

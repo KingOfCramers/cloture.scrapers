@@ -26,6 +26,7 @@ let senateCommitteeSchema = new Schema({
       "ssci",
       "ssbs",
       "svac",
+      "sage",
     ],
   },
   title: {

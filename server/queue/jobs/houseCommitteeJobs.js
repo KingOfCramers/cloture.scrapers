@@ -6,11 +6,12 @@ const schedule =
 
 const jobs = [
   {
-    type: "puppeteerv1", // Scraping routine
+    type: "puppeteerv1",
     committee: "hjud",
     collection: "houseCommittee",
-    name: "House Judiciary Committee Hearings", // Stored in Redis, must be unique
-    link: "https://foreignaffairs.house.gov/hearings", // Initial Link
+    name: "House Judiciary Committee Hearings and Markups",
+    link:
+      "https://judiciary.house.gov/calendar/eventslisting.aspx?EventTypeID=0&CategoryID=0&Congress=&Count=10",
     selectors: {
       layerOne: {
         depth: 5,

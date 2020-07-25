@@ -14,7 +14,7 @@ const jobs = [
     selectors: {
       layerOne: {
         depth: 5,
-        rows: "ul.calendar-listing", // Rows to check
+        rows: "li.calendar-item",
       },
       layerTwo: {
         title: "h3.news-titler",

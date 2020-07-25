@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"sked_checker.senatecommittees"},{"v":{"$numberInt":"2"},"unique":true,"key":{"link":{"$numberInt":"1"}},"name":"link_1","ns":"sked_checker.senatecommittees","background":true}],"uuid":"ab3a00d31075480393b053c5038a3c4b"}

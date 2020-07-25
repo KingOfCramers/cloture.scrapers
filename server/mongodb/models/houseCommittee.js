@@ -8,6 +8,7 @@ let houseCommitteeSchema = new Schema({
     required: [true, "A valid house committee is required."],
     enum: [
       "hrle",
+      "hjud",
       "hasc",
       "hfac",
       "hvac",

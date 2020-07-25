@@ -34,7 +34,7 @@ export const setupQueue = async () => {
     await setupProducers(
       queue,
       process.env.SCRAPE === "true"
-        ? [...unlimitedSenate, ...unlimitedHouse]
+        ? [...unlimitedHouse] // [...unlimitedSenate, ...unlimitedHouse]
         : [...senateCommitteeJobs, ...houseCommitteeJobs]
     );
   } catch (err) {

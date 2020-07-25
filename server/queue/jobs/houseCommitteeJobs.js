@@ -6,6 +6,25 @@ const schedule =
 
 const jobs = [
   {
+    type: "puppeteerv1", // Scraping routine
+    committee: "hjud",
+    collection: "houseCommittee",
+    name: "House Judiciary Committee Hearings", // Stored in Redis, must be unique
+    link: "https://foreignaffairs.house.gov/hearings", // Initial Link
+    selectors: {
+      layerOne: {
+        depth: 5,
+        rows: "ul.calendar-listing", // Rows to check
+      },
+      layerTwo: {
+        title: "h3.news-titler",
+        regexTime: true,
+        regexDate: true,
+        location: { label: true, value: "div.events-location strong" },
+      },
+    },
+  },
+  {
     type: "puppeteerv6",
     committee: "hrle",
     collection: "houseCommittee",

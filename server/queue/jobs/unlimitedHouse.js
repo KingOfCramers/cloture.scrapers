@@ -22,6 +22,26 @@ const makeJobs = (max, start, chunk) => {
 };
 
 const unlimited = [
+  ...makeJobs(34, 0, 1).map((range, i) => ({
+    type: "unlimitedv1",
+    committee: "hjud",
+    collection: "houseCommittee",
+    name: `House Judiciary ${i}`,
+    phaseOne: {
+      link: `https://judiciary.house.gov/calendar/eventslisting.aspx?EventTypeID=0&CategoryID=0&Congress=&Count=10&Page=SUBSTITUTE`,
+      range,
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: "li.calendar-item",
+    },
+    phaseThree: {
+      title: "h3.news-titler",
+      regexTime: true,
+      regexDate: true,
+      location: { label: true, value: "div.events-location strong" },
+    },
+  })),
   ...makeJobs(97, 1, 4).map((range, i) => ({
     type: "unlimitedv6",
     committee: "hrle",

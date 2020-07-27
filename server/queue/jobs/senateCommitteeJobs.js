@@ -30,7 +30,7 @@ const jobs = [
     link: "https://www.foreign.senate.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 1,
+        depth: 5,
         rows: "div.table-holder div.text-center",
       },
       layerTwo: {

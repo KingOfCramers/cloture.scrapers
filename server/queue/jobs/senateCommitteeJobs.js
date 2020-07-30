@@ -12,7 +12,7 @@ const jobs = [
     link: "https://www.aging.senate.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
       },
       layerTwo: {
@@ -30,7 +30,7 @@ const jobs = [
     link: "https://www.foreign.senate.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.table-holder div.text-center",
       },
       layerTwo: {
@@ -49,7 +49,7 @@ const jobs = [
     link: "https://www.armed-services.senate.gov/hearings?c=all",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tbody tr.vevent",
       },
       layerTwo: {
@@ -68,7 +68,7 @@ const jobs = [
     link: "https://www.agriculture.senate.gov/hearings?c=all",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tbody tr.vevent",
       },
       layerTwo: {
@@ -87,7 +87,7 @@ const jobs = [
     link: "https://www.appropriations.senate.gov/hearings?c=all&mode=list",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tbody tr.vevent",
       },
       layerTwo: {
@@ -106,7 +106,7 @@ const jobs = [
     link: "https://www.banking.senate.gov/hearings?c=all&mode=list",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tbody tr.vevent",
       },
       layerTwo: {
@@ -125,7 +125,7 @@ const jobs = [
     link: "https://www.banking.senate.gov/markups?c=all&mode=list",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tbody tr.vevent",
       },
       layerTwo: {
@@ -144,7 +144,7 @@ const jobs = [
     link: "https://www.budget.senate.gov/hearings?c=all&mode=list",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tbody tr.vevent",
       },
       layerTwo: {
@@ -163,7 +163,7 @@ const jobs = [
     link: "https://www.commerce.senate.gov/hearings?month=&year=&label_id=",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.elements .element",
       },
       layerTwo: {
@@ -181,7 +181,7 @@ const jobs = [
     link: "https://www.commerce.senate.gov/markups?month=&year=",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.elements .element",
       },
       layerTwo: {
@@ -200,7 +200,7 @@ const jobs = [
       "https://www.energy.senate.gov/public/index.cfm/hearings-and-business-meetings?MonthDisplay=0&YearDisplay=0",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.recordsContainer tbody tr",
         date: { selector: "td.recordListDate", instance: 0 },
         time: { selector: "td.recordListTime", instance: 0 },
@@ -217,7 +217,7 @@ const jobs = [
       "https://www.epw.senate.gov/public/index.cfm/hearings?MonthDisplay=0&YearDisplay=0&Label_id=&Label_id=",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.recordsContainer tbody tr",
         date: { selector: "td.recordListDate", instance: 0 },
         time: { selector: "td.recordListTime", instance: 0 },
@@ -233,7 +233,7 @@ const jobs = [
     link: "https://www.finance.senate.gov/hearings?c=all&maxrows=15",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "#main_column tbody tr.vevent",
       },
       layerTwo: {
@@ -252,7 +252,7 @@ const jobs = [
     link: "https://www.help.senate.gov/hearings?c=all&mode=list",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.table-holder tr.vevent",
       },
       layerTwo: {
@@ -271,7 +271,7 @@ const jobs = [
     link: "https://www.hsgac.senate.gov/hearings?c=all",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "table tr.vevent",
       },
       layerTwo: {
@@ -289,7 +289,7 @@ const jobs = [
     link: "https://www.indian.senate.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "table.views-table tbody tr",
         title: "a",
         date: { selector: "td span", instance: 0 },
@@ -306,7 +306,7 @@ const jobs = [
     link: "https://www.judiciary.senate.gov/hearings?month=0&year=0&mode=list",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "table tr.vevent",
       },
       layerTwo: {
@@ -325,7 +325,7 @@ const jobs = [
     link: "https://www.rules.senate.gov/hearings?c=all&mode=list",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.table-holder tr.vevent",
       },
       layerTwo: {
@@ -344,7 +344,7 @@ const jobs = [
     link: "https://www.intelligence.senate.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.view-content div.views-row",
       },
     },
@@ -357,7 +357,7 @@ const jobs = [
     link: "https://www.sbc.senate.gov/public/index.cfm/hearings?page=1",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.recordsContainer tbody tr",
         date: { selector: "td.recordListDate", instance: 0 },
         time: { selector: "td.recordListTime", instance: 0 },
@@ -373,7 +373,7 @@ const jobs = [
     link: "https://www.veterans.senate.gov/hearings?c=all",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.table-holder tr.vevent",
       },
       layerTwo: {

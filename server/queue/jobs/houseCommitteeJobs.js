@@ -14,7 +14,7 @@ const jobs = [
       "https://judiciary.house.gov/calendar/eventslisting.aspx?EventTypeID=0&CategoryID=0&Congress=&Count=10",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "li.calendar-item",
       },
       layerTwo: {
@@ -33,7 +33,7 @@ const jobs = [
     link: "https://rules.house.gov/media",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         filter: { keyword: "meeting", selector: "h3" },
         rows: "div.view-content .views-row",
       },
@@ -52,7 +52,7 @@ const jobs = [
     link: "https://foreignaffairs.house.gov/hearings", // Initial Link
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "table tbody tr", // Rows to check
       },
       layerTwo: {
@@ -92,7 +92,7 @@ const jobs = [
     link: "https://armedservices.house.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "table tbody tr",
       },
       layerTwo: {
@@ -111,7 +111,7 @@ const jobs = [
     link: "https://veterans.house.gov/events/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
       },
       layerTwo: {
@@ -130,7 +130,7 @@ const jobs = [
     link: "https://veterans.house.gov/events/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
       },
       layerTwo: {
@@ -149,7 +149,7 @@ const jobs = [
     link: "http://homeland.house.gov/activities/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
         date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 },
@@ -165,7 +165,7 @@ const jobs = [
     link: "http://homeland.house.gov/activities/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
         date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 },
@@ -181,7 +181,7 @@ const jobs = [
     link: "https://agriculture.house.gov/calendar/",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "ul.calendar-listing li",
       },
       layerTwo: {
@@ -199,7 +199,7 @@ const jobs = [
     link: "https://appropriations.house.gov/events/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         upcomingHearings: ".pane-content",
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
@@ -216,7 +216,7 @@ const jobs = [
     link: "https://appropriations.house.gov/events/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         upcomingHearings: ".pane-content",
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
@@ -233,7 +233,7 @@ const jobs = [
     link: "https://budget.house.gov/legislation/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         upcomingHearings: ".pane-content",
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
@@ -249,7 +249,7 @@ const jobs = [
     link: "https://budget.house.gov/legislation/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         upcomingHearings: ".pane-content",
         hearings: ".views-row",
         dateTime: ".views-field-field-congress-meeting-date",
@@ -265,7 +265,7 @@ const jobs = [
     link: "https://edlabor.house.gov/hearings-and-events",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
       },
       layerTwo: {
@@ -284,7 +284,7 @@ const jobs = [
     link: "https://edlabor.house.gov/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
       },
       layerTwo: {
@@ -303,7 +303,7 @@ const jobs = [
     link: "https://energycommerce.house.gov/committee-activity/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".views-row",
         date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
@@ -319,7 +319,7 @@ const jobs = [
     link: "https://energycommerce.house.gov/committee-activity/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".views-row",
         date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
@@ -377,7 +377,7 @@ const jobs = [
     link: "https://cha.house.gov/committee-activity/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".view-content",
         date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
@@ -394,7 +394,7 @@ const jobs = [
     link: "https://cha.house.gov/committee-activity/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".views-row",
         date: { selector: ".date-display-single", instance: 0 },
         splitDate: "-",
@@ -410,7 +410,7 @@ const jobs = [
     link: "https://naturalresources.house.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "tr.vevent",
         date: { selector: "time.dtstart", instance: 0 },
         splitDate: " ",
@@ -426,7 +426,7 @@ const jobs = [
     link: "https://oversight.house.gov/legislation/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".views-row",
         date: { selector: "span.date-display-single", instance: 0 },
         splitDate: "-",
@@ -442,7 +442,7 @@ const jobs = [
     link: "https://oversight.house.gov/legislation/business-meetings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows:
           ".pane-cng-meetings-panel-pane-business-meetings-upcoming .views-row",
         date: "span.date-display-single",
@@ -459,7 +459,7 @@ const jobs = [
     link: "https://oversight.house.gov/legislation/briefings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".views-row",
         date: { selector: "span.date-display-single", instance: 0 },
         splitDate: "-",
@@ -475,7 +475,7 @@ const jobs = [
     link: "https://science.house.gov/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "#hearings--upcoming div.hearing",
         date: { selector: ".hearing__date", instance: 0 },
         time: { selector: ".hearing__time time", instance: 0 },
@@ -491,7 +491,7 @@ const jobs = [
     link: "https://science.house.gov/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "#hearings--upcoming div.hearing",
         date: { selector: ".hearing__date", instance: 0 },
         time: { selector: ".hearing__time time", instance: 0 },
@@ -527,7 +527,7 @@ const jobs = [
     link: "https://transportation.house.gov/committee-activity/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.hearings-table table tr.vevent",
         date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
@@ -543,7 +543,7 @@ const jobs = [
     link: "https://transportation.house.gov/committee-activity/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: "div.hearings-table table tr.vevent",
         date: { selector: "time.dtstart", instance: 0 },
         time: { selector: "time.dtstart", instance: 1 }, // Zero indexed, second option
@@ -558,7 +558,7 @@ const jobs = [
     link: "https://waysandmeans.house.gov/legislation/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".pane-congress-hearings-panel-pane-hearings-upcoming .views-row",
       },
       layerTwo: {
@@ -580,7 +580,7 @@ const jobs = [
     link: "https://waysandmeans.house.gov/legislation/markups",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".pane-congress-markups-panel-pane-markups-upcoming .views-row",
       },
       layerTwo: {
@@ -602,7 +602,7 @@ const jobs = [
     link: "https://climatecrisis.house.gov/committee-activity/hearings",
     selectors: {
       layerOne: {
-        depth: 5,
+        depth: 10,
         rows: ".views-row",
         date: { selector: "span.date-display-single", instance: 0 },
         splitDate: "-",

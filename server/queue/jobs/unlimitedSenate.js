@@ -4,6 +4,24 @@ const schedule =
     ? { type: "cron", value: "*/30 * * * *" }
     : { type: "every", value: 2000 };
 
+// Make jobs with month and years
+
+const makeJobsWithMonthsAndYears = (startYear) => {
+  let years = Array.from(
+    { length: 2020 - startYear },
+    function (v, k) {
+      return this + k;
+    },
+    startYear
+  );
+  let months = [...Array(12).keys()].map((x) => x + 1);
+  let value = [];
+  years.map((year) => {
+    months.forEach((month) => value.push({ month, year }));
+  });
+  return value;
+};
+
 // Creates an array of arrays, with the range of page numbers in each
 // The max represents the final page
 // The chunk is the number of pages to process before sending the results
@@ -22,6 +40,22 @@ const makeJobs = (max, start, chunk) => {
 };
 
 const unlimited = [
+  ...makeJobsWithMonthsAndYears(2005).map(({ month, year }) => ({
+    committee: "snat",
+    type: "unlimitedv2",
+    collection: "senateCommittee",
+    name: `Senate Natural Resources, Month: ${month}; Year: ${year};`,
+    phaseOne: {
+      link: `https://www.energy.senate.gov/public/index.cfm/hearings-and-business-meetings?MonthDisplay=${month}&YearDisplay=${year}`,
+    },
+    phaseTwo: {
+      depth: 1000,
+      rows: "div.recordsContainer tbody tr",
+      date: { selector: "td.recordListDate", instance: 0 },
+      time: { selector: "td.recordListTime", instance: 0 },
+      title: "td.recordListTitle a",
+    },
+  })),
   ...makeJobs(12, 1, 2).map((range, i) => ({
     type: "unlimitedv1",
     committee: "sage",

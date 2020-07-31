@@ -325,7 +325,6 @@ const unlimited = [
       location: "td.views-field-field-hearing-new-office",
     },
   })),
-  /// TITLE SHOULD HAVE TEXT SELECTOR, ERRONEOUSLY INCLUDES OTHER INFORMATION
   ...makeJobs(75, 1, 3).map((range) => ({
     type: "unlimitedv1",
     committee: "sjud",
@@ -341,6 +340,8 @@ const unlimited = [
     },
     phaseThree: {
       title: "h1.main_page_title",
+      titleTrimRegex:
+        "(Oversight)$|(Full Committee Hearing)$|(Subcommittee Hearing)$|(Business Meeting)$|(Nomination Hearing)$",
       location: { value: "tr.location td:nth-of-type(2)", label: false },
       date: { value: "tr.date td:nth-of-type(2)", label: false },
       time: { value: "tr.time td:nth-of-type(2)", label: false },

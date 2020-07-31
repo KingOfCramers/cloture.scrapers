@@ -310,6 +310,8 @@ const jobs = [
         rows: "table tr.vevent",
       },
       layerTwo: {
+        titleTrimRegex:
+          "(Oversight)$|(Full Committee Hearing)$|(Subcommittee Hearing)$|(Business Meeting)$|(Nomination Hearing)$",
         title: "h1.main_page_title",
         location: { value: "tr.location td:nth-of-type(2)", label: false },
         date: { value: "tr.date td:nth-of-type(2)", label: false },

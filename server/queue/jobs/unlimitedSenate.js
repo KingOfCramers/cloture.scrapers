@@ -8,7 +8,7 @@ const schedule =
 
 const makeJobsWithMonthsAndYears = (startYear) => {
   let years = Array.from(
-    { length: 2020 - startYear },
+    { length: 2021 - startYear },
     function (v, k) {
       return this + k;
     },
@@ -40,6 +40,24 @@ const makeJobs = (max, start, chunk) => {
 };
 
 const unlimited = [
+  ...makeJobsWithMonthsAndYears(2000).map(({ month, year }) => ({
+    committee: "sstr",
+    type: "unlimitedv1",
+    collection: "senateCommittee",
+    name: `Senate Transportation Hearing, Month: ${month}; Year: ${year};`,
+    phaseOne: {
+      link: `https://www.commerce.senate.gov/hearings?month=${month}&year=${year}`,
+    },
+    phaseTwo: {
+      depth: 100,
+      rows: "div.elements .element",
+    },
+    phaseThree: {
+      title: "h1.element-title",
+      regexTime: true,
+      regexDate: true,
+    },
+  })),
   ...makeJobsWithMonthsAndYears(2005).map(({ month, year }) => ({
     committee: "snat",
     type: "unlimitedv2",

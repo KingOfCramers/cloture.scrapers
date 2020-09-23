@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev:start": "nodemon",
-    "prod:build": "tsc"
+    "prod:build": "tsc",
+    "prod:deploy": "tsc && scp -r ./build",
+    "prod:start": "NODE_ENV=production pm2 start build/index.js -i max --name ts_schedulers"
   },
   "dependencies": {
     "babel-node": "^0.0.1-security",

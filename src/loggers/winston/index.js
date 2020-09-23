@@ -26,7 +26,7 @@ winston.add(consoleTransport);
 // Setup file transport
 const transport = new winston.transports.DailyRotateFile({
   filename: `API_${process.env.NODE_ENV}.log`,
-  dirname: `./dist/logs`,
+  dirname: `./logs`,
   frequency: null, // Rely on date pattern, rotate daily
   datePattern: "YYYY-MM-DD",
   zippedArchive: true,

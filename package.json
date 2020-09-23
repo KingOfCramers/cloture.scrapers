@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev:start": "nodemon",
-    "dev:scrape": "NODE_ENV='development' SCRAPE='true' nodemon < /dev/null --exec babel-node src/index.js",
-    "prod:build": "tsc src"
+    "prod:build": "tsc"
   },
   "dependencies": {
     "babel-node": "^0.0.1-security",

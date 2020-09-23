@@ -8,7 +8,8 @@ declare namespace NodeJS {
     MONGODB_URI: string;
     MONGODB_USER: string;
     MONGODB_PASS: string;
-    SILENT: string;
-    NICE: string;
+    SCRAPE: "true" | "false";
+    SILENT: "true" | "false";
+    NICE: "true" | "false";
   }
 }

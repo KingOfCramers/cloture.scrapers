@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
 import path from "path";
-dotenv.config({ path: `./envs/.env.${process.env.NODE_ENV}` });
+console.log(process.env.NODE_ENV);
+dotenv.config({
+  path: path.resolve(__dirname, "..", `.${process.env.NODE_ENV}.env`),
+});
 
 import { connect } from "./mongodb/connect";
 import { configureRedis } from "./redis";

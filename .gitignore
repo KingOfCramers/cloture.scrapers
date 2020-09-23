@@ -1,5 +1,5 @@
 **/node_modules
-envs/**
+**.env
 .DS_Store
 **/dist
 **/playground

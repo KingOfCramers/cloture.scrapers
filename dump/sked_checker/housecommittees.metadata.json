@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"sked_checker.housecommittees"}],"uuid":"9a50fd1c8d904aafbd81d20e1e5ab6de"}

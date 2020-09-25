@@ -45,7 +45,7 @@ let senateCommitteeSchema = new Schema({
   time: {
     type: Date,
     require: false,
-    set: (time) => {
+    set: (time: string) => {
       let momentified = moment(time);
       if (momentified.isValid()) {
         let hours = momentified.hours();
@@ -68,22 +68,29 @@ let senateCommitteeSchema = new Schema({
 });
 
 senateCommitteeSchema.pre("save", function (next) {
-  this.wasNew = this.isNew; // Pass down newness to post-save for logging
-  if (!this.isNew) {
+  // Reassign to document to allow for "wasNew" property
+  const document: mongoose.Document & any = this;
+  document.wasNew = document.isNew; // Pass down newness to post-save for logging
+  if (!document.isNew) {
     // If it's not new, then log the updates here.
-    let modifiedPaths = this.modifiedPaths();
+    let modifiedPaths = document.modifiedPaths();
     if (modifiedPaths.length > 0) {
-      modifiedPaths.forEach((path) => {
-        logger.info(`${this.id} ${path} ––> ${JSON.stringify(this[path])}`);
+      modifiedPaths.forEach((path: string) => {
+        logger.info(
+          `${document.id} ${path} ––> ${JSON.stringify(document[path])}`
+        );
       });
     }
   }
   next();
 });
 
-senateCommitteeSchema.post("save", function (val) {
-  if (this.wasNew) {
-    logger.info(`Document saved with id ${val._id}`);
+senateCommitteeSchema.post("save", function (
+  doc: mongoose.Document & any,
+  next
+) {
+  if (doc.wasNew) {
+    logger.info(`Document saved with id ${doc._id}`);
   }
 });
 

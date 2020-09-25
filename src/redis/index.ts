@@ -5,9 +5,9 @@ import { logger } from "../loggers/winston";
 export const configureRedis = async () => {
   // Initial connection
   const client = redis.createClient({
-    port: process.env.REDIS_PORT,
+    port: parseInt(process.env.REDIS_PORT as string),
     host: process.env.REDIS_URL,
-    auth_pass: process.env.REDIS_PASSWORD || null,
+    auth_pass: process.env.REDIS_PASSWORD,
   });
 
   // Configure promisify-ed methods

@@ -1,5 +1,4 @@
 import moment from "moment";
-import { logger } from "../../loggers/winston";
 
 export const stripWhiteSpace = (data) =>
   data.map((x) => {

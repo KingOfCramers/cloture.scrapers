@@ -1,6 +1,5 @@
 import util from "util";
 import redis from "redis";
-import { logger } from "../loggers/winston";
 
 export const configureRedis = async () => {
   // Initial connection
@@ -18,7 +17,7 @@ export const configureRedis = async () => {
   try {
     await flusher();
   } catch (err) {
-    logger.error("Could not flush Redis cache.");
+    console.error("Could not flush Redis cache.");
     throw err;
   }
 };

@@ -1,7 +1,5 @@
 import Bull from "bull";
 
-import { logger } from "../loggers/winston";
-
 import { setupProducers } from "./producers";
 import { setupListeners } from "./listeners";
 
@@ -26,7 +24,7 @@ export const setupQueue = async () => {
       } delay`
     );
   } catch (err) {
-    logger.error("Could not create queue.");
+    console.error("Could not create queue.");
     throw err;
   }
 
@@ -38,7 +36,7 @@ export const setupQueue = async () => {
         : [...senateCommitteeJobs, ...houseCommitteeJobs]
     );
   } catch (err) {
-    logger.error("Could not setup producers.");
+    console.error("Could not setup producers.");
     throw err;
   }
 
@@ -47,7 +45,7 @@ export const setupQueue = async () => {
   try {
     await setupListeners(queue);
   } catch (err) {
-    logger.error("Could not setup listeners");
+    console.error("Could not setup listeners");
     throw err;
   }
 };

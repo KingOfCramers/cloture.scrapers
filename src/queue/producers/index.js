@@ -1,5 +1,3 @@
-import { logger } from "../../loggers/winston";
-
 export const every = async (queue, job) => {
   let every = job.schedule.value;
   const options = {

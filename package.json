@@ -7,7 +7,7 @@
     "dev:start": "nodemon",
     "prod:build": "tsc",
     "prod:deploy": "tsc && scp -r ./build",
-    "prod:start": "NODE_ENV=production pm2 start build/index.js -i max --name ts_schedulers"
+    "prod:start": "pm2 start ecosystem.config.json --env production"
   },
   "dependencies": {
     "@types/morgan": "^1.9.1",

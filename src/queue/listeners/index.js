@@ -1,4 +1,3 @@
-import { logger } from "../../loggers/winston";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
 import { insertData, cleanDateTime, stripWhiteSpace } from "./helpers";
 
@@ -7,14 +6,14 @@ export const setupListeners = async (queue) => {
     let { data, meta } = JSON.parse(result);
 
     if (!data || !meta) {
-      logger.error(`${job} failed to return data or meta information`);
+      console.error(`${job} failed to return data or meta information`);
     }
 
     let model =
       meta.collection === "houseCommittee" ? houseCommittee : senateCommittee;
 
     if (!model) {
-      logger.error(
+      console.error(
         `${job} could not find model, tried to find: ${meta.collection}`
       );
     }
@@ -25,20 +24,20 @@ export const setupListeners = async (queue) => {
     try {
       strippedData = stripWhiteSpace(data);
     } catch (err) {
-      logger.error(`${job} could not strip white space. `, err);
+      console.error(`${job} could not strip white space. `, err);
     }
 
     try {
       cleanedDateAndTimeData = cleanDateTime(strippedData);
     } catch (err) {
-      logger.error(`${job} could not cleanedDateAndTimeData. `, err);
+      console.error(`${job} could not cleanedDateAndTimeData. `, err);
     }
 
     try {
       let promisedInserts = insertData(model, cleanedDateAndTimeData);
       await Promise.all(promisedInserts);
     } catch (err) {
-      logger.error(`${job} could not insert data. `, err);
+      console.error(`${job} could not insert data. `, err);
     }
 
     console.log(`${job} has completed [${meta.name}]`);
@@ -49,15 +48,15 @@ export const setupListeners = async (queue) => {
   });
 
   queue.on("global:stalled", (job) => {
-    logger.error(`${job} has stalled`);
+    console.error(`${job} has stalled`);
     // A job has been marked as stalled. This is useful for debugging job workers that crash or pause the event loop.
   });
 
   queue.on("global:failed", (job, err) => {
-    logger.error(`${job} failed. `, err);
+    console.error(`${job} failed. `, err);
   });
 
   queue.on("global:error", (err) => {
-    logger.error("The queue experienced an error. ", err);
+    console.error("The queue experienced an error. ", err);
   });
 };

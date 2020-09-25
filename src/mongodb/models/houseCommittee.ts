@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { logger } from "../../loggers/winston";
 import moment from "moment";
 
 let houseCommitteeSchema = new Schema({

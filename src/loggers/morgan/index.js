@@ -1,5 +1,4 @@
 import morgan from "morgan";
-import { logger } from "../winston";
 
 morgan.token("body", function (req, res) {
   return JSON.stringify(req.body).replace(/\\n/g, "");

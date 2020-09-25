@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { logger } from "../../loggers/winston";
 import moment from "moment";
 
 let senateCommitteeSchema = new Schema({
@@ -97,10 +96,10 @@ senateCommitteeSchema.post("save", function (
 // Convert dates + times upon fetch
 senateCommitteeSchema
   .path("date")
-  .get((v) => (moment(v).isValid() ? moment(v).format("LL") : null));
+  .get((v: string) => (moment(v).isValid() ? moment(v).format("LL") : null));
 senateCommitteeSchema
   .path("time")
-  .get((v) => (moment(v).isValid() ? moment(v).format("LT") : null));
+  .get((v: string) => (moment(v).isValid() ? moment(v).format("LT") : null));
 
 // Make model and export
 const senateCommittee = mongoose.model(

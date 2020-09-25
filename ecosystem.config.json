@@ -3,6 +3,12 @@
     {
       "name": "schedulers",
       "script": "./build/index.js",
+      "out_file": "schedulers.log",
+      "error_file": "schedulers.err",
+      "log_file": "schedulers.combined",
+      "merge_logs": true,
+      "time": true,
+      "timestamp": "YYYY-MM-DD HH:mm",
       "env_production": {
         "NODE_ENV": "production"
       },
@@ -11,4 +17,3 @@
     }
   ]
 }
-

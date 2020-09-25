@@ -76,7 +76,7 @@ houseCommitteeSchema.pre("save", function (next) {
     let modifiedPaths = document.modifiedPaths();
     if (modifiedPaths.length > 0) {
       modifiedPaths.forEach((path: string) => {
-        logger.info(
+        console.log(
           `${document.id} ${path} ––> ${JSON.stringify(document[path])}`
         );
       });
@@ -90,7 +90,7 @@ houseCommitteeSchema.post("save", function (
   next
 ) {
   if (doc.wasNew) {
-    logger.info(`Document saved with id ${doc._id}`);
+    console.log(`Document saved with id ${doc._id}`);
   }
 });
 

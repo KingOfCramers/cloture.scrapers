@@ -41,11 +41,11 @@ export const setupListeners = async (queue) => {
       logger.error(`${job} could not insert data. `, err);
     }
 
-    logger.info(`${job} has completed [${meta.name}]`);
+    console.log(`${job} has completed [${meta.name}]`);
   });
 
   queue.on("global:active", (job) => {
-    logger.info(`${job} has started`); // (${job.data.name}) has started`);
+    console.log(`${job} has started`); // (${job.data.name}) has started`);
   });
 
   queue.on("global:stalled", (job) => {

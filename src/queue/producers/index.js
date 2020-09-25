@@ -10,11 +10,11 @@ export const every = async (queue, job) => {
 
   try {
     await queue.add(job.name, job, options);
-    logger.info(
+    console.log(
       `New job '${job.name}' recurring every ${every / 1000} seconds.`
     );
   } catch (err) {
-    logger.info(`Could not schedule ${job.collection} every job`);
+    console.log(`Could not schedule ${job.collection} every job`);
     throw err;
   }
 };
@@ -28,9 +28,9 @@ export const cron = async (queue, job) => {
 
   try {
     await queue.add(job.name, job, options);
-    logger.info(`Created job '${job.collection}' recurring at ${cron}.`);
+    console.log(`Created job '${job.collection}' recurring at ${cron}.`);
   } catch (err) {
-    logger.info(`Could not schedule ${job.collection} cron job`);
+    console.log(`Could not schedule ${job.collection} cron job`);
     throw err;
   }
 };
@@ -44,5 +44,5 @@ export const setupProducers = async (queue, jobs) => {
     }
   });
   await Promise.all(producers);
-  logger.info("All job producers created.");
+  console.log("All job producers created.");
 };

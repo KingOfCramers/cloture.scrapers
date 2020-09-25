@@ -20,7 +20,7 @@ export const setupQueue = async () => {
         password: process.env.REDIS_PASSWORD,
       },
     });
-    logger.info(
+    console.log(
       `Created new queue with ${
         process.env.NICE ? parseInt(process.env.NICE) : "no"
       } delay`

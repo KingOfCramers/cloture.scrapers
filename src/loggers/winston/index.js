@@ -57,7 +57,7 @@ const logger = new winston.createLogger({
 // Recieves message from morgan and streams to logger
 logger.stream = {
   write: function (message) {
-    logger.info(message);
+    console.log(message);
   },
 };
 

@@ -10,6 +10,7 @@
     "prod:start": "NODE_ENV=production pm2 start build/index.js -i max --name ts_schedulers"
   },
   "dependencies": {
+    "@types/morgan": "^1.9.1",
     "babel-node": "^0.0.1-security",
     "bull": "^3.14.0",
     "dotenv": "^8.2.0",

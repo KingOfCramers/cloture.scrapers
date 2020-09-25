@@ -13,7 +13,7 @@ import { logger } from "./loggers/winston";
 const runServer = async () => {
   try {
     await connect();
-    logger.info(`Connected to MongoDB at ${process.env.MONGODB_URI}.`);
+    console.log(`Connected to MongoDB at ${process.env.MONGODB_URI}.`);
   } catch (err) {
     logger.error(`Could not connect to MongoDB.`);
     throw err;
@@ -21,7 +21,7 @@ const runServer = async () => {
 
   try {
     await configureRedis(); // Hoisted
-    logger.info(
+    console.log(
       `Connected to Redis at url ${process.env.REDIS_URL}, cache flushed.`
     );
   } catch (err) {
@@ -31,7 +31,7 @@ const runServer = async () => {
 
   try {
     await setupQueue();
-    logger.info(`Queue successfully established.`);
+    console.log(`Queue successfully established.`);
   } catch (err) {
     logger.error(`Could not setup queue.`);
     throw err;
@@ -39,7 +39,7 @@ const runServer = async () => {
 };
 
 runServer()
-  .then(() => logger.info("Setup successful."))
+  .then(() => console.log("Setup successful."))
   .catch((err) => {
     logger.error("Something went wrong. ", err);
     process.exit(1);

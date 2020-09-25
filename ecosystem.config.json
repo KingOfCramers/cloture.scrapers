@@ -3,9 +3,9 @@
     {
       "name": "schedulers",
       "script": "./build/index.js",
-      "out_file": "schedulers.log",
-      "error_file": "schedulers.err",
-      "log_file": "schedulers.combined",
+      "out_file": "./logs/schedulers.log",
+      "error_file": "./logs/schedulers.err",
+      "log_file": "./logs/schedulers.combined",
       "merge_logs": true,
       "time": true,
       "timestamp": "YYYY-MM-DD HH:mm",

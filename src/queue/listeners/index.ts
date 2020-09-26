@@ -1,9 +1,26 @@
+import { Queue, JobOptions } from "bull";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
 import { insertData, cleanDateTime, stripWhiteSpace } from "./helpers";
 
-export const setupListeners = async (queue) => {
-  queue.on("global:completed", async (job, result) => {
-    let { data, meta } = JSON.parse(result);
+export interface Committee {
+  title: string;
+  link: string;
+  date?: Date;
+  time?: Date;
+  text?: string;
+  location?: string;
+}
+
+interface metaType {
+  collection: "houseCommittee" | "senateCommittee";
+  name: string;
+}
+
+export const setupListeners = async (queue: Queue) => {
+  queue.on("global:completed", async (job: string, result: string) => {
+    const { data, meta }: { data: Committee[]; meta: metaType } = JSON.parse(
+      result
+    );
 
     if (!data || !meta) {
       console.error(`${job} failed to return data or meta information`);
@@ -18,23 +35,10 @@ export const setupListeners = async (queue) => {
       );
     }
 
-    let strippedData;
-    let cleanedDateAndTimeData;
+    let cleanedDateAndTimeData = cleanDateTime(stripWhiteSpace(data));
 
     try {
-      strippedData = stripWhiteSpace(data);
-    } catch (err) {
-      console.error(`${job} could not strip white space. `, err);
-    }
-
-    try {
-      cleanedDateAndTimeData = cleanDateTime(strippedData);
-    } catch (err) {
-      console.error(`${job} could not cleanedDateAndTimeData. `, err);
-    }
-
-    try {
-      let promisedInserts = insertData(model, cleanedDateAndTimeData);
+      let promisedInserts = insertData(model, data);
       await Promise.all(promisedInserts);
     } catch (err) {
       console.error(`${job} could not insert data. `, err);
@@ -44,12 +48,11 @@ export const setupListeners = async (queue) => {
   });
 
   queue.on("global:active", (job) => {
-    console.log(`${job} has started`); // (${job.data.name}) has started`);
+    console.log(`${job} has started`);
   });
 
   queue.on("global:stalled", (job) => {
     console.error(`${job} has stalled`);
-    // A job has been marked as stalled. This is useful for debugging job workers that crash or pause the event loop.
   });
 
   queue.on("global:failed", (job, err) => {

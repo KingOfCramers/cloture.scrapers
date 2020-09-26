@@ -1,16 +1,24 @@
 import moment from "moment";
+import { Model, Document } from "mongoose";
+import { Committee } from "./index";
 
-export const stripWhiteSpace = (data) =>
-  data.map((x) => {
+interface obj {
+  [key: string]: any;
+}
+
+export const stripWhiteSpace = (data: Committee[]): Committee[] =>
+  data.map((x: Committee) => {
     for (let key in x) {
+      //@ts-ignore
       if (typeof x[key] === "string") {
+        //@ts-ignore
         x[key] = x[key].trim();
       }
     }
     return x;
   });
 
-export const insertData = (model, data) =>
+export const insertData = (model: Model<Document, {}>, data: Committee[]) =>
   data.map(async (datum) => {
     let doc = await model.findOne({ link: datum.link });
     if (!doc) {
@@ -62,7 +70,7 @@ const validFormats = {
   ],
 };
 
-export const cleanDateTime = (data) =>
+export const cleanDateTime = (data: Committee[]) =>
   data.map((doc) => {
     const { date, time } = doc;
     const validTime = validFormats.time.find((format) =>
@@ -72,7 +80,7 @@ export const cleanDateTime = (data) =>
       moment(date, format, true).isValid()
     );
 
-    doc.time = validTime ? moment(time, validTime).toISOString() : null;
-    doc.date = validDate ? moment(date, validDate).toISOString() : null;
+    doc.time = validTime ? moment(time, validTime).toDate() : undefined;
+    doc.date = validDate ? moment(date, validDate).toDate() : undefined;
     return doc;
   });

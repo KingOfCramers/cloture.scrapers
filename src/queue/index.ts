@@ -17,16 +17,6 @@ export interface Committee {
   location?: string;
 }
 
-interface metaType {
-  collection: "houseCommittee" | "senateCommittee";
-  name: string;
-}
-
-export interface jobType {
-  data: Committee[];
-  meta: metaType;
-}
-
 export const setupQueue = async () => {
   // Create an instance of the Bull queue: https://github.com/OptimalBits/bull
   try {

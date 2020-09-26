@@ -45,10 +45,3 @@ const runServer = async () => {
 };
 
 runServer();
-
-//runServer()
-//.then(() => console.log("Setup successful."))
-//.catch((err) => {
-//console.error("Something went wrong. ", err);
-//process.exit(1);
-//});

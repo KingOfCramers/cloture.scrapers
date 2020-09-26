@@ -22,6 +22,9 @@ export const setupProducers = async (
   queue: Queue,
   jobs: (house_job | senate_job)[]
 ) => {
+  // This adds our jobs to the queue.
+  // Each job is added by "name" and then the full data from the job is passed into Redis.
+  // This data is then picked up by our consumer
   let producers = jobs.map(async (job) => {
     if (process.env.NODE_ENV === "production") {
       await cron(queue, job);

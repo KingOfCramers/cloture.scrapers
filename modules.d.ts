@@ -9,5 +9,6 @@ declare namespace NodeJS {
     MONGODB_USER: string;
     MONGODB_PASS: string;
     SCRAPE: "true" | "false";
+    HEADLESS: "true" | "false";
   }
 }

@@ -1,38 +1,41 @@
 import { Queue, JobOptions } from "bull";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
 import { insertData, cleanDateTime, stripWhiteSpace } from "./helpers";
-import { Committee, jobType } from "../index";
+import { result } from "../consumers";
 
 export const setupListeners = async (queue: Queue) => {
+  // When a job finishes, this data will be obtained from Redis.
+  // Take the data, parse it, and try to save it to the database.
   queue.on("global:completed", async (job: string, result: string) => {
-    const { data, meta }: jobType = JSON.parse(result);
+    const { data, meta }: result = JSON.parse(result);
 
-    console.log("data is", data);
-    console.log("meta is", meta);
+    console.log("data is listener is", data);
+    console.log("meta is listener is", meta);
+    //console.log("meta is", meta);
 
-    if (!data || !meta) {
-      console.error(`${job} failed to return data or meta information`);
-    }
+    //if (!data || !meta) {
+    //console.error(`${job} failed to return data or meta information`);
+    //}
 
-    let model =
-      meta.collection === "houseCommittee" ? houseCommittee : senateCommittee;
+    //let model =
+    //meta.collection === "houseCommittee" ? houseCommittee : senateCommittee;
 
-    if (!model) {
-      console.error(
-        `${job} could not find model, tried to find: ${meta.collection}`
-      );
-    }
+    //if (!model) {
+    //console.error(
+    //`${job} could not find model, tried to find: ${meta.collection}`
+    //);
+    //}
 
-    let cleanedDateAndTimeData = cleanDateTime(stripWhiteSpace(data));
+    //let cleanedDateAndTimeData = cleanDateTime(stripWhiteSpace(data));
 
-    try {
-      let promisedInserts = insertData(model, data);
-      await Promise.all(promisedInserts);
-    } catch (err) {
-      console.error(`${job} could not insert data. `, err);
-    }
+    //try {
+    //let promisedInserts = insertData(model, data);
+    //await Promise.all(promisedInserts);
+    //} catch (err) {
+    //console.error(`${job} could not insert data. `, err);
+    //}
 
-    console.log(`${job} has completed [${meta.name}]`);
+    //console.log(`${job} has completed [${meta.name}]`);
   });
 
   queue.on("global:active", (job) => {

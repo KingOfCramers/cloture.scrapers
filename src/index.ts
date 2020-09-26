@@ -26,7 +26,7 @@ const runServer = async () => {
   }
 
   try {
-    await configureRedis(); // Hoisted
+    await configureRedis();
     console.log(
       `Connected to Redis at url ${process.env.REDIS_URL}, cache flushed.`
     );
@@ -44,9 +44,11 @@ const runServer = async () => {
   }
 };
 
-runServer()
-  .then(() => console.log("Setup successful."))
-  .catch((err) => {
-    console.error("Something went wrong. ", err);
-    process.exit(1);
-  });
+runServer();
+
+//runServer()
+//.then(() => console.log("Setup successful."))
+//.catch((err) => {
+//console.error("Something went wrong. ", err);
+//process.exit(1);
+//});

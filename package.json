@@ -10,10 +10,12 @@
     "prod:start": "pm2 start ecosystem.config.json --env production"
   },
   "dependencies": {
+    "@types/puppeteer": "^3.0.2",
     "bull": "^3.14.0",
     "dotenv": "^8.2.0",
     "eslint-plugin-react": "^7.19.0",
     "mongoose": "^5.9.15",
+    "puppeteer": "^5.3.1",
     "redis": "^3.0.2"
   },
   "devDependencies": {

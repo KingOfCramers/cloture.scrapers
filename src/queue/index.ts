@@ -2,6 +2,8 @@ import Bull from "bull";
 
 import { setupProducers } from "./producers";
 import { setupListeners } from "./listeners";
+import { setupConsumers } from "./consumers";
+import { askQuestion } from "../util";
 
 // Import different jobs
 import { house, senate } from "./jobs";
@@ -29,11 +31,20 @@ export const setupQueue = async () => {
     throw err;
   }
 
-  // Set up listeners. These listeners will accept and process the strings supplied through REDIS by the processors.
+  // Set up listeners. These listeners will accept and process the strings supplied through REDIS by the consumers.
   try {
     await setupListeners(queue);
   } catch (err) {
     console.error("Could not setup listeners");
     throw err;
+  }
+
+  // If in development, prompt for running scrapers. Otherwise, run them automatically.
+  process.env.NODE_ENV === "development" && (await askQuestion("Run scraper?"));
+
+  try {
+    setupConsumers(queue);
+  } catch (err) {
+    console.log("Could not run consumers");
   }
 };

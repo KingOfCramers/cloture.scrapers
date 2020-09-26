@@ -1,26 +1,14 @@
 import { Queue, JobOptions } from "bull";
 import { houseCommittee, senateCommittee } from "../../mongodb/models";
 import { insertData, cleanDateTime, stripWhiteSpace } from "./helpers";
-
-export interface Committee {
-  title: string;
-  link: string;
-  date?: Date;
-  time?: Date;
-  text?: string;
-  location?: string;
-}
-
-interface metaType {
-  collection: "houseCommittee" | "senateCommittee";
-  name: string;
-}
+import { Committee, jobType } from "../index";
 
 export const setupListeners = async (queue: Queue) => {
   queue.on("global:completed", async (job: string, result: string) => {
-    const { data, meta }: { data: Committee[]; meta: metaType } = JSON.parse(
-      result
-    );
+    const { data, meta }: jobType = JSON.parse(result);
+
+    console.log("data is", data);
+    console.log("meta is", meta);
 
     if (!data || !meta) {
       console.error(`${job} failed to return data or meta information`);

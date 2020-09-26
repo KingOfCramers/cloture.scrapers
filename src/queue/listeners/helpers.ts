@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Model, Document } from "mongoose";
-import { Committee } from "./index";
+import { Committee } from "../index";
 
 interface obj {
   [key: string]: any;

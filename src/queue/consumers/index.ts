@@ -19,45 +19,41 @@ export const consumers = (queue: Queue): void => {
       // Use that data in the puppeteer instance
       queue.process(
         "*",
-        async (x: Bull.Job): Promise<result> => {
-          const data: house_job | senate_job = x.data;
-          console.log("Value inside the job consumer ", data);
-          console.log("ID inside the consumer is", x.id);
-          console.log("Name inside the consumer is", x.name);
-          return {
-            data: [
-              {
-                link: "https://faker.com",
-                title: "Fake",
-                date: new Date(),
-              },
-            ],
-            meta: { committee: data.committee, collection: data.collection },
-          };
-          //try {
-          //const scraper = pickScraper(job.type);
-          //console.log(`${x.id} of ${job.type} running for ${job.name}`);
-          //const results = await scraper(browser, job, job.timestamp);
-          //console.log(`${x.id} of ${job.type} finished for ${job.name}`);
+        async (job: Bull.Job): Promise<result> => {
+          const data: house_job | senate_job = job.data;
+          try {
+            const scraper = pickScraper(data.details.version);
+            console.log(`${job.id} running for ${job.name}`);
+            const results = await scraper(browser, data);
+            console.log(`${job.id} finished for ${job.name}`);
+            console.log("RESULTS WERE ", results);
 
-          //// Return the data and the job's meta-information to the listener for parsing
-          //return {
-          //data: results.map((x: ) => {
-          //x.committee = job.committee;
-          //return x;
-          //}),
-          //meta: job,
-          //};
-          //} catch (err) {
-          //let oldPages = await browser.pages();
-          //await Promise.all(
-          //oldPages.map(async (page, i) => i > 0 && (await page.close()))
-          //);
-          //console.error(
-          //`${x.id} of ${job.type} for ${job.name} errored: `,
-          //err
-          //);
-          //}
+            return {
+              data: [
+                {
+                  link: "https://faker.com",
+                  title: "Fake",
+                  date: new Date(),
+                },
+              ],
+              meta: { committee: data.committee, collection: data.collection },
+            };
+            //// Return the data and the job's meta-information to the listener for parsing
+            //return {
+            //data: results.map((job: ) => {
+            //job.committee = job.committee;
+            //return job;
+            //}),
+            //meta: job,
+            //};
+          } catch (err) {
+            let oldPages = await browser.pages();
+            await Promise.all(
+              oldPages.map(async (page, i) => i > 0 && (await page.close()))
+            );
+            console.error(`${job.id} for ${job.name} errored: `, err);
+            return err;
+          }
         }
       );
     })

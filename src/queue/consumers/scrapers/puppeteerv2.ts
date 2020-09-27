@@ -1,12 +1,8 @@
 import randomUser from "random-useragent";
 import puppeteer from "puppeteer";
 
-import {
-  getPageText,
-  getLinksAndData,
-  setPageBlockers,
-  setPageScripts,
-} from "./internals";
+import { getLinksAndData, getPageText, getLinks, openNewPages } from "./common";
+import { setPageBlockers, setPageScripts } from "./config";
 
 // Import job types
 import { house_job } from "../../jobs/house";
@@ -43,7 +39,7 @@ export const puppeteerv2 = async (
   }
   try {
     dataWithLinks = await Promise.all(
-      dataWithLinks.map(async (datum) => {
+      dataWithLinks.map(async (datum: any) => {
         let page = await browser.newPage();
         await setPageBlockers(page);
         await page.goto(datum.link);

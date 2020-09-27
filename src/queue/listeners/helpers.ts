@@ -26,7 +26,6 @@ export const insertData = (model: Model<Document, {}>, data: Committee[]) =>
       return await newDoc.save();
     } else {
       doc.set({ ...datum });
-      debugger;
       return await doc.save();
     }
   });

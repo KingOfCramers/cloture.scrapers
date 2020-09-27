@@ -5,13 +5,8 @@ import randomUser from "random-useragent";
 import { house_job } from "../../jobs/house";
 import { senate_job } from "../../jobs/senate";
 
-import {
-  getPageData,
-  getLinksFiltered,
-  openNewPages,
-  setPageBlockers,
-  setPageScripts,
-} from "./internals";
+import { getPageData, getLinksFiltered, openNewPages } from "./common";
+import { setPageScripts, setPageBlockers } from "./config";
 
 export const puppeteerv6 = async (
   browser: puppeteer.Browser,

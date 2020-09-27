@@ -1,15 +1,17 @@
 {
-  "name": "graphqlCourse",
+  "name": "ts_schedulers",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "dev:start": "nodemon",
     "prod:build": "tsc",
+    "dev:debug": "tsc && NODE_ENV=development node --inspect-brk build/index.js",
     "prod:deploy": "tsc && scp -r ./build",
     "prod:start": "pm2 start ecosystem.config.json --env production"
   },
   "dependencies": {
+    "@types/jquery": "^3.5.1",
     "@types/puppeteer": "^3.0.2",
     "@types/random-useragent": "^0.3.0",
     "bull": "^3.14.0",

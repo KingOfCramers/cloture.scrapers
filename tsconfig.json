@@ -4,7 +4,8 @@
     "module": "commonjs",
     "lib": [
       "ES2018",
-      "ESNext.AsyncIterable"
+      "ESNext.AsyncIterable",
+      "dom"
     ],
     "allowJs": true,
     "declaration": true,

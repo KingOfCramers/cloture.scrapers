@@ -42,9 +42,7 @@ export const setupPuppeteer = async (initVals: {
     console.log("Browser was disconnected.");
   });
 
-  console.log(
-    `Configured through site ${isTor || isProxy ? proxy : "locally."}`
-  );
+  console.log("Configured puppeteer.");
 
   return browser;
 };

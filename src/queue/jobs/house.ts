@@ -6,92 +6,92 @@ export type house_job = job & {
 };
 
 export const house: house_job[] = [
-  {
-    committee: "hjud",
-    collection: "houseCommittee",
-    name: "House Judiciary Committee Hearings and Markups",
-    link:
-      "https://judiciary.house.gov/calendar/eventslisting.aspx?EventTypeID=0&CategoryID=0&Congress=&Count=10",
-    details: {
-      version: "puppeteerv1",
-      selectors: {
-        layerOne: {
-          depth: 10,
-          rows: "li.calendar-item",
-        },
-        layerTwo: {
-          title: "h3.news-titler",
-          regexTime: true,
-          regexDate: true,
-          location: { label: true, value: "div.events-location strong" },
-        },
-      },
-    },
-  },
-  {
-    committee: "hrle",
-    collection: "houseCommittee",
-    name: "House Rules Committee",
-    link: "https://rules.house.gov/media",
-    details: {
-      version: "puppeteerv6",
-      selectors: {
-        layerOne: {
-          depth: 10,
-          filter: { keyword: "meeting", selector: "h3" },
-          rows: "div.view-content .views-row",
-        },
-        layerTwo: {
-          title: ".title",
-          regexTime: true,
-          regexDate: true,
-        },
-      },
-    },
-  },
-  {
-    committee: "hfac",
-    collection: "houseCommittee",
-    name: "House Foreign Affairs Committee Hearings",
-    link: "https://foreignaffairs.house.gov/hearings",
-    details: {
-      version: "puppeteerv1",
-      selectors: {
-        layerOne: {
-          depth: 10,
-          rows: "table tbody tr",
-        },
-        layerTwo: {
-          date: { label: false, value: "span.date" },
-          time: { label: false, value: "span.time" },
-          title: ".title",
-          location: { label: true, value: "span.location strong" },
-        },
-      },
-    },
-  },
-  {
-    committee: "hfac",
-    collection: "houseCommittee",
-    name: "House Foreign Affairs Committee Markups",
-    link: "https://foreignaffairs.house.gov/markups",
-    details: {
-      version: "puppeteerv1",
-      selectors: {
-        layerOne: {
-          depth: 1,
-          rows: "table tbody tr",
-        },
-        layerTwo: {
-          title: ".title",
-          date: { label: false, value: "span.date" },
-          time: { label: false, value: "span.time" },
-          location: { label: true, value: "span.location strong" },
-          //witnesses: "div.witnesses strong",
-        },
-      },
-    },
-  },
+  //{
+  //committee: "hjud",
+  //collection: "houseCommittee",
+  //name: "House Judiciary Committee Hearings and Markups",
+  //link:
+  //"https://judiciary.house.gov/calendar/eventslisting.aspx?EventTypeID=0&CategoryID=0&Congress=&Count=10",
+  //details: {
+  //version: "puppeteerv1",
+  //selectors: {
+  //layerOne: {
+  //depth: 10,
+  //rows: "li.calendar-item",
+  //},
+  //layerTwo: {
+  //title: "h3.news-titler",
+  //regexTime: true,
+  //regexDate: true,
+  //location: { label: true, value: "div.events-location strong" },
+  //},
+  //},
+  //},
+  //},
+  //{
+  //committee: "hrle",
+  //collection: "houseCommittee",
+  //name: "House Rules Committee",
+  //link: "https://rules.house.gov/media",
+  //details: {
+  //version: "puppeteerv6",
+  //selectors: {
+  //layerOne: {
+  //depth: 10,
+  //filter: { keyword: "meeting", selector: "h3" },
+  //rows: "div.view-content .views-row",
+  //},
+  //layerTwo: {
+  //title: ".title",
+  //regexTime: true,
+  //regexDate: true,
+  //},
+  //},
+  //},
+  //},
+  //{
+  //committee: "hfac",
+  //collection: "houseCommittee",
+  //name: "House Foreign Affairs Committee Hearings",
+  //link: "https://foreignaffairs.house.gov/hearings",
+  //details: {
+  //version: "puppeteerv1",
+  //selectors: {
+  //layerOne: {
+  //depth: 10,
+  //rows: "table tbody tr",
+  //},
+  //layerTwo: {
+  //date: { label: false, value: "span.date" },
+  //time: { label: false, value: "span.time" },
+  //title: ".title",
+  //location: { label: true, value: "span.location strong" },
+  //},
+  //},
+  //},
+  //},
+  //{
+  //committee: "hfac",
+  //collection: "houseCommittee",
+  //name: "House Foreign Affairs Committee Markups",
+  //link: "https://foreignaffairs.house.gov/markups",
+  //details: {
+  //version: "puppeteerv1",
+  //selectors: {
+  //layerOne: {
+  //depth: 1,
+  //rows: "table tbody tr",
+  //},
+  //layerTwo: {
+  //title: ".title",
+  //date: { label: false, value: "span.date" },
+  //time: { label: false, value: "span.time" },
+  //location: { label: true, value: "span.location strong" },
+  ////witnesses: "div.witnesses strong",
+  //},
+  //},
+  //},
+  //},
   //{
   //type: "puppeteerv1",
   //committee: "hasc",

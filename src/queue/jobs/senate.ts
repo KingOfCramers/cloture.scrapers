@@ -6,33 +6,34 @@ export type senate_job = job & {
 };
 
 export const senate: senate_job[] = [
-  {
-    committee: "sage",
-    collection: "senateCommittee",
-    name: "Senate Aging Committee",
-    link: "https://www.aging.senate.gov/hearings",
-    details: {
-      version: "puppeteerv1",
-      selectors: {
-        layerOne: {
-          depth: 10,
-          rows: "tr.vevent",
-        },
-        layerTwo: {
-          title: "div#content h1",
-          regexTime: true,
-          regexDate: true,
-        },
-      },
-    },
-  },
   //{
+  //committee: "sage",
+  //collection: "senateCommittee",
+  //name: "Senate Aging Committee",
+  //link: "https://www.aging.senate.gov/hearings",
+  //details: {
   //version: "puppeteerv1",
+  //selectors: {
+  //layerOne: {
+  //depth: 10,
+  //rows: "tr.vevent",
+  //},
+  //layerTwo: {
+  //title: "div#content h1",
+  //regexTime: true,
+  //regexDate: true,
+  //},
+  //},
+  //},
+  //},
+  //{
   //committee: "sfrc",
   //collection: "senateCommittee",
   //name: "Senate Foreign Relations Committee Hearings",
   //link: "https://www.foreign.senate.gov/hearings",
   //details: {
+  //version: "puppeteerv1",
+  //selectors: {
   //layerOne: {
   //depth: 10,
   //rows: "div.table-holder div.text-center",
@@ -45,25 +46,28 @@ export const senate: senate_job[] = [
   //},
   //},
   //},
-  //{
-  //version: "puppeteerv1",
-  //committee: "sasc",
-  //collection: "senateCommittee",
-  //name: "Senate Armed Services Committee",
-  //link: "https://www.armed-services.senate.gov/hearings?c=all",
-  //details: {
-  //layerOne: {
-  //depth: 10,
-  //rows: "tbody tr.vevent",
   //},
-  //layerTwo: {
-  //title: "div#main_column h1",
-  //date: { label: true, value: "span.date b" },
-  //time: { label: true, value: "span.time b" },
-  //location: { label: true, value: "span.location b" },
-  //},
-  //},
-  //},
+  {
+    committee: "sasc",
+    collection: "senateCommittee",
+    name: "Senate Armed Services Committee",
+    link: "https://www.armed-services.senate.gov/hearings?c=all",
+    details: {
+      version: "puppeteerv1",
+      selectors: {
+        layerOne: {
+          depth: 10,
+          rows: "tbody tr.vevent",
+        },
+        layerTwo: {
+          title: "div#main_column h1",
+          date: { label: true, value: "span.date b" },
+          time: { label: true, value: "span.time b" },
+          location: { label: true, value: "span.location b" },
+        },
+      },
+    },
+  },
   //{
   //version: "puppeteerv1",
   //committee: "sagc",

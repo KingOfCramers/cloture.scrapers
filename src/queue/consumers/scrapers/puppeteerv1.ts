@@ -5,13 +5,9 @@ import randomUser from "random-useragent";
 import { house_job } from "../../jobs/house";
 import { senate_job } from "../../jobs/senate";
 
-import {
-  getPageData,
-  getLinks,
-  openNewPages,
-  setPageBlockers,
-  setPageScripts,
-} from "./internals";
+// Import common functions for all scrapers and for page-specific logic
+import { getPageData, getLinks, openNewPages } from "./common";
+import { setPageBlockers, setPageScripts } from "./config";
 
 export const puppeteerv1 = async (
   browser: puppeteer.Browser,
@@ -39,7 +35,7 @@ export const puppeteerv1 = async (
   try {
     links = await getLinks({
       page,
-      selectors: job.details.selectors,
+      selectors: job.details.selectors.layerOne,
     });
   } catch (err) {
     console.error("Could not get links. ", err);

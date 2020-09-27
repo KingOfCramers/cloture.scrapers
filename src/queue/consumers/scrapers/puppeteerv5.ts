@@ -10,9 +10,8 @@ import {
   getPageDataWithJQuery,
   openNewPages,
   getPageText,
-  setPageBlockers,
-  setPageScripts,
-} from "./internals";
+} from "./common";
+import { setPageScripts, setPageBlockers } from "./config";
 
 export const puppeteerv5 = async (
   browser: puppeteer.Browser,

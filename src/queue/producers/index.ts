@@ -18,7 +18,7 @@ export const cron = async (queue: Queue, job: house_job | senate_job) => {
   }
 };
 
-export const setupProducers = async (
+export const producers = async (
   queue: Queue,
   jobs: (house_job | senate_job)[]
 ) => {

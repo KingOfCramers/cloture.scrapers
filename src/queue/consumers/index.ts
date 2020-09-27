@@ -1,8 +1,7 @@
 import puppeteer from "puppeteer";
 import Bull from "bull";
-import { setupPuppeteer } from "./puppeteer";
+import { setupPuppeteer, pickScraper } from "./util";
 import { Queue, JobOptions } from "bull";
-//import { pickScraper } from "./puppeteer";
 import { Committee } from "../index";
 import { house_job } from "../jobs/house";
 import { senate_job } from "../jobs/senate";
@@ -13,7 +12,7 @@ export interface result {
   meta: { committee: string; collection: string };
 }
 
-export const setupConsumers = (queue: Queue): void => {
+export const consumers = (queue: Queue): void => {
   setupPuppeteer({ kind: null })
     .then((browser: puppeteer.Browser) => {
       // Accept the data from our producer.
@@ -23,6 +22,8 @@ export const setupConsumers = (queue: Queue): void => {
         async (x: Bull.Job): Promise<result> => {
           const data: house_job | senate_job = x.data;
           console.log("Value inside the job consumer ", data);
+          console.log("ID inside the consumer is", x.id);
+          console.log("Name inside the consumer is", x.name);
           return {
             data: [
               {

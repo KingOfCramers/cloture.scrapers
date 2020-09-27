@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@types/puppeteer": "^3.0.2",
+    "@types/random-useragent": "^0.3.0",
     "bull": "^3.14.0",
     "dotenv": "^8.2.0",
     "eslint-plugin-react": "^7.19.0",
     "mongoose": "^5.9.15",
     "puppeteer": "^5.3.1",
+    "random-useragent": "^0.5.0",
     "redis": "^3.0.2"
   },
   "devDependencies": {

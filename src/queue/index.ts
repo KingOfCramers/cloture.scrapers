@@ -1,8 +1,8 @@
 import Bull from "bull";
 
-import { setupProducers } from "./producers";
-import { setupListeners } from "./listeners";
-import { setupConsumers } from "./consumers";
+import { producers } from "./producers";
+import { listeners } from "./listeners";
+import { consumers } from "./consumers";
 import { askQuestion } from "../util";
 
 // Import different jobs
@@ -34,7 +34,7 @@ export const setupQueue = async () => {
 
   // Creates jobs by attaching them to queue. If in "scrape" mode, will set jobs w/out restrictions and will run immediately
   try {
-    await setupProducers(queue, [...senate, ...house]);
+    await producers(queue, [...senate, ...house]);
   } catch (err) {
     console.error("Could not setup producers.");
     throw err;
@@ -42,7 +42,7 @@ export const setupQueue = async () => {
 
   // Set up listeners. These listeners will accept and process the strings supplied through REDIS by the consumers.
   try {
-    await setupListeners(queue);
+    await listeners(queue);
   } catch (err) {
     console.error("Could not setup listeners");
     throw err;
@@ -52,7 +52,7 @@ export const setupQueue = async () => {
   process.env.NODE_ENV === "development" && (await askQuestion("Run scraper?"));
 
   try {
-    setupConsumers(queue);
+    consumers(queue);
   } catch (err) {
     console.log("Could not run consumers");
   }

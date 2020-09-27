@@ -1,21 +1,38 @@
 import puppeteer from "puppeteer";
-import { setPageBlockers, setPageScripts } from "..//config";
+import { setPageBlockers, setPageScripts } from "../configuration";
+import {
+  makeArrayFromDocument,
+  getFromText,
+  getLink,
+  getLinkText,
+  clean,
+  getFromLink,
+  getFromNode,
+  getNextMatch,
+  makeTextArray,
+  getNodesFromArray,
+  getNodeFromDocument,
+  getTextFromDocument,
+  getNextNodeFromDocument,
+  getNextTextFromDocument,
+  getNextElementSiblingText,
+  makeCleanArrayFromDocument,
+  getNextElementSiblingTextFromDocument,
+} from "../configuration/functions";
 
-//
-// Need to refactor and make selectors type more specific
-//
-
+// EDIT Need to refactor and make selectors type more specific
 interface linkArgs {
   page: puppeteer.Page;
   selectors: any;
 }
 
+// EDIT Need to refactor and make selectors type more specific
 interface linkArgsMultiPages {
   pages: puppeteer.Page[];
   selectors: any;
 }
 
-// Many of these functions are passed into the page context
+// These functions are passed into the page context.
 export const getLinksFiltered = async ({ page, selectors }: linkArgs) =>
   page.evaluate((selectors) => {
     let rows = makeArrayFromDocument(selectors.rows);
@@ -54,7 +71,7 @@ export const getLinksAndDatav2 = async ({ page, selectors }: linkArgs) =>
         let title = getLinkText(x);
         let date;
         let time;
-        let innerText = x.innerText.trim();
+        let innerText = (x as HTMLElement).innerText.trim();
         let myTimeRegex = new RegExp(
           /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)/
         );
@@ -73,119 +90,6 @@ export const getLinksAndDatav2 = async ({ page, selectors }: linkArgs) =>
       });
   }, selectors);
 
-export const getLinksAndData = async ({ page, selectors }: linkArgs) =>
-  page.evaluate((selectors) => {
-    let rows = makeArrayFromDocument(selectors.rows);
-    return rows
-      .filter((x, i) => i + 1 <= selectors.depth)
-      .map((x) => {
-        let link = getLink(x);
-        let title = getLinkText(x);
-        let location = getFromText(x, selectors.location);
-        let date;
-        let time;
-        if (selectors.time) {
-          time = getNthInstanceOfText(
-            x,
-            selectors.time.selector,
-            selectors.time.instance
-          );
-        }
-        if (selectors.date) {
-          date = getNthInstanceOfText(
-            x,
-            selectors.date.selector,
-            selectors.date.instance
-          );
-        }
-        if (selectors.splitDate) {
-          // If data includes splitDate...
-          time = date && date.split(selectors.splitDate)[1];
-          date = date && date.split(selectors.splitDate)[0];
-        }
-        return { link, title, location, date, time };
-      });
-  }, selectors);
-
-export const getLinksAndDataV4 = async ({ page, selectors }: linkArgs) =>
-  page.evaluate((selectors) => {
-    let rows = Array.from(
-      document
-        .querySelector(selectors.upcomingHearings)
-        .querySelectorAll(selectors.hearings)
-    );
-    return rows
-      .filter((x, i) => i + 1 <= selectors.depth)
-      .map((x) => {
-        let link = getLink(x);
-        let title = getLinkText(x);
-        let dateAndTimeInfo = getFromText(x, selectors.dateTime)
-          .split("-")
-          .map((x: string) => x.trim());
-        let date = dateAndTimeInfo[0];
-        let time = dateAndTimeInfo[1];
-        let location = getFromText(x, selectors.location);
-        return { link, title, date, time, location };
-      });
-  }, selectors);
-
-export const openNewPages = async (browser: puppeteer.Browser, links: any) => {
-  let pages: puppeteer.Page[] = await Promise.all(
-    links.map(() => browser.newPage())
-  );
-  let navResults = await Promise.allSettled(
-    pages.map(async (page, i) => {
-      try {
-        await setPageBlockers(page);
-        await page.goto(links[i]);
-        await setPageScripts(page);
-        return Promise.resolve({ page });
-      } catch (err) {
-        return Promise.reject({ page, err, link: links[i] });
-      }
-    })
-  );
-
-  let successfulNavigations = navResults
-    .filter((x) => x.status === "fulfilled")
-    .map((x) => x.value);
-  let failedNavigations = navResults
-    .filter((x) => x.status !== "fulfilled")
-    .map((x) => x.reason);
-
-  if (failedNavigations.length > 0) {
-    await Promise.all(
-      failedNavigations.map(async (x) => {
-        console.error(`Failed to navigate to ${x.link}, skipping: `, x.err);
-        return x.page.close();
-      })
-    );
-  }
-
-  return successfulNavigations.map((x) => x.page);
-};
-
-export const getLinksAndDataV4Unlimited = async ({
-  page,
-  selectors,
-}: linkArgs) =>
-  page.evaluate((selectors) => {
-    let rows = Array.from(document.querySelectorAll(selectors.hearings));
-    return rows
-      .filter((x, i) => i + 1 <= selectors.depth)
-      .map((x) => {
-        let link = getLink(x);
-        let title = getLinkText(x);
-        let dateAndTimeInfo = getFromText(x, selectors.dateTime)
-          .split("-")
-          .map((x: string) => x.trim());
-        let date = dateAndTimeInfo[0];
-        let time = dateAndTimeInfo[1];
-        let location = getFromText(x, selectors.location);
-        return { link, title, date, time, location };
-      });
-  }, selectors);
-
 export const getPageData = async ({ pages, selectors }: linkArgsMultiPages) =>
   await Promise.all(
     pages.map(async (page) =>
@@ -193,7 +97,7 @@ export const getPageData = async ({ pages, selectors }: linkArgsMultiPages) =>
         let title = getTextFromDocument(selectors.title);
         if (selectors.titleTrimRegex) {
           let titleRegex = new RegExp(selectors.titleTrimRegex, "i");
-          title = title.replace(titleRegex, "");
+          title && title.replace(titleRegex, "");
         }
         let date = null;
         let time = null;
@@ -258,38 +162,95 @@ export const getPageData = async ({ pages, selectors }: linkArgsMultiPages) =>
     )
   );
 
-export const getPageDataWithJQuery = async ({
-  pages,
-  selectors,
-}: linkArgsMultiPages) =>
-  Promise.all(
-    pages.map(async (page) => {
-      return page.evaluate((selectors) => {
-        let title = getTextFromDocument(selectors.title);
-        // This complicated function turns the location, date, and time into an array
-        let info = $(selectors.jquerySelector)
-          .contents()[1]
-          .textContent.split("\n")
-          .map((x: string) => x.trim())
-          .filter((x: string) => x !== "" && x !== "@" && x !== "0");
-        let location =
-          selectors.locationIndex === null
-            ? null
-            : info[selectors.locationIndex];
-        let date =
-          selectors.dateIndex === null ? null : info[selectors.dateIndex];
-        let time =
-          selectors.timeIndex === null ? null : info[selectors.timeIndex];
-        let link = document.URL;
-        let text = document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
-        return {
-          title,
-          date,
-          time,
-          location,
-          link,
-          text,
-        };
-      }, selectors);
-    })
-  );
+//export const getPageDataWithJQuery = async ({
+//pages,
+//selectors,
+//}: linkArgsMultiPages) =>
+//Promise.all(
+//pages.map(async (page) => {
+//return page.evaluate((selectors) => {
+//let title = getTextFromDocument(selectors.title);
+//// This complicated function turns the location, date, and time into an array
+//let info = $(selectors.jquerySelector)
+//.contents()[1]
+//.textContent.split("\n")
+//.map((x: string) => x.trim())
+//.filter((x: string) => x !== "" && x !== "@" && x !== "0");
+//let location =
+//selectors.locationIndex === null
+//? null
+//: info[selectors.locationIndex];
+//let date =
+//selectors.dateIndex === null ? null : info[selectors.dateIndex];
+//let time =
+//selectors.timeIndex === null ? null : info[selectors.timeIndex];
+//let link = document.URL;
+//let text = document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
+//return {
+//title,
+//date,
+//time,
+//location,
+//link,
+//text,
+//};
+//}, selectors);
+//})
+//);
+
+//export const getLinksAndData = async ({ page, selectors }: linkArgs) =>
+//page.evaluate((selectors) => {
+//let rows = makeArrayFromDocument(selectors.rows);
+//return rows
+//.filter((x, i) => i + 1 <= selectors.depth)
+//.map((x) => {
+//let link = getLink(x);
+//let title = getLinkText(x);
+//let location = getFromText(x, selectors.location);
+//let date;
+//let time;
+//if (selectors.time) {
+//time = getNthInstanceOfText(
+//x,
+//selectors.time.selector,
+//selectors.time.instance
+//);
+//}
+//if (selectors.date) {
+//date = getNthInstanceOfText(
+//x,
+//selectors.date.selector,
+//selectors.date.instance
+//);
+//}
+//if (selectors.splitDate) {
+//// If data includes splitDate...
+//time = date && date.split(selectors.splitDate)[1];
+//date = date && date.split(selectors.splitDate)[0];
+//}
+//return { link, title, location, date, time };
+//});
+//}, selectors);
+
+//export const getLinksAndDataV4 = async ({ page, selectors }: linkArgs) =>
+//page.evaluate((selectors) => {
+//let rows = Array.from(
+//document
+//.querySelector(selectors.upcomingHearings)
+//.querySelectorAll(selectors.hearings)
+//);
+//return rows
+//.filter((x, i) => i + 1 <= selectors.depth)
+//.map((x) => {
+//let link = getLink(x);
+//let title = getLinkText(x);
+//let dateAndTimeInfo = getFromText(x, selectors.dateTime)
+//.split("-")
+//.map((x: string) => x.trim());
+//let date = dateAndTimeInfo[0];
+//let time = dateAndTimeInfo[1];
+//let location = getFromText(x, selectors.location);
+//return { link, title, date, time, location };
+//});
+//}, selectors);
+

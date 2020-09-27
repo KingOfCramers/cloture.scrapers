@@ -24,12 +24,12 @@ export const listeners = async (queue: Queue) => {
 
     let cleanedDateAndTimeData = cleanDateTime(stripWhiteSpace(data));
 
-    //try {
-    //let promisedInserts = insertData(model, cleanedDateAndTimeData);
-    //await Promise.all(promisedInserts);
-    //} catch (err) {
-    //console.error(`${id} could not insert data. `, err);
-    //}
+    try {
+      let promisedInserts = insertData(model, cleanedDateAndTimeData);
+      await Promise.all(promisedInserts);
+    } catch (err) {
+      console.error(`${id} could not insert data. `, err);
+    }
   });
 
   // Log information about the job.

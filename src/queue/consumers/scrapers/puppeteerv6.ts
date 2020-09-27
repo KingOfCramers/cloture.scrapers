@@ -5,27 +5,20 @@ import randomUser from "random-useragent";
 import { house_job } from "../../jobs/house";
 import { senate_job } from "../../jobs/senate";
 
-import { getPageData, getLinksFiltered, openNewPages } from "./common";
-import { setPageScripts, setPageBlockers } from "./config";
+import { getPageData, getLinksFiltered } from "./common";
+import {
+  setPageScripts,
+  setPageBlockers,
+  setInitialPage,
+  openNewPages,
+} from "./configuration";
 
 export const puppeteerv6 = async (
   browser: puppeteer.Browser,
   job: house_job | senate_job
 ) => {
   // Setup puppeteer page for the job
-  let page;
-
-  try {
-    page = await browser.newPage();
-    let userAgentString = randomUser.getRandom();
-    await page.setUserAgent(userAgentString || "");
-    await setPageBlockers(page);
-    await page.goto(job.link);
-    await setPageScripts(page);
-  } catch (err) {
-    console.error("Could not navigate to inital page. ", err);
-    throw err;
-  }
+  const page: puppeteer.Page = await setInitialPage(browser, job.link);
 
   let links;
   let pages;

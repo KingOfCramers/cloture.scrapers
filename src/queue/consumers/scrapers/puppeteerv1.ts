@@ -1,32 +1,24 @@
 import puppeteer from "puppeteer";
-import randomUser from "random-useragent";
 
 // Import job types
 import { house_job } from "../../jobs/house";
 import { senate_job } from "../../jobs/senate";
 
 // Import common functions for all scrapers and for page-specific logic
-import { getPageData, getLinks, openNewPages } from "./common";
-import { setPageBlockers, setPageScripts } from "./config";
+import { getPageData, getLinks } from "./common";
+import {
+  setPageBlockers,
+  setPageScripts,
+  setInitialPage,
+  openNewPages,
+} from "./configuration";
 
 export const puppeteerv1 = async (
   browser: puppeteer.Browser,
   job: house_job | senate_job
 ) => {
   // Setup puppeteer page for the job
-  let page;
-
-  try {
-    page = await browser.newPage();
-    let userAgentString = randomUser.getRandom();
-    await page.setUserAgent(userAgentString || "");
-    await setPageBlockers(page);
-    await page.goto(job.link);
-    await setPageScripts(page);
-  } catch (err) {
-    console.error("Could not navigate to inital page. ", err);
-    throw err;
-  }
+  const page: puppeteer.Page = await setInitialPage(browser, job.link);
 
   let links;
   let pages;

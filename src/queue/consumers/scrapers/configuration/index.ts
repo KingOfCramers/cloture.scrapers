@@ -1,4 +1,5 @@
 import path from "path";
+import randomUser from "random-useragent";
 import puppeteer from "puppeteer";
 import fs from "fs";
 
@@ -70,4 +71,53 @@ export const setPageScripts = async (page: puppeteer.Page) => {
   } else {
     await page.addScriptTag({ path: consumerFunctionsPath }); // Uses path from CWD
   }
+};
+
+export const setInitialPage = async (
+  browser: puppeteer.Browser,
+  link: string
+): Promise<puppeteer.Page> => {
+  const page = await browser.newPage();
+  let userAgentString = randomUser.getRandom();
+  await page.setUserAgent(userAgentString || "");
+  await setPageBlockers(page);
+  await page.goto(link);
+  await setPageScripts(page);
+  return page;
+};
+
+export const openNewPages = async (browser: puppeteer.Browser, links: any) => {
+  let pages: puppeteer.Page[] = await Promise.all(
+    links.map(() => browser.newPage())
+  );
+  let navResults = await Promise.allSettled(
+    pages.map(async (page, i) => {
+      try {
+        await setPageBlockers(page);
+        await page.goto(links[i]);
+        await setPageScripts(page);
+        return Promise.resolve({ page });
+      } catch (err) {
+        return Promise.reject({ page, err, link: links[i] });
+      }
+    })
+  );
+
+  let successfulNavigations = navResults
+    .filter((x) => x.status === "fulfilled")
+    .map((x) => x.value);
+  let failedNavigations = navResults
+    .filter((x) => x.status !== "fulfilled")
+    .map((x) => x.reason);
+
+  if (failedNavigations.length > 0) {
+    await Promise.all(
+      failedNavigations.map(async (x) => {
+        console.error(`Failed to navigate to ${x.link}, skipping: `, x.err);
+        return x.page.close();
+      })
+    );
+  }
+
+  return successfulNavigations.map((x) => x.page);
 };

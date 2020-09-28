@@ -6,6 +6,10 @@ interface obj {
   [key: string]: any;
 }
 
+type CommitteeDocument = Committee & {
+  committee: string;
+};
+
 export const stripWhiteSpace = (data: Committee[]): Committee[] =>
   data.map((x: Committee) => {
     for (let key in x) {
@@ -18,7 +22,11 @@ export const stripWhiteSpace = (data: Committee[]): Committee[] =>
     return x;
   });
 
-export const insertData = (model: Model<Document, {}>, data: Committee[]) =>
+// This function saves the data to our database.
+export const insertData = (
+  model: Model<Document, {}>,
+  data: CommitteeDocument[]
+) =>
   data.map(async (datum) => {
     let doc = await model.findOne({ link: datum.link });
     if (!doc) {
@@ -69,6 +77,8 @@ const validFormats = {
   ],
 };
 
+// This function ensures that the date/time data fetched is correct.
+// And if not, sets the field to undefined.
 export const cleanDateTime = (data: Committee[]) =>
   data.map((doc) => {
     const { date, time } = doc;

@@ -9,44 +9,41 @@ import { houseCommittees, senateCommittees } from "../../statics";
 
 export interface result {
   data: Committee[];
-  meta: { committee: string; collection: string };
+  meta: {
+    committee: string;
+    collection: "houseCommittee" | "senateCommittee";
+  };
 }
 
+// Accept the data from our producer.
+// Use that data in the puppeteer instance, and pass the scraped data to the listener with the return statement.
 export const consumers = (queue: Queue): void => {
   setupPuppeteer({ kind: null })
     .then((browser: puppeteer.Browser) => {
-      // Accept the data from our producer.
-      // Use that data in the puppeteer instance
       queue.process(
         "*",
         async (job: Bull.Job): Promise<result> => {
-          const data: house_job | senate_job = job.data;
           try {
-            const scraper = pickScraper(data.details.version);
+            // Pick the instance of the scraper we'd like to use
+            const scraper = pickScraper(job.data.details.version);
             console.log(`${job.id} running for ${job.name}`);
-            const results = await scraper(browser, data);
-            console.log(`${job.id} finished for ${job.name}`);
-            console.log("RESULTS WERE ", results);
 
+            // Run the scraper, getting an array of committees
+            const data: Committee[] = await scraper(browser, job.data);
+            console.log(`${job.id} finished for ${job.name}`);
+
+            // Return the data from the scraper and the metadata from the job to the listener.
+            // The collection will be used to choose whether to use the senate or house resolver.
+            // The committee will be saved with the document
             return {
-              data: [
-                {
-                  link: "https://faker.com",
-                  title: "Fake",
-                  date: new Date(),
-                },
-              ],
-              meta: { committee: data.committee, collection: data.collection },
+              data,
+              meta: {
+                committee: job.data.committee,
+                collection: job.data.collection,
+              },
             };
-            //// Return the data and the job's meta-information to the listener for parsing
-            //return {
-            //data: results.map((job: ) => {
-            //job.committee = job.committee;
-            //return job;
-            //}),
-            //meta: job,
-            //};
           } catch (err) {
+            // If there are any errors, close all the pages from the job and return the error
             let oldPages = await browser.pages();
             await Promise.all(
               oldPages.map(async (page, i) => i > 0 && (await page.close()))
@@ -59,6 +56,6 @@ export const consumers = (queue: Queue): void => {
     })
     .catch((err) => {
       console.error("There was an error with the processor. ", err);
-      process.exit(1);
+      //process.exit(1);
     });
 };

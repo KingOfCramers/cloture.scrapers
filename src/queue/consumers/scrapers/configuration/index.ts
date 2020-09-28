@@ -61,12 +61,15 @@ export const setPageBlockers = async (page: puppeteer.Page) => {
 };
 
 // Add personal functions to the page.
-// These are then accessible within puppeteer. If not accessible, throw an error because scrapers won't work
+// These are then accessible within puppeteer. Since they're written in typescript
+// They are only accessible within the "built" version of the site.
+// Thus, check if the site has been built (when in development) and get that version.
+// If not, throw an error.
 export const setPageScripts = async (page: puppeteer.Page) => {
   let consumerFunctionsPath = path.resolve(__dirname, "./functions.js");
   let consumerFunctionsExist = fs.existsSync(consumerFunctionsPath);
   if (!consumerFunctionsExist) {
-    console.error("Consumer or jQuery utility function files do not exist!");
+    console.error("Utility function files do not exist!");
     process.exit(1);
   } else {
     await page.addScriptTag({ path: consumerFunctionsPath }); // Uses path from CWD
@@ -96,7 +99,7 @@ export const openNewPages = async (browser: puppeteer.Browser, links: any) => {
         await setPageBlockers(page);
         await page.goto(links[i]);
         await setPageScripts(page);
-        return Promise.resolve({ page });
+        return Promise.resolve({ page, err: null, link: null });
       } catch (err) {
         return Promise.reject({ page, err, link: links[i] });
       }
@@ -105,9 +108,11 @@ export const openNewPages = async (browser: puppeteer.Browser, links: any) => {
 
   let successfulNavigations = navResults
     .filter((x) => x.status === "fulfilled")
+    //@ts-ignore
     .map((x) => x.value);
   let failedNavigations = navResults
     .filter((x) => x.status !== "fulfilled")
+    //@ts-ignore
     .map((x) => x.reason);
 
   if (failedNavigations.length > 0) {

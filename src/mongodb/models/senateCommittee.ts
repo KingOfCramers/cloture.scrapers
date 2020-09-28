@@ -4,7 +4,7 @@ import moment from "moment";
 let senateCommitteeSchema = new Schema({
   committee: {
     type: String,
-    required: [true, "A valid house committee is required."],
+    required: [true, "A valid senate committee is required."],
     enum: [
       "sfrc",
       "sasc",

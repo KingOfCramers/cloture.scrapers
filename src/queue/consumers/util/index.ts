@@ -11,25 +11,11 @@ import {
 } from "../scrapers";
 
 // This function only runs once and sets up our puppeteer browser.
-// We could run the proxy through tor or proxy in production
 export const setupPuppeteer = async (initVals: {
   kind: string | null;
 }): Promise<puppeteer.Browser> => {
-  // Set initial variables
-  let proxy = null;
   const args = ["--no-sandbox", "--unlimited-storage"];
 
-  const isTor = initVals.kind === "tor";
-  const isProxy = initVals.kind === "proxy";
-
-  //if (!isTor && !isProxy && process.env.NODE_ENV === "production") {
-  //throw new Error(
-  //"Incorrect kind passed to puppeteer, should be 'tor' or 'proxy', provided " +
-  //initVals.kind
-  //);
-  //}
-
-  ///// Initialize Browser
   const browser = await puppeteer.launch({
     headless:
       process.env.NODE_ENV === "production" || process.env.HEADLESS === "true",
@@ -47,6 +33,8 @@ export const setupPuppeteer = async (initVals: {
   return browser;
 };
 
+// This function accepts the string value from the job
+// and returns the correct scraping routine.
 export const pickScraper = (kind: string) =>
   ((kind) => {
     switch (kind) {

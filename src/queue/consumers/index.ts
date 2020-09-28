@@ -2,7 +2,8 @@ import puppeteer from "puppeteer";
 import Bull from "bull";
 import { setupPuppeteer, pickScraper } from "./util";
 import { Queue, JobOptions } from "bull";
-import { Committee } from "../index";
+// This is not the correct type becuase of casting the time/date to strings.
+import { Committee } from "../../types/shared";
 import { house_job } from "../jobs/house";
 import { senate_job } from "../jobs/senate";
 import { houseCommittees, senateCommittees } from "../../statics";

@@ -4,6 +4,7 @@ import { getModelForClass, prop } from "@typegoose/typegoose";
 
 enum SenateCommittees {
   SENATE_FOREIGN_RELATIONS_COMMITTEE = "sfrc",
+  SENATE_AGING_COMMITTEE = "sage",
   SENATE_ARMED_SERVICES_COMMITTEE = "sasc",
   SENATE_AGRICULTURE_COMMITTEE = "sagc",
   SENATE_APPROPRIATIONS_COMMITTEE = "sapc",

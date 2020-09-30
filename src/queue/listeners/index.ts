@@ -1,3 +1,4 @@
+import Bull from "bull";
 import { Queue, JobOptions } from "bull";
 import { HouseCommitteeModel, SenateCommitteeModel } from "../../types";
 import { result } from "../consumers";
@@ -9,9 +10,9 @@ import { result } from "../consumers";
 // The other listeners listen to the queue and log information about the status of jobs
 export const listeners = async (queue: Queue) => {
   queue.on(
-    "global:completed",
-    async (id: string, result: string): Promise<void> => {
-      const { data, meta }: result = JSON.parse(result);
+    "completed",
+    async (job: Bull.Job): Promise<void> => {
+      const { data, meta }: result = job.returnvalue;
 
       let model =
         meta.collection === "houseCommittee"
@@ -21,7 +22,7 @@ export const listeners = async (queue: Queue) => {
 
       if (!model) {
         return console.error(
-          `${id} could not find model, tried to find: ${meta.collection}`
+          `${job.name} could not find model, tried to find: ${meta.collection}`
         );
       }
 
@@ -44,24 +45,24 @@ export const listeners = async (queue: Queue) => {
         // Also, must reattach the pre/post save hooks to the schemas! See the cloture.app.backend repository
         await Promise.all(promisedInsertsAndUpdates);
       } catch (err) {
-        console.error(`${id} could not insert data. `, err);
+        console.error(`${job.name} could not insert data. `, err);
       }
     }
   );
 
-  queue.on("global:active", (id) => {
-    console.log(`${id} has started`);
+  queue.on("active", (job) => {
+    console.log(`${job.name} has started`);
   });
 
-  queue.on("global:stalled", (id) => {
-    console.error(`${id} has stalled`);
+  queue.on("stalled", (job) => {
+    console.error(`${job.name} has stalled`);
   });
 
-  queue.on("global:failed", (id, err) => {
-    console.error(`${id} failed. `, err);
+  queue.on("failed", (job, err) => {
+    console.error(`${job.name} failed. `, err);
   });
 
-  queue.on("global:error", (err) => {
+  queue.on("error", (err) => {
     console.error("The queue experienced an error. ", err);
   });
 };

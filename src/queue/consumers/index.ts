@@ -27,11 +27,11 @@ export const consumers = (queue: Queue): void => {
           try {
             // Pick the instance of the scraper we'd like to use
             const scraper = pickScraper(job.data.details.version);
-            console.log(`${job.id} running for ${job.name}`);
+            console.log(`${job.name} running`);
 
             // Run the scraper, getting an array of committees
             const data: Committee[] = await scraper(browser, job.data);
-            console.log(`${job.id} finished for ${job.name}`);
+            console.log(`${job.name} finished`);
 
             // Return the data from the scraper and the metadata from the job to the listener.
             // The collection will be used to choose whether to use the senate or house resolver.
@@ -57,6 +57,6 @@ export const consumers = (queue: Queue): void => {
     })
     .catch((err) => {
       console.error("There was an error with the processor. ", err);
-      //process.exit(1);
+      process.exit(1);
     });
 };

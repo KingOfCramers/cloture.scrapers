@@ -35,6 +35,10 @@ const validFormats = {
     "h:mm [a.m.]",
     "h:mm [A.M.]",
     "h:mm [P.M.]",
+    "h.mm [p.m.]",
+    "h.mm [a.m.]",
+    "h.mm [A.M.]",
+    "h.mm [P.M.]",
   ],
 };
 
@@ -53,6 +57,7 @@ const handleSetDate = (date: string) => {
 };
 
 @ObjectType({ description: "The base class for Senate and House committees." })
+// The pre-save logger. Logs out modified paths.
 @pre<Committee>("save", function (next) {
   const document: mongoose.Document & any = this;
   document.wasNew = document.isNew; // Pass "newness" as new property for post-save
@@ -60,18 +65,25 @@ const handleSetDate = (date: string) => {
     let modifiedPaths = document.modifiedPaths();
     if (modifiedPaths.length > 0) {
       modifiedPaths.forEach((path: string) => {
-        console.log(
-          `${document.id} ${path} ––> ${JSON.stringify(document[path])}`
-        );
+        console.log(`${document.id} ${path} modified.`);
       });
     }
   }
   next();
 })
+// The post-save logger. Logs out id of new documents.
 @post<Committee>("save", function (doc: mongoose.Document & any, next) {
   if (doc.wasNew) {
     console.log(`Document saved with id ${doc._id}`);
   }
+})
+@post<Committee>("save", function (
+  err: mongoose.Error,
+  doc: mongoose.Document,
+  next: any
+) {
+  console.log("Document could not save: ", err.message);
+  next();
 })
 export class Committee {
   @Field()

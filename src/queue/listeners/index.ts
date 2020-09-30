@@ -45,7 +45,7 @@ export const listeners = async (queue: Queue) => {
         // Also, must reattach the pre/post save hooks to the schemas! See the cloture.app.backend repository
         await Promise.all(promisedInsertsAndUpdates);
       } catch (err) {
-        console.error(`${job.name} could not insert data. `, err);
+        console.error(`${job.name} could not insert data.`);
       }
     }
   );

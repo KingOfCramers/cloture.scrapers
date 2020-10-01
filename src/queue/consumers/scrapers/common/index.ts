@@ -1,4 +1,3 @@
-//@ts-nocheck
 import puppeteer from "puppeteer";
 import {
   setPageBlockers,
@@ -39,11 +38,14 @@ export const getLinksFiltered = async ({ page, selectors }: linkArgs) =>
     return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth range, prevents overfetching w/ puppeteer (and where x !== null)
   }, selectors);
 
-export const getLinks = async ({ page, selectors }: linkArgs) =>
+export const getLinks = async ({
+  page,
+  selectors,
+}: linkArgs): Promise<(string | null)[]> =>
   page.evaluate((selectors) => {
     let rows = makeArrayFromDocument(selectors.rows);
     let links = rows.map((x) => getLink(x));
-    return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth range, prevents overfetching w/ puppeteer (and where x !== null)
+    return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth
   }, selectors);
 
 export const getPageText = async (page: puppeteer.Page) =>

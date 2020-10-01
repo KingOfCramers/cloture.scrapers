@@ -10,6 +10,8 @@ import {
   puppeteerv6,
 } from "../scrapers";
 
+import { Committee } from "../../../types/shared";
+
 // This function only runs once and sets up our puppeteer browser.
 export const setupPuppeteer = async (initVals: {
   kind: string | null;
@@ -33,9 +35,11 @@ export const setupPuppeteer = async (initVals: {
   return browser;
 };
 
+type scraperType = () => Promise<Committee[]>;
+
 // This function accepts the string value from the job
 // and returns the correct scraping routine.
-export const pickScraper = (kind: string) =>
+export const pickScraper = (kind: string): scraperType =>
   ((kind) => {
     switch (kind) {
       case "puppeteerv1" || "puppeteerv1.1":

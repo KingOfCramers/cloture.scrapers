@@ -1,9 +1,5 @@
 import puppeteer from "puppeteer";
 
-// Import job types
-import { houseJob } from "../../jobs/house";
-import { senateJob } from "../../jobs/senate";
-
 // Import common functions for all scrapers and for page-specific logic
 import { getPageData, getLinks } from "./common";
 import {
@@ -13,15 +9,17 @@ import {
   openNewPages,
 } from "./configuration";
 
+import { HouseJob, SenateJob, V1 } from "../../jobs/types";
+
 export const puppeteerv1 = async (
   browser: puppeteer.Browser,
-  job: houseJob | senateJob
+  job: HouseJob<V1> | SenateJob<V1>
 ) => {
   // Setup puppeteer page for the job
   const page: puppeteer.Page = await setInitialPage(browser, job.link);
 
-  let links;
-  let pages;
+  let links: (string | null)[];
+  let pages: puppeteer.Page[] | null;
   let pageData;
 
   try {

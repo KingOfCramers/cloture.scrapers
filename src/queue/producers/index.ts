@@ -1,8 +1,8 @@
 import { Queue, JobOptions } from "bull";
-import { house_job } from "../jobs/house";
-import { senate_job } from "../jobs/senate";
+import { houseJob } from "../jobs/house";
+import { senateJob } from "../jobs/senate";
 
-export const cron = async (queue: Queue, job: house_job | senate_job) => {
+export const cron = async (queue: Queue, job: houseJob | senateJob) => {
   const options = {
     repeat: { cron: "*/30 * * * *" },
     removeOnComplete: true, // Remove the job once it's completed.
@@ -20,7 +20,7 @@ export const cron = async (queue: Queue, job: house_job | senate_job) => {
 
 export const producers = async (
   queue: Queue,
-  jobs: (house_job | senate_job)[]
+  jobs: (houseJob | senateJob)[]
 ) => {
   // This adds our jobs to the queue.
   // Each job is added by "name" and then the full data from the job is passed into Redis.

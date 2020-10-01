@@ -1,11 +1,30 @@
 import { houseCommittees } from "../../statics";
-import { job, sched } from "./types";
+import { HouseJob, V1, V2 } from "./types";
 
-export type house_job = job & {
-  committee: houseCommittees;
+const hjud: HouseJob<V1> = {
+  committee: "hjud",
+  collection: "houseCommittee",
+  name: "House Judiciary Committee Hearings and Markups",
+  link:
+    "https://judiciary.house.gov/calendar/eventslisting.aspx?EventTypeID=0&CategoryID=0&Congress=&Count=10",
+  details: {
+    version: "puppeteerv1",
+    selectors: {
+      layerOne: {
+        depth: 10,
+        rows: "li.calendar-item",
+      },
+      layerTwo: {
+        title: "h3.news-titler",
+        regexTime: true,
+        regexDate: true,
+        location: { label: true, value: "div.events-location strong" },
+      },
+    },
+  },
 };
 
-export const house: house_job[] = [
+export const house = [
   //{
   //committee: "hjud",
   //collection: "houseCommittee",

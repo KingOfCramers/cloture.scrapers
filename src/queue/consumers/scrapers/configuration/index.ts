@@ -2,6 +2,7 @@ import path from "path";
 import randomUser from "random-useragent";
 import puppeteer from "puppeteer";
 import fs from "fs";
+export * from "./_functions";
 
 export const setPageBlockers = async (page: puppeteer.Page) => {
   await page.setRequestInterception(true);

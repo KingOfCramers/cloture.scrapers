@@ -19,6 +19,7 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
     "experimentalDecorators": true
   }
 }

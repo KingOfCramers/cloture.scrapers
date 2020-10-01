@@ -4,8 +4,8 @@ import { setupPuppeteer, pickScraper } from "./util";
 import { Queue, JobOptions } from "bull";
 // This is not the correct type becuase of casting the time/date to strings.
 import { Committee } from "../../types/shared";
-import { house_job } from "../jobs/house";
-import { senate_job } from "../jobs/senate";
+import { houseJob } from "../jobs/house";
+import { senateJob } from "../jobs/senate";
 import { houseCommittees, senateCommittees } from "../../statics";
 
 export interface result {

@@ -1,22 +1,29 @@
 //@ts-nocheck
 import puppeteer from "puppeteer";
-import { setPageBlockers, setPageScripts } from "../configuration";
+import {
+  setPageBlockers,
+  setPageScripts,
+  makeArrayFromDocument,
+  getFromText,
+  getLink,
+  getLinkText,
+  getNextTextFromDocument,
+  getTextFromDocument,
+  getNthInstanceOfText,
+} from "../configuration";
+
+import { V1, V2 } from "../../../jobs/types";
 
 // EDIT Need to refactor and make selectors type more specific
 interface linkArgs {
   page: puppeteer.Page;
   selectors: any;
 }
-
-// EDIT Need to refactor and make selectors type more specific
 interface linkArgsMultiPages {
   pages: puppeteer.Page[];
   selectors: any;
 }
 
-// EDIT NEED TO CHANGE FUNCTIONS THAT BREAK OR RELY ON JQUERY
-
-// These functions are passed into the page context.
 export const getLinksFiltered = async ({ page, selectors }: linkArgs) =>
   page.evaluate((selectors) => {
     let rows = makeArrayFromDocument(selectors.rows);
@@ -72,6 +79,12 @@ export const getLinksAndDatav2 = async ({ page, selectors }: linkArgs) =>
         return { link, title, date, time };
       });
   }, selectors);
+
+// The main function that runs to scrape data from every subpage
+interface GetPageDataParams {
+  pages: puppeteer.Pages[];
+  selectors: V1;
+}
 
 export const getPageData = async ({ pages, selectors }: linkArgsMultiPages) =>
   await Promise.all(
@@ -215,6 +228,7 @@ export const getLinksAndData = async ({ page, selectors }: linkArgs) =>
       });
   }, selectors);
 
+// EDIT fix the any associations
 export const getLinksAndDataV4 = async ({ page, selectors }: linkArgs) =>
   page.evaluate((selectors) => {
     let rows = Array.from(

@@ -2,8 +2,8 @@ import puppeteer from "puppeteer";
 import randomUser from "random-useragent";
 
 // Import job types
-import { house_job } from "../../jobs/house";
-import { senate_job } from "../../jobs/senate";
+import { houseJob } from "../../jobs/house";
+import { senateJob } from "../../jobs/senate";
 
 import { getPageData, getLinksFiltered } from "./common";
 import {
@@ -15,7 +15,7 @@ import {
 
 export const puppeteerv6 = async (
   browser: puppeteer.Browser,
-  job: house_job | senate_job
+  job: houseJob | senateJob
 ) => {
   // Setup puppeteer page for the job
   const page: puppeteer.Page = await setInitialPage(browser, job.link);

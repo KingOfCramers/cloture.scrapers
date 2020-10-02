@@ -16,8 +16,8 @@ const hjud: HouseJob<V1> = {
       },
       layerTwo: {
         title: "h3.news-titler",
-        regexTime: true,
-        regexDate: true,
+        time: true,
+        date: true,
         location: { label: true, value: "div.events-location strong" },
       },
     },

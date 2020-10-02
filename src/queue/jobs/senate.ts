@@ -1,11 +1,6 @@
 import { senateCommittees } from "../../statics";
-import { job, sched } from "./types";
 
-export type senateJob = job & {
-  committee: senateCommittees;
-};
-
-export const senate: senateJob[] = [
+export const senate = [
   //{
   //committee: "sage",
   //collection: "senateCommittee",

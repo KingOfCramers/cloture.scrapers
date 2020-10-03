@@ -1,6 +1,4 @@
-// These are the helper functions. They are included in the configuration file as well, compiled into javascript.
-// This file is what is attached to the puppeteer instance.
-// We are merely saving these here for type checking purposes
+// These are the helper functions. They are transpiled into javascript (into the build folder) which is then attached to the puppeteer window.
 export const clean = (item: string | undefined | null) =>
   item ? item.replace(/\s\s+/g, " ").trim() : null;
 
@@ -77,4 +75,3 @@ export const getNthInstanceOf = (
   query: string,
   num: number
 ): Element | undefined => document.querySelectorAll(query)[num];
-

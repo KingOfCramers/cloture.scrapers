@@ -2,7 +2,6 @@ import path from "path";
 import randomUser from "random-useragent";
 import puppeteer from "puppeteer";
 import fs from "fs";
-export * from "./_functions";
 
 export const setPageBlockers = async (page: puppeteer.Page) => {
   await page.setRequestInterception(true);
@@ -67,7 +66,12 @@ export const setPageBlockers = async (page: puppeteer.Page) => {
 // Thus, check if the site has been built (when in development) and get that version.
 // If not, throw an error.
 export const setPageScripts = async (page: puppeteer.Page) => {
-  let consumerFunctionsPath = path.resolve(__dirname, "./functions.js");
+  let consumerFunctionsPath = path.resolve(
+    __dirname,
+    "functions",
+    "build",
+    "index.js"
+  );
   let consumerFunctionsExist = fs.existsSync(consumerFunctionsPath);
   if (!consumerFunctionsExist) {
     console.error("Utility function files do not exist!");

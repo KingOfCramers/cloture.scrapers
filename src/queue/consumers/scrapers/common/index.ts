@@ -1,19 +1,19 @@
 //@ts-nocheck
 // EDIT -- What's going on, why can't one import configuration here?
 import puppeteer from "puppeteer";
-//import {
-//setPageBlockers,
-//setPageScripts,
-//makeArrayFromDocument,
-//getFromText,
-//getLink,
-//getLinkText,
-//getNextTextFromDocument,
-//getTextFromDocument,
-//getNthInstanceOfText,
-//} from "../configuration";
+import {
+  setPageBlockers,
+  setPageScripts,
+  makeArrayFromDocument,
+  getFromText,
+  getLink,
+  getLinkText,
+  getNextTextFromDocument,
+  getTextFromDocument,
+  getNthInstanceOfText,
+} from "../functions/src";
 
-//import { V1, V2, V3, V4, V5, V6 } from "../../../jobs/types";
+import { V1, V2, V3, V4, V5, V6 } from "../../../jobs/types";
 
 // EDIT Need to refactor and make selectors type more specific
 interface linkArgs {
@@ -45,7 +45,6 @@ export const getLinks = async ({
   selectors,
 }: linkArgs): Promise<(string | null)[]> =>
   page.evaluate((selectors) => {
-    debugger;
     let rows = makeArrayFromDocument(selectors.rows);
     let links = rows.map((x) => getLink(x));
     return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth
@@ -88,13 +87,13 @@ export const getLinksAndDatav2 = async ({ page, selectors }: linkArgs) =>
 // The main function that runs to scrape data from every subpage
 interface GetPageDataParams {
   pages: puppeteer.Page[];
-  selectors: V1;
+  selectors: V1["selectors"]["layerTwo"];
 }
 
-export const getPageData = async ({ pages, selectors }: linkArgsMultiPages) =>
+export const getPageData = async ({ pages, selectors }: GetPageDataParams) =>
   await Promise.all(
     pages.map(async (page) =>
-      page.evaluate((selectors) => {
+      page.evaluate((selectors: GetPageDataParams["selectors"]) => {
         let title = getTextFromDocument(selectors.title);
         if (selectors.titleTrimRegex) {
           let titleRegex = new RegExp(selectors.titleTrimRegex, "i");
@@ -103,6 +102,8 @@ export const getPageData = async ({ pages, selectors }: linkArgsMultiPages) =>
         let date = null;
         let time = null;
         let location = null;
+
+        debugger;
 
         if (selectors.date) {
           date = selectors.date.label

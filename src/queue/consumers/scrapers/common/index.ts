@@ -1,9 +1,5 @@
-//@ts-nocheck
-// EDIT -- What's going on, why can't one import configuration here?
 import puppeteer from "puppeteer";
 import {
-  setPageBlockers,
-  setPageScripts,
   makeArrayFromDocument,
   getFromText,
   getLink,
@@ -13,16 +9,11 @@ import {
   getNthInstanceOfText,
 } from "../functions/src";
 
-import { V1, V2, V3, V4, V5, V6 } from "../../../jobs/types";
+import { V1, V2, V3, V4, V5, V6, RowsAndDepth } from "../../../jobs/types";
 
-// EDIT Need to refactor and make selectors type more specific
 interface linkArgs {
   page: puppeteer.Page;
-  selectors: any;
-}
-interface linkArgsMultiPages {
-  pages: puppeteer.Page[];
-  selectors: any;
+  selectors: RowsAndDepth;
 }
 
 export const getLinksFiltered = async ({ page, selectors }: linkArgs) =>
@@ -44,21 +35,28 @@ export const getLinks = async ({
   page,
   selectors,
 }: linkArgs): Promise<(string | null)[]> =>
-  page.evaluate((selectors) => {
+  page.evaluate((selectors: RowsAndDepth) => {
     let rows = makeArrayFromDocument(selectors.rows);
     let links = rows.map((x) => getLink(x));
     return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth
   }, selectors);
 
-export const getPageText = async (page: puppeteer.Page) =>
+export const getPageText = async (page: puppeteer.Page): Promise<string> =>
   page.evaluate(() => {
     return document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
   });
 
-export const getLinksAndDatav2 = async ({ page, selectors }: linkArgs) =>
-  page.evaluate((selectors) => {
+interface PageAndV2Selectors {
+  page: puppeteer.Page;
+  selectors: V2["selectors"]["layerOne"];
+}
+export const getLinksAndDatav2 = async ({
+  page,
+  selectors,
+}: PageAndV2Selectors) =>
+  page.evaluate((selectors: V2["selectors"]["layerOne"]) => {
     let rows = makeArrayFromDocument(selectors.rows);
-    return rows
+    let filteredRows = rows
       .filter((x, i) => i + 1 <= selectors.depth)
       .map((x) => {
         let link = getLink(x);
@@ -82,6 +80,7 @@ export const getLinksAndDatav2 = async ({ page, selectors }: linkArgs) =>
 
         return { link, title, date, time };
       });
+    return filteredRows;
   }, selectors);
 
 // The main function that runs to scrape data from every subpage
@@ -164,39 +163,45 @@ export const getPageData = async ({ pages, selectors }: GetPageDataParams) =>
     )
   );
 
+interface GetPageDataWithJQueryInterface {
+  pages: puppeteer.Page[];
+  selectors: V5["selectors"]["layerTwo"];
+}
 export const getPageDataWithJQuery = async ({
   pages,
   selectors,
-}: linkArgsMultiPages) =>
+}: GetPageDataWithJQueryInterface) =>
   Promise.all(
     pages.map(async (page) => {
-      return page.evaluate((selectors) => {
-        let title = getTextFromDocument(selectors.title);
-        // This complicated function turns the location, date, and time into an array
-        let info = $(selectors.jquerySelector)
-          .contents()[1]
-          .textContent.split("\n")
-          .map((x: string) => x.trim())
-          .filter((x: string) => x !== "" && x !== "@" && x !== "0");
-        let location =
-          selectors.locationIndex === null
-            ? null
-            : info[selectors.locationIndex];
-        let date =
-          selectors.dateIndex === null ? null : info[selectors.dateIndex];
-        let time =
-          selectors.timeIndex === null ? null : info[selectors.timeIndex];
-        let link = document.URL;
-        let text = document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
-        return {
-          title,
-          date,
-          time,
-          location,
-          link,
-          text,
-        };
-      }, selectors);
+      return page.evaluate(
+        (selectors: GetPageDataWithJQueryInterface["selectors"]) => {
+          let title = getTextFromDocument(selectors.title);
+          let info = $(selectors.jquerySelector)
+            .contents()[1]
+            .textContent.split("\n")
+            .map((x: string) => x.trim())
+            .filter((x: string) => x !== "" && x !== "@" && x !== "0");
+          let location =
+            selectors.locationIndex === null
+              ? null
+              : info[selectors.locationIndex];
+          let date =
+            selectors.dateIndex === null ? null : info[selectors.dateIndex];
+          let time =
+            selectors.timeIndex === null ? null : info[selectors.timeIndex];
+          let link = document.URL;
+          let text = document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
+          return {
+            title,
+            date,
+            time,
+            location,
+            link,
+            text,
+          };
+        },
+        selectors
+      );
     })
   );
 

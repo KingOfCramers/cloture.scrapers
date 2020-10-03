@@ -10,7 +10,7 @@ import {
   openNewPages,
   setPageBlockers,
   setInitialPage,
-} from "./configuration";
+} from "./navigation";
 
 export const puppeteerv5 = async (
   browser: puppeteer.Browser,

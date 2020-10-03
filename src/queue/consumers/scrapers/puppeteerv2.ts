@@ -7,7 +7,7 @@ import {
   setPageScripts,
   setInitialPage,
   openNewPages,
-} from "./configuration";
+} from "./navigation";
 
 // Import job types
 import { HouseJob, SenateJob, V2 } from "../../jobs";

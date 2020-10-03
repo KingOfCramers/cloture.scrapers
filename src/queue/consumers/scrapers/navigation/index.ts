@@ -68,6 +68,7 @@ export const setPageBlockers = async (page: puppeteer.Page) => {
 export const setPageScripts = async (page: puppeteer.Page) => {
   let consumerFunctionsPath = path.resolve(
     __dirname,
+    "..",
     "functions",
     "build",
     "index.js"

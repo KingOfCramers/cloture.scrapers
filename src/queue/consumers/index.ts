@@ -6,12 +6,17 @@ import { Queue, JobOptions } from "bull";
 import { Committee } from "../../types/shared";
 import { houseCommittees, senateCommittees } from "../../statics";
 
-export interface result {
+export interface GoodResult {
   data: Committee[];
   meta: {
     committee: string;
     collection: "houseCommittee" | "senateCommittee";
   };
+}
+
+export interface E {
+  error: string;
+  errMsg: string;
 }
 
 // Accept the data from our producer.
@@ -21,7 +26,7 @@ export const consumers = (queue: Queue): void => {
     .then((browser: puppeteer.Browser) => {
       queue.process(
         "*",
-        async (job: Bull.Job): Promise<result> => {
+        async (job: Bull.Job): Promise<GoodResult | E> => {
           try {
             // Pick the instance of the scraper we'd like to use
             const scraper = pickScraper(job.data.details.version);
@@ -47,8 +52,10 @@ export const consumers = (queue: Queue): void => {
             await Promise.all(
               oldPages.map(async (page, i) => i > 0 && (await page.close()))
             );
-            console.error(`${job.id} for ${job.name} errored: `, err);
-            return err;
+            return {
+              error: `${job.id} for ${job.name} errored.`,
+              errMsg: err.message,
+            };
           }
         }
       );

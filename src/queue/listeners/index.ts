@@ -1,7 +1,7 @@
 import Bull from "bull";
 import { Queue, JobOptions } from "bull";
 import { HouseCommitteeModel, SenateCommitteeModel } from "../../types";
-import { result } from "../consumers";
+import { GoodResult, E } from "../consumers";
 
 // When a job finishes, this data will be obtained from Redis (passed there by the consumer).
 // Take the data, parse it, and then check the metadata.
@@ -12,7 +12,12 @@ export const listeners = async (queue: Queue) => {
   queue.on(
     "completed",
     async (job: Bull.Job): Promise<void> => {
-      const { data, meta }: result = job.returnvalue;
+      const value: GoodResult | E = job.returnvalue;
+      if ("error" in value) {
+        return console.error(value.errMsg);
+      }
+
+      const { meta, data } = value;
 
       let model =
         meta.collection === "houseCommittee"

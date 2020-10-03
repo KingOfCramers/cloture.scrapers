@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+// EDIT -- How do we switch this to use our build/src folder instead? It should be build when running and src when dev
 import {
   makeArrayFromDocument,
   getFromText,

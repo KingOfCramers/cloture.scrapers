@@ -1,9 +1,15 @@
 // Reusable types
-type labelSelector = { label: boolean; value: string };
-type instanceSelector = { selector: string; instance: number };
+type LabelSelector = { label: boolean; value: string };
+type InstanceSelector = { selector: string; instance: number };
 
 // Import committee union types
 import { houseCommittees, senateCommittees } from "../../statics";
+
+// Used to get links
+export interface RowsAndDepth {
+  rows: string;
+  depth: number;
+}
 
 // Details for scrapers
 export interface V1 {
@@ -15,9 +21,9 @@ export interface V1 {
     };
     layerTwo: {
       title: string;
-      date: labelSelector | boolean;
-      time: labelSelector | boolean;
-      location?: labelSelector;
+      date: LabelSelector | boolean;
+      time: LabelSelector | boolean;
+      location?: LabelSelector;
     };
   };
 }
@@ -28,8 +34,8 @@ export interface V2 {
     layerOne: {
       depth: number;
       rows: string;
-      date: instanceSelector;
-      time: instanceSelector;
+      date: InstanceSelector;
+      time: InstanceSelector;
       title: string;
       location?: string;
     };
@@ -41,10 +47,6 @@ export interface V3 {
     layerOne: {
       depth: number;
       rows: string;
-      date: instanceSelector;
-      time: instanceSelector;
-      title: string;
-      location?: string;
     };
   };
 }
@@ -54,14 +56,11 @@ export interface V4 {
   selectors: {
     layerOne: {
       depth: number;
-      rows: string;
-      date: instanceSelector;
-      time: instanceSelector;
-      title: string;
+      upcomingHearings: string;
+      hearings: string;
+      dateTime: string;
+      time: string;
       location?: string;
-    };
-    layerTwo: {
-      selectors: {};
     };
   };
 }
@@ -72,13 +71,13 @@ export interface V5 {
     layerOne: {
       depth: number;
       rows: string;
-      date: instanceSelector;
-      time: instanceSelector;
-      title: string;
-      location?: string;
     };
     layerTwo: {
-      selectors: {};
+      title: string;
+      jquerySelector: string;
+      locationIndex: number | null;
+      dateIndex: number;
+      timeIndex: number;
     };
   };
 }
@@ -88,13 +87,18 @@ export interface V6 {
     layerOne: {
       depth: number;
       rows: string;
-      date: instanceSelector;
-      time: instanceSelector;
+      date: InstanceSelector;
+      time: InstanceSelector;
       title: string;
       location?: string;
     };
     layerTwo: {
-      selectors: {};
+      selectors: {
+        title: string;
+        date: LabelSelector | boolean;
+        time: LabelSelector | boolean;
+        location?: LabelSelector;
+      };
     };
   };
 }

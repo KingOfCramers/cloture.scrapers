@@ -35,11 +35,9 @@ export const setupPuppeteer = async (initVals: {
   return browser;
 };
 
-type scraperType = () => Promise<Committee[]>;
-
 // This function accepts the string value from the job
 // and returns the correct scraping routine.
-export const pickScraper = (kind: string): scraperType =>
+export const pickScraper = (kind: string) =>
   ((kind) => {
     switch (kind) {
       case "puppeteerv1" || "puppeteerv1.1":

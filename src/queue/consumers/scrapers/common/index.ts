@@ -1,17 +1,19 @@
+//@ts-nocheck
+// EDIT -- What's going on, why can't one import configuration here?
 import puppeteer from "puppeteer";
-import {
-  setPageBlockers,
-  setPageScripts,
-  makeArrayFromDocument,
-  getFromText,
-  getLink,
-  getLinkText,
-  getNextTextFromDocument,
-  getTextFromDocument,
-  getNthInstanceOfText,
-} from "../configuration";
+//import {
+//setPageBlockers,
+//setPageScripts,
+//makeArrayFromDocument,
+//getFromText,
+//getLink,
+//getLinkText,
+//getNextTextFromDocument,
+//getTextFromDocument,
+//getNthInstanceOfText,
+//} from "../configuration";
 
-import { V1, V2 } from "../../../jobs/types";
+//import { V1, V2, V3, V4, V5, V6 } from "../../../jobs/types";
 
 // EDIT Need to refactor and make selectors type more specific
 interface linkArgs {
@@ -43,6 +45,7 @@ export const getLinks = async ({
   selectors,
 }: linkArgs): Promise<(string | null)[]> =>
   page.evaluate((selectors) => {
+    debugger;
     let rows = makeArrayFromDocument(selectors.rows);
     let links = rows.map((x) => getLink(x));
     return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth
@@ -84,7 +87,7 @@ export const getLinksAndDatav2 = async ({ page, selectors }: linkArgs) =>
 
 // The main function that runs to scrape data from every subpage
 interface GetPageDataParams {
-  pages: puppeteer.Pages[];
+  pages: puppeteer.Page[];
   selectors: V1;
 }
 
@@ -230,10 +233,10 @@ export const getLinksAndData = async ({ page, selectors }: linkArgs) =>
       });
   }, selectors);
 
-// EDIT fix the any associations
+// EDIT fix the selectors, dont use any
 export const getLinksAndDataV4 = async ({ page, selectors }: linkArgs) =>
   page.evaluate((selectors) => {
-    let rows = Array.from(
+    let rows: Element[] = Array.from(
       document
         .querySelector(selectors.upcomingHearings)
         .querySelectorAll(selectors.hearings)
@@ -244,10 +247,10 @@ export const getLinksAndDataV4 = async ({ page, selectors }: linkArgs) =>
         let link = getLink(x);
         let title = getLinkText(x);
         let dateAndTimeInfo = getFromText(x, selectors.dateTime)
-          .split("-")
+          ?.split("-")
           .map((x: string) => x.trim());
-        let date = dateAndTimeInfo[0];
-        let time = dateAndTimeInfo[1];
+        let date = dateAndTimeInfo && dateAndTimeInfo[0];
+        let time = dateAndTimeInfo && dateAndTimeInfo[1];
         let location = getFromText(x, selectors.location);
         return { link, title, date, time, location };
       });

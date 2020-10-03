@@ -10,12 +10,11 @@ import {
 } from "./configuration";
 
 // Import job types
-import { houseJob } from "../../jobs/house";
-import { senateJob } from "../../jobs/senate";
+import { HouseJob, SenateJob, V2 } from "../../jobs";
 
 export const puppeteerv2 = async (
   browser: puppeteer.Browser,
-  job: houseJob | senateJob
+  job: HouseJob<V2> | SenateJob<V2>
 ) => {
   const page: puppeteer.Page = await setInitialPage(browser, job.link);
 

@@ -35,7 +35,69 @@ export interface V2 {
     };
   };
 }
+export interface V3 {
+  version: "puppeteerv3";
+  selectors: {
+    layerOne: {
+      depth: number;
+      rows: string;
+      date: instanceSelector;
+      time: instanceSelector;
+      title: string;
+      location?: string;
+    };
+  };
+}
 
+export interface V4 {
+  version: "puppeteerv4";
+  selectors: {
+    layerOne: {
+      depth: number;
+      rows: string;
+      date: instanceSelector;
+      time: instanceSelector;
+      title: string;
+      location?: string;
+    };
+    layerTwo: {
+      selectors: {};
+    };
+  };
+}
+
+export interface V5 {
+  version: "puppeteerv5";
+  selectors: {
+    layerOne: {
+      depth: number;
+      rows: string;
+      date: instanceSelector;
+      time: instanceSelector;
+      title: string;
+      location?: string;
+    };
+    layerTwo: {
+      selectors: {};
+    };
+  };
+}
+export interface V6 {
+  version: "puppeteerv6";
+  selectors: {
+    layerOne: {
+      depth: number;
+      rows: string;
+      date: instanceSelector;
+      time: instanceSelector;
+      title: string;
+      location?: string;
+    };
+    layerTwo: {
+      selectors: {};
+    };
+  };
+}
 interface Job {
   name: string;
   link: string;

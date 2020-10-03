@@ -25,6 +25,8 @@ const hjud: HouseJob<V1> = {
 };
 
 export const house = [
+  hjud,
+
   //{
   //committee: "hjud",
   //collection: "houseCommittee",

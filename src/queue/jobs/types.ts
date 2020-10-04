@@ -6,10 +6,10 @@ type InstanceSelector = { selector: string; instance: number };
 import { houseCommittees, senateCommittees } from "../../statics";
 
 // Used to get links
-export interface RowsAndDepth {
+export type RowsAndDepth = {
   rows: string;
   depth: number;
-}
+};
 
 // Details for scrapers
 export interface V1 {
@@ -21,6 +21,7 @@ export interface V1 {
     };
     layerTwo: {
       title: string;
+      titleTrimRegex?: string;
       date: LabelSelector | boolean;
       time: LabelSelector | boolean;
       location?: LabelSelector;
@@ -37,7 +38,7 @@ export interface V2 {
       date: InstanceSelector;
       time: InstanceSelector;
       title: string;
-      location?: string;
+      location: string | undefined;
     };
   };
 }

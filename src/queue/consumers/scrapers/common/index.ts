@@ -1,14 +1,14 @@
 import puppeteer from "puppeteer";
 // EDIT -- How do we switch this to use our build/src folder instead? It should be build when running and src when dev
-import {
-  makeArrayFromDocument,
-  getFromText,
-  getLink,
-  getLinkText,
-  getNextTextFromDocument,
-  getTextFromDocument,
-  getNthInstanceOfText,
-} from "../functions/src";
+//import {
+//makeArrayFromDocument,
+//getFromText,
+//getLink,
+//getLinkText,
+//getNextTextFromDocument,
+//getTextFromDocument,
+//getNthInstanceOfText,
+//} from "../functions/src";
 
 import { V1, V2, V3, V4, V5, V6, RowsAndDepth } from "../../../jobs/types";
 
@@ -37,6 +37,7 @@ export const getLinks = async ({
   selectors,
 }: linkArgs): Promise<(string | null)[]> =>
   page.evaluate((selectors: RowsAndDepth) => {
+    debugger;
     let rows = makeArrayFromDocument(selectors.rows);
     let links = rows.map((x) => getLink(x));
     return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth
@@ -99,56 +100,42 @@ export const getPageData = async ({ pages, selectors }: GetPageDataParams) =>
           let titleRegex = new RegExp(selectors.titleTrimRegex, "i");
           title && title.replace(titleRegex, "");
         }
-        let date = null;
-        let time = null;
-        let location = null;
 
-        debugger;
-
-        if (selectors.date) {
-          date = selectors.date.label
-            ? getNextTextFromDocument(selectors.date.value)
-            : getTextFromDocument(selectors.date.value);
-        }
-        if (selectors.location) {
-          location = selectors.location.label
-            ? getNextTextFromDocument(selectors.location.value)
-            : getTextFromDocument(selectors.location.value);
-        }
-        if (selectors.time) {
-          time = selectors.time.label
-            ? getNextTextFromDocument(selectors.time.value)
-            : getTextFromDocument(selectors.time.value);
-        }
-        if (selectors.regexTime) {
-          let myTimeRegex = new RegExp(
-            /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)/
-          );
-          let isMatch = document.body.innerText.match(myTimeRegex);
-          if (!isMatch) {
-            time = null;
-          } else {
-            time = isMatch[0];
-          }
-        }
-        if (selectors.regexDate) {
+        // If date is merely "true" then search by Regex
+        if (typeof selectors.date === "boolean") {
           let myDateRegex = new RegExp(
             /(monday|tuesday|wednesday|thursday|friday|saturday|sunday)?,? ?(January|February|March|April|May|June|July|August|September|October|November|December) ([0-9][0-9]?),? \d\d\d\d/,
             "gi"
           );
           let isMatch = document.body.innerText.match(myDateRegex);
-          if (!isMatch) {
-            date = null;
-          } else {
-            date = isMatch[0];
-          }
+          var date = isMatch && isMatch[0];
+        } else {
+          // EDIT -- Something to do with labels here?
+          var date = selectors.date.label
+            ? getNextTextFromDocument(selectors.date.value)
+            : getTextFromDocument(selectors.date.value);
         }
 
-        if (selectors.splitDate) {
-          // If data includes splitDate...
-          time = date ? date.split(selectors.splitDate)[1] : null; // If date isn't found...
-          date = date ? date.split(selectors.splitDate)[0] : null;
+        if (selectors.location) {
+          var location = selectors.location.label
+            ? getNextTextFromDocument(selectors.location.value)
+            : getTextFromDocument(selectors.location.value);
+        } else {
+          var location: string | null = null;
         }
+
+        if (typeof selectors.time === "boolean") {
+          let myTimeRegex = new RegExp(
+            /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)/
+          );
+          let isMatch = document.body.innerText.match(myTimeRegex);
+          var time = isMatch && isMatch[0];
+        } else {
+          var time = selectors.time.label
+            ? getNextTextFromDocument(selectors.time.value)
+            : getTextFromDocument(selectors.time.value);
+        }
+
         let link = document.URL;
         let text = document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
 

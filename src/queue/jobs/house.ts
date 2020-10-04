@@ -39,8 +39,8 @@ const hrle: HouseJob<V6> = {
       },
       layerTwo: {
         title: ".title",
-        regexTime: true,
-        regexDate: true,
+        time: true,
+        date: true,
       },
     },
   },
@@ -696,4 +696,12 @@ const clmt: HouseJob<V2> = {
   },
 };
 
-export const house = [hjud, hasc, ...hvac, hagc];
+export const house: (HouseJob<V1> | HouseJob<V2>)[] = [
+  //hjud,
+  //hasc,
+  //...hvac,
+  //hagc,
+  //clmt,
+  //...trns,
+  clmt,
+];

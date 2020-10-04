@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+
 // EDIT -- How do we switch this to use our build/src folder instead? It should be build when running and src when dev
 //import {
 //makeArrayFromDocument,
@@ -8,15 +9,27 @@ import puppeteer from "puppeteer";
 //getNextTextFromDocument,
 //getTextFromDocument,
 //getNthInstanceOfText,
+//clean,
 //} from "../functions/src";
 
 import { V1, V2, V3, V4, V5, V6, RowsAndDepth } from "../../../jobs/types";
+
+type StringOrNull = string | null;
+interface Result {
+  title: StringOrNull;
+  link: StringOrNull;
+  date: StringOrNull;
+  time?: StringOrNull;
+  text?: StringOrNull;
+  location?: StringOrNull;
+}
 
 interface linkArgs {
   page: puppeteer.Page;
   selectors: RowsAndDepth;
 }
 
+// Only return rows with specific text in them
 export const getLinksFiltered = async ({ page, selectors }: linkArgs) =>
   page.evaluate((selectors) => {
     let rows = makeArrayFromDocument(selectors.rows);
@@ -29,61 +42,25 @@ export const getLinksFiltered = async ({ page, selectors }: linkArgs) =>
       return false;
     });
     let links = filteredRows.map((x) => getLink(x));
-    return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth range, prevents overfetching w/ puppeteer (and where x !== null)
+    return links.filter((x, i) => i + 1 <= selectors.depth && x);
   }, selectors);
 
+// Return all links in a given row of items with a specified depth
 export const getLinks = async ({
   page,
   selectors,
 }: linkArgs): Promise<(string | null)[]> =>
   page.evaluate((selectors: RowsAndDepth) => {
-    debugger;
     let rows = makeArrayFromDocument(selectors.rows);
     let links = rows.map((x) => getLink(x));
     return links.filter((x, i) => i + 1 <= selectors.depth && x); // Only return pages w/in depth
   }, selectors);
 
+// Get the full text of the page
 export const getPageText = async (page: puppeteer.Page): Promise<string> =>
   page.evaluate(() => {
     return document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
   });
-
-interface PageAndV2Selectors {
-  page: puppeteer.Page;
-  selectors: V2["selectors"]["layerOne"];
-}
-export const getLinksAndDatav2 = async ({
-  page,
-  selectors,
-}: PageAndV2Selectors) =>
-  page.evaluate((selectors: V2["selectors"]["layerOne"]) => {
-    let rows = makeArrayFromDocument(selectors.rows);
-    let filteredRows = rows
-      .filter((x, i) => i + 1 <= selectors.depth)
-      .map((x) => {
-        let link = getLink(x);
-        let title = getLinkText(x);
-        let date;
-        let time;
-        let innerText = (x as HTMLElement).innerText.trim();
-        let myTimeRegex = new RegExp(
-          /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)/
-        );
-        let myDateRegex = new RegExp(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/, "gi");
-        let isDate = innerText.match(myDateRegex);
-        let isTime = innerText.match(myTimeRegex);
-        if (isDate) {
-          date = isDate[0];
-        }
-
-        if (isTime) {
-          time = isTime[0];
-        }
-
-        return { link, title, date, time };
-      });
-    return filteredRows;
-  }, selectors);
 
 // The main function that runs to scrape data from every subpage
 interface GetPageDataParams {
@@ -91,7 +68,10 @@ interface GetPageDataParams {
   selectors: V1["selectors"]["layerTwo"];
 }
 
-export const getPageData = async ({ pages, selectors }: GetPageDataParams) =>
+export const getPageData = async ({
+  pages,
+  selectors,
+}: GetPageDataParams): Promise<Result[]> =>
   await Promise.all(
     pages.map(async (page) =>
       page.evaluate((selectors: GetPageDataParams["selectors"]) => {
@@ -108,7 +88,7 @@ export const getPageData = async ({ pages, selectors }: GetPageDataParams) =>
             "gi"
           );
           let isMatch = document.body.innerText.match(myDateRegex);
-          var date = isMatch && isMatch[0];
+          var date = isMatch ? isMatch[0] : null;
         } else {
           // EDIT -- Something to do with labels here?
           var date = selectors.date.label
@@ -129,7 +109,7 @@ export const getPageData = async ({ pages, selectors }: GetPageDataParams) =>
             /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)/
           );
           let isMatch = document.body.innerText.match(myTimeRegex);
-          var time = isMatch && isMatch[0];
+          var time = isMatch ? isMatch[0] : null;
         } else {
           var time = selectors.time.label
             ? getNextTextFromDocument(selectors.time.value)
@@ -193,42 +173,51 @@ export const getPageDataWithJQuery = async ({
     })
   );
 
-export const getLinksAndData = async ({ page, selectors }: linkArgs) =>
-  page.evaluate((selectors) => {
+export const getLinksAndData = async ({
+  page,
+  selectors,
+}: {
+  page: puppeteer.Page;
+  selectors: V2["selectors"]["layerOne"];
+}): Promise<Result[]> =>
+  page.evaluate((selectors: V2["selectors"]["layerOne"]) => {
     let rows = makeArrayFromDocument(selectors.rows);
     return rows
       .filter((x, i) => i + 1 <= selectors.depth)
       .map((x) => {
         let link = getLink(x);
         let title = getLinkText(x);
-        let location = getFromText(x, selectors.location);
-        let date;
-        let time;
-        if (selectors.time) {
-          time = getNthInstanceOfText(
-            x,
-            selectors.time.selector,
-            selectors.time.instance
-          );
-        }
-        if (selectors.date) {
-          date = getNthInstanceOfText(
-            x,
-            selectors.date.selector,
-            selectors.date.instance
-          );
-        }
+        let location = selectors.location
+          ? getFromText(x, selectors.location)
+          : null;
+        let date = getNthInstanceOfText(
+          x,
+          selectors.date.selector,
+          selectors.date.instance
+        );
+
+        let time = selectors.time
+          ? getNthInstanceOfText(
+              x,
+              selectors.time.selector,
+              selectors.time.instance
+            )
+          : null;
+
+        // If data includes split date, reassign time + date
         if (selectors.splitDate) {
-          // If data includes splitDate...
-          time = date && date.split(selectors.splitDate)[1];
-          date = date && date.split(selectors.splitDate)[0];
+          time = date && clean(date.split(selectors.splitDate)[1]);
+          date = date && clean(date.split(selectors.splitDate)[0]);
         }
         return { link, title, location, date, time };
       });
   }, selectors);
 
 // EDIT fix the selectors, dont use any
-export const getLinksAndDataV4 = async ({ page, selectors }: linkArgs) =>
+export const getLinksAndDataV4 = async ({
+  page,
+  selectors,
+}: linkArgs): Promise<Result[]> =>
   page.evaluate((selectors) => {
     let rows: Element[] = Array.from(
       document
@@ -243,8 +232,8 @@ export const getLinksAndDataV4 = async ({ page, selectors }: linkArgs) =>
         let dateAndTimeInfo = getFromText(x, selectors.dateTime)
           ?.split("-")
           .map((x: string) => x.trim());
-        let date = dateAndTimeInfo && dateAndTimeInfo[0];
-        let time = dateAndTimeInfo && dateAndTimeInfo[1];
+        let date = dateAndTimeInfo ? dateAndTimeInfo[0] : null;
+        let time = dateAndTimeInfo ? dateAndTimeInfo[1] : null;
         let location = getFromText(x, selectors.location);
         return { link, title, date, time, location };
       });

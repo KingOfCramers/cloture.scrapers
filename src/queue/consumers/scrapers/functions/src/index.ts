@@ -68,10 +68,10 @@ export const getNthInstanceOfText = (
   node: Element,
   query: string,
   num: number
-) => document.querySelectorAll(query)[num]?.textContent;
+) => node.querySelectorAll(query)[num]?.textContent;
 
 export const getNthInstanceOf = (
   node: Element,
   query: string,
   num: number
-): Element | undefined => document.querySelectorAll(query)[num];
+): Element | undefined => node.querySelectorAll(query)[num];

@@ -36,9 +36,9 @@ export interface V2 {
       depth: number;
       rows: string;
       date: InstanceSelector;
-      time: InstanceSelector;
-      title: string;
-      location: string | undefined;
+      time?: InstanceSelector;
+      splitDate?: string;
+      location?: string | undefined;
     };
   };
 }
@@ -88,18 +88,13 @@ export interface V6 {
     layerOne: {
       depth: number;
       rows: string;
-      date: InstanceSelector;
-      time: InstanceSelector;
-      title: string;
-      location?: string;
+      filter: { keyword: string; selector: string };
     };
     layerTwo: {
-      selectors: {
-        title: string;
-        date: LabelSelector | boolean;
-        time: LabelSelector | boolean;
-        location?: LabelSelector;
-      };
+      title: string;
+      date: LabelSelector | boolean;
+      time: LabelSelector | boolean;
+      location?: LabelSelector;
     };
   };
 }

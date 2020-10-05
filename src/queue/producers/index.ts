@@ -10,7 +10,7 @@ export const cron = async (queue: Queue, job: HouseJob<{}> | SenateJob<{}>) => {
 
   try {
     await queue.add(job.name, job, options);
-    console.log(`Created job: '${job.name}' recurring at ${cron}.`);
+    console.log(`Created job: '${job.name}' recurring every thirty minutes.`);
   } catch (err) {
     console.log(`Could not schedule ${job.collection} cron job`);
     throw err;

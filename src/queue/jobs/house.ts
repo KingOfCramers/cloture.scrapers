@@ -697,11 +697,11 @@ const clmt: HouseJob<V2> = {
 };
 
 export const house: (HouseJob<V1> | HouseJob<V2>)[] = [
-  //hjud,
-  //hasc,
-  //...hvac,
-  //hagc,
-  //clmt,
-  //...trns,
+  hjud,
+  hasc,
+  ...hvac,
+  hagc,
+  clmt,
+  ...trns,
   clmt,
 ];

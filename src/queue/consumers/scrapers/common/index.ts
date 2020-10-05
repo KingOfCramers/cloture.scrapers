@@ -1,16 +1,16 @@
 import puppeteer from "puppeteer";
 
 // EDIT -- How do we switch this to use our build/src folder instead? It should be build when running and src when dev
-//import {
-//makeArrayFromDocument,
-//getFromText,
-//getLink,
-//getLinkText,
-//getNextTextFromDocument,
-//getTextFromDocument,
-//getNthInstanceOfText,
-//clean,
-//} from "../functions/src";
+import {
+  makeArrayFromDocument,
+  getFromText,
+  getLink,
+  getLinkText,
+  getNextTextFromDocument,
+  getTextFromDocument,
+  getNthInstanceOfText,
+  clean,
+} from "../functions/src";
 
 import { V1, V2, V3, V4, V5, V6, RowsAndDepth } from "../../../jobs/types";
 
@@ -75,10 +75,20 @@ export const getPageData = async ({
   await Promise.all(
     pages.map(async (page) =>
       page.evaluate((selectors: GetPageDataParams["selectors"]) => {
+        let link = document.URL;
+        let text = document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
         let title = getTextFromDocument(selectors.title);
         if (selectors.titleTrimRegex) {
           let titleRegex = new RegExp(selectors.titleTrimRegex, "i");
           title && title.replace(titleRegex, "");
+        }
+
+        if (selectors.location) {
+          var location = selectors.location.label
+            ? getNextTextFromDocument(selectors.location.value)
+            : getTextFromDocument(selectors.location.value);
+        } else {
+          var location: string | null = null;
         }
 
         // If date is merely "true" then search by Regex
@@ -90,34 +100,30 @@ export const getPageData = async ({
           let isMatch = document.body.innerText.match(myDateRegex);
           var date = isMatch ? isMatch[0] : null;
         } else {
-          // EDIT -- Something to do with labels here?
           var date = selectors.date.label
             ? getNextTextFromDocument(selectors.date.value)
             : getTextFromDocument(selectors.date.value);
         }
 
-        if (selectors.location) {
-          var location = selectors.location.label
-            ? getNextTextFromDocument(selectors.location.value)
-            : getTextFromDocument(selectors.location.value);
-        } else {
-          var location: string | null = null;
-        }
-
+        // If time is merely "true" then search by Regex. If it's not boolean but exists, use label value
+        let time: string | null = null;
         if (typeof selectors.time === "boolean") {
           let myTimeRegex = new RegExp(
             /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)/
           );
           let isMatch = document.body.innerText.match(myTimeRegex);
-          var time = isMatch ? isMatch[0] : null;
-        } else {
-          var time = selectors.time.label
+          time = isMatch ? isMatch[0] : null;
+        } else if (selectors.time) {
+          time = selectors.time.label
             ? getNextTextFromDocument(selectors.time.value)
             : getTextFromDocument(selectors.time.value);
         }
 
-        let link = document.URL;
-        let text = document.body.innerText.replace(/[\s,\t\,\n]+/g, " ");
+        // If data includes split date, reassign time + date
+        if (selectors.splitDate) {
+          time = date && clean(date.split(selectors.splitDate)[1]);
+          date = date && clean(date.split(selectors.splitDate)[0]);
+        }
 
         return {
           title,

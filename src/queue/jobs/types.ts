@@ -23,7 +23,8 @@ export interface V1 {
       title: string;
       titleTrimRegex?: string;
       date: LabelSelector | boolean;
-      time: LabelSelector | boolean;
+      time?: LabelSelector | boolean;
+      splitDate?: string;
       location?: LabelSelector;
     };
   };

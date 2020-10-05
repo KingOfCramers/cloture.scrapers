@@ -632,5 +632,3 @@ export const house: (
   ...hvac,
   ...wymn,
 ];
-
-export default [hjud];

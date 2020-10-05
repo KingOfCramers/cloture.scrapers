@@ -285,8 +285,8 @@ const shsc: SenateJob<V1> = jobCreator(
     },
     layerTwo: {
       title: "h1.summary",
-      regexTime: true,
-      regexDate: true,
+      time: true,
+      date: true,
     },
   }
 );

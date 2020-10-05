@@ -65,7 +65,7 @@ export const getPageText = async (page: puppeteer.Page): Promise<string> =>
 // The main function that runs to scrape data from every subpage
 interface GetPageDataParams {
   pages: puppeteer.Page[];
-  selectors: V1["selectors"]["layerTwo"];
+  selectors: V1["layerTwo"];
 }
 
 export const getPageData = async ({
@@ -139,7 +139,7 @@ export const getPageData = async ({
 
 interface GetPageDataWithJQueryInterface {
   pages: puppeteer.Page[];
-  selectors: V5["selectors"]["layerTwo"];
+  selectors: V5["layerTwo"];
 }
 export const getPageDataWithJQuery = async ({
   pages,
@@ -184,9 +184,9 @@ export const getLinksAndData = async ({
   selectors,
 }: {
   page: puppeteer.Page;
-  selectors: V2["selectors"]["layerOne"];
+  selectors: V2["layerOne"];
 }): Promise<Result[]> =>
-  page.evaluate((selectors: V2["selectors"]["layerOne"]) => {
+  page.evaluate((selectors: V2["layerOne"]) => {
     let rows = makeArrayFromDocument(selectors.rows);
     return rows
       .filter((x, i) => i + 1 <= selectors.depth)

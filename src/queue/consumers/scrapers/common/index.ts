@@ -1,16 +1,16 @@
 import puppeteer from "puppeteer";
 
 // EDIT -- How do we switch this to use our build/src folder instead? It should be build when running and src when dev
-import {
-  makeArrayFromDocument,
-  getFromText,
-  getLink,
-  getLinkText,
-  getNextTextFromDocument,
-  getTextFromDocument,
-  getNthInstanceOfText,
-  clean,
-} from "../functions/src";
+//import {
+//makeArrayFromDocument,
+//getFromText,
+//getLink,
+//getLinkText,
+//getNextTextFromDocument,
+//getTextFromDocument,
+//getNthInstanceOfText,
+//clean,
+//} from "../functions/src";
 
 import { V1, V2, V3, V4, V5, V6, RowsAndDepth } from "../../../jobs/types";
 

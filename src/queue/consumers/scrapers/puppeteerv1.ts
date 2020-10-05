@@ -25,7 +25,7 @@ export const puppeteerv1 = async (
   try {
     links = await getLinks({
       page,
-      selectors: job.details.selectors.layerOne,
+      selectors: job.details.layerOne,
     });
   } catch (err) {
     console.error("Could not get links. ", err);
@@ -42,7 +42,7 @@ export const puppeteerv1 = async (
   try {
     pageData = await getPageData({
       pages,
-      selectors: job.details.selectors.layerTwo,
+      selectors: job.details.layerTwo,
     });
   } catch (err) {
     console.error("Could not get pageData. ", err);

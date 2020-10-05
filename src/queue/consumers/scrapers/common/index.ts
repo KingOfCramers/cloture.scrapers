@@ -219,11 +219,14 @@ export const getLinksAndData = async ({
       });
   }, selectors);
 
-// EDIT fix the selectors, dont use any
+interface GetLinksAndDataV4Args {
+  page: puppeteer.Page;
+  selectors: { depth: number };
+}
 export const getLinksAndDataV4 = async ({
   page,
   selectors,
-}: linkArgs): Promise<Result[]> =>
+}: GetLinksAndDataV4Args): Promise<Result[]> =>
   page.evaluate((selectors) => {
     let rows: Element[] = Array.from(
       document

@@ -28,7 +28,6 @@ export const puppeteerv6 = async (
       page,
       selectors: job.details.layerOne,
     });
-    console.log(links);
   } catch (err) {
     console.error("Could not get links. ", err);
     throw err;

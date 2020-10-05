@@ -18,7 +18,7 @@ export const puppeteerv4 = async (
   try {
     dataWithLinks = await getLinksAndDataV4({
       page,
-      selectors: job.details.selectors.layerOne,
+      selectors: job.details.layerOne,
     });
   } catch (err) {
     console.error("Could not get links. ", err);

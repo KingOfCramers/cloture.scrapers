@@ -1,4 +1,4 @@
-import { HouseJob, V1, V2, V3, V4, V5, V6 } from "./types";
+import { HouseJob, V1, V2, V4, V5, V6 } from "./types";
 import { houseCommittees } from "../../statics";
 
 const jobCreator = <T>(
@@ -11,9 +11,7 @@ const jobCreator = <T>(
   committee,
   name,
   link,
-  details: {
-    ...details,
-  },
+  details,
 });
 
 const hjud: HouseJob<V1> = jobCreator(
@@ -606,12 +604,33 @@ const clmt: HouseJob<V2> = jobCreator(
   }
 );
 
-export const house: (HouseJob<V1> | HouseJob<V2>)[] = [
-  hjud,
-  hasc,
-  ...hvac,
+export const house: (
+  | HouseJob<V1>
+  | HouseJob<V2>
+  | HouseJob<V4>
+  | HouseJob<V5>
+  | HouseJob<V6>
+)[] = [
+  ...admn,
+  hfac,
   hagc,
+  ...hapc,
+  hasc,
+  ...hbuc,
   clmt,
+  ...help,
+  ...nrgy,
+  ...fisv,
+  hjud,
+  hrle,
+  ...hhsc,
+  ntty,
+  ...ovst,
+  ...scnc,
+  smbs,
   ...trns,
-  clmt,
+  ...hvac,
+  ...wymn,
 ];
+
+export default [hjud];

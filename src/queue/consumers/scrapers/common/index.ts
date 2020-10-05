@@ -109,7 +109,7 @@ export const getPageData = async ({
         let time: string | null = null;
         if (typeof selectors.time === "boolean") {
           let myTimeRegex = new RegExp(
-            /((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)/
+            /((1[0-2]|0?[1-9])():([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)|((1[0-2]|0?[1-9])().([0-5][0-9]) ([AaPp]\.?[Mm]\.))/
           );
           let isMatch = document.body.innerText.match(myTimeRegex);
           time = isMatch ? isMatch[0] : null;

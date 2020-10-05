@@ -219,6 +219,34 @@ export const getLinksAndData = async ({
       });
   }, selectors);
 
+export const getLinksAndDatav2 = async ({
+  page,
+  selectors,
+}: {
+  page: puppeteer.Page;
+  selectors: V3["layerOne"];
+}) =>
+  page.evaluate((selectors: V2["layerOne"]) => {
+    let rows = makeArrayFromDocument(selectors.rows);
+    let filteredRows = rows
+      .filter((x, i) => i + 1 <= selectors.depth)
+      .map((x) => {
+        let link = getLink(x);
+        let title = getLinkText(x);
+        let myTimeRegex = new RegExp(
+          /((1[0-2]|0?[1-9])():([0-5][0-9]) ?([AaPp]\.?[Mm]\.?)?)|((1[0-2]|0?[1-9])().([0-5][0-9]) ([AaPp]\.?[Mm]\.))/
+        );
+        let myDateRegex = new RegExp(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/, "gi");
+        let innerText = (x as HTMLElement).innerText.trim();
+        let hasDate = innerText.match(myDateRegex);
+        let hasTime = innerText.match(myTimeRegex);
+        let time = hasTime ? hasTime[0] : null;
+        let date = hasDate ? hasDate[0] : null;
+        return { link, title, date, time };
+      });
+    return filteredRows;
+  }, selectors);
+
 interface GetLinksAndDataV4Args {
   page: puppeteer.Page;
   selectors: { depth: number };

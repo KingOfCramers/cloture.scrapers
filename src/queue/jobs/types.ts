@@ -41,11 +41,9 @@ export interface V2 {
 }
 export interface V3 {
   version: "puppeteerv3";
-  selectors: {
-    layerOne: {
-      depth: number;
-      rows: string;
-    };
+  layerOne: {
+    depth: number;
+    rows: string;
   };
 }
 

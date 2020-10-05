@@ -1,4 +1,4 @@
-import { SenateJob, V1, V2, V4, V5, V6 } from "./types";
+import { SenateJob, V1, V2, V3 } from "./types";
 import { senateCommittees } from "../../statics";
 
 const jobCreator = <T>(
@@ -348,19 +348,19 @@ const srle: SenateJob<V1> = jobCreator(
   }
 );
 
-//{
-//committee: "ssci",
-//version: "puppeteerv3",
-//collection: "senateCommittee",
-//name: "Senate Intelligence Committee Hearings",
-//link: "https://www.intelligence.senate.gov/hearings",
-//details: {
-//layerOne: {
-//depth: 10,
-//rows: "div.view-content div.views-row",
-//},
-//},
-//},
+const ssci: SenateJob<V3> = jobCreator(
+  "ssci",
+  "Senate Intelligence Committee Hearings",
+  "https://www.intelligence.senate.gov/hearings",
+  {
+    version: "puppeteerv3",
+    layerOne: {
+      depth: 10,
+      rows: "div.view-content div.views-row",
+    },
+  }
+);
+
 const ssbs: SenateJob<V2> = jobCreator(
   "ssbs",
   "Senate Small Business Committee",
@@ -393,7 +393,7 @@ const svac: SenateJob<V1> = jobCreator(
   }
 );
 
-export const senate: (SenateJob<V1> | SenateJob<V2>)[] = [
+export const senate: (SenateJob<V1> | SenateJob<V2> | SenateJob<V3>)[] = [
   //sagc,
   //sage,
   //srle,
@@ -403,15 +403,15 @@ export const senate: (SenateJob<V1> | SenateJob<V2>)[] = [
   //sbdg,
   //shlp,
   //senv,
-  ////seth,
   //sfin,
   //sfrc,
   //shsc,
   //sind,
   //sjud,
   //snat,
-  //ssci,
+  //// seth,
+  ssci,
   //ssbs,
-  ...sstr,
-  svac,
+  //...sstr,
+  //svac,
 ];

@@ -1,4 +1,4 @@
-### This is the backend to Cloture
+### These are the scrapers that feed congressional hearing information to Cloture with Puppeteer.
 
 This project uses Bull.js to create a queue of scrapers to various congressional committee websites.
 

@@ -52,25 +52,44 @@ const hrle: HouseJob<V6> = jobCreator(
   }
 );
 
-const hfac: HouseJob<V1> = jobCreator(
-  "hfac",
-  "House Foreign Affairs Committee Markups",
-  "https://foreignaffairs.house.gov/markups",
-  {
-    version: "puppeteerv1",
-    layerOne: {
-      depth: 1,
-      rows: "table tbody tr",
-    },
-    layerTwo: {
-      title: ".title",
-      date: { label: false, value: "span.date" },
-      time: { label: false, value: "span.time" },
-      location: { label: true, value: "span.location strong" },
-      //witnesses: "div.witnesses strong",
-    },
-  }
-);
+const hfac: HouseJob<V1>[] = [
+  jobCreator(
+    "hfac",
+    "House Foreign Affairs Committee Markups",
+    "https://foreignaffairs.house.gov/markups",
+    {
+      version: "puppeteerv1",
+      layerOne: {
+        depth: 1,
+        rows: "table tbody tr",
+      },
+      layerTwo: {
+        title: ".title",
+        date: { label: false, value: "span.date" },
+        time: { label: false, value: "span.time" },
+        location: { label: true, value: "span.location strong" },
+      },
+    }
+  ),
+  jobCreator(
+    "hfac",
+    "House Foreign Affairs Committee Hearings",
+    "https://foreignaffairs.house.gov/hearings",
+    {
+      version: "puppeteerv1",
+      layerOne: {
+        depth: 1,
+        rows: "table tbody tr",
+      },
+      layerTwo: {
+        title: ".title",
+        date: { label: false, value: "span.date" },
+        time: { label: false, value: "span.time" },
+        location: { label: true, value: "span.location strong" },
+      },
+    }
+  ),
+];
 
 const hasc: HouseJob<V1> = jobCreator(
   "hasc",
@@ -612,7 +631,7 @@ export const house: (
   | HouseJob<V6>
 )[] = [
   ...admn,
-  hfac,
+  ...hfac,
   hagc,
   ...hapc,
   hasc,

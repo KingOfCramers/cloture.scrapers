@@ -16,15 +16,16 @@ import { Committee } from "../../../types/shared";
 export const setupPuppeteer = async (initVals: {
   kind: string | null;
 }): Promise<puppeteer.Browser> => {
-  const args = ["--no-sandbox", "--unlimited-storage"];
-
-  const browser = await puppeteer.launch({
+  const browserOptions = {
     headless:
       process.env.NODE_ENV === "production" || process.env.HEADLESS === "true",
     defaultViewport: null,
     devtools: process.env.NODE_ENV !== "production",
-    args,
-  });
+    args: ["--no-sandbox", "--unlimited-storage"],
+    executablePath: process.env.CHROMIUM_PATH,
+  };
+
+  const browser = await puppeteer.launch(browserOptions);
 
   browser.on("disconnected", () => {
     console.log("Browser was disconnected.");

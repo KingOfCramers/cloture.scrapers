@@ -1,3 +1,4 @@
+//@ts-nocheck
 import puppeteer from "puppeteer";
 
 // EDIT -- How do we switch this to use our build/src folder instead? It should be build when running and src when dev
@@ -15,7 +16,7 @@ import puppeteer from "puppeteer";
 import { V1, V2, V3, V4, V5, V6, RowsAndDepth } from "../../../jobs/types";
 
 type StringOrNull = string | null;
-interface Result {
+export interface Result {
   title: StringOrNull;
   link: StringOrNull;
   date: StringOrNull;

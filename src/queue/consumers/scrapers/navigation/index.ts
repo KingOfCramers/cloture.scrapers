@@ -70,8 +70,7 @@ export const setPageScripts = async (page: puppeteer.Page) => {
     __dirname,
     "..",
     "functions",
-    "build",
-    "index.js"
+    "production.js"
   );
   let consumerFunctionsExist = fs.existsSync(consumerFunctionsPath);
   if (!consumerFunctionsExist) {

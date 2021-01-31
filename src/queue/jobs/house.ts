@@ -511,22 +511,21 @@ const scnc: HouseJob<V2>[] = [
   ),
 ];
 
-const smbs: HouseJob<V5> = jobCreator(
+const smbs: HouseJob<V6> = jobCreator(
   "smbs",
   "House Small Business Committee Hearings and Markups",
   "https://smallbusiness.house.gov/activity/",
   {
-    version: "puppeteerv5",
+    version: "puppeteerv6",
     layerOne: {
-      depth: 3,
-      rows: "ul.calendar-listing li",
+      depth: 5,
+      rows: "ul.calendar-listing li.future",
+      filter: { keyword: ".*", selector: "a" },
     },
     layerTwo: {
-      title: "h3.news-titler",
-      jquerySelector: ".topnewstext",
-      locationIndex: null,
-      dateIndex: 0,
-      timeIndex: 1,
+      title: "h2.newsie-titler",
+      time: true,
+      date: true,
     },
   }
 );
@@ -630,24 +629,24 @@ export const house: (
   | HouseJob<V5>
   | HouseJob<V6>
 )[] = [
-  //...admn,
-  //...hfac,
-  //hagc,
-  //...hapc,
-  //hasc,
-  //...hbuc,
-  //clmt,
-  //...help,
-  //...nrgy,
-  //...fisv,
-  //hjud,
+  ...admn,
+  ...hfac,
+  hagc,
+  ...hapc,
+  hasc,
+  ...hbuc,
+  clmt,
+  ...help,
+  ...nrgy,
+  ...fisv,
+  hjud,
   hrle,
-  //...hhsc,
-  //ntty,
-  //...ovst,
-  //...scnc,
-  //smbs,
-  //...trns,
-  //...hvac,
-  //...wymn,
+  ...hhsc,
+  ntty,
+  ...ovst,
+  ...scnc,
+  smbs,
+  ...trns,
+  ...hvac,
+  ...wymn,
 ];

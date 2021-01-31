@@ -31,6 +31,7 @@
     "@types/mongoose": "^5.7.36",
     "@types/redis": "^2.8.27",
     "eslint": "^6.8.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "ts-node": "^9.1.1"
   }
 }

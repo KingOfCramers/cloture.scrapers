@@ -45,6 +45,8 @@ export const puppeteerv6 = async (
       pages,
       selectors: job.details.layerTwo,
     });
+
+    console.log(pageData);
   } catch (err) {
     console.error("Could not get pageData. ", err);
     throw err;

@@ -203,18 +203,21 @@ const sstr: SenateJob<V1>[] = [
   ),
 ];
 
-const snat: SenateJob<V2> = jobCreator(
+const snat: SenateJob<V1> = jobCreator(
   "snat",
   "Senate Natural Resources",
-  "https://www.energy.senate.gov/public/index.cfm/hearings-and-business-meetings?MonthDisplay=0&YearDisplay=0",
+  "https://www.energy.senate.gov/hearings-post",
   {
-    version: "puppeteerv2",
+    version: "puppeteerv1",
     layerOne: {
       depth: 10,
-      rows: "div.recordsContainer tbody tr",
-      date: { selector: "td.recordListDate", instance: 0 },
-      time: { selector: "td.recordListTime", instance: 0 },
-      title: "td.recordListTitle a",
+      rows: "div.posttype-list div.element",
+    },
+    layerTwo: {
+      title: "h1.element-title a",
+      date: { label: false, value: "div.element-date" },
+      time: { label: false, value: "div.element-time" },
+      location: { label: false, value: "div.element-locaton" },
     },
   }
 );
@@ -409,7 +412,7 @@ export const senate: (SenateJob<V1> | SenateJob<V2> | SenateJob<V3>)[] = [
   sind,
   sjud,
   snat,
-  // seth,
+  //seth,
   ssci,
   ssbs,
   ...sstr,

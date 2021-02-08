@@ -343,7 +343,7 @@ const fisv: HouseJob<V5>[] = [
   jobCreator(
     "fisv",
     "House Financial Services Committee Hearings",
-    "https://financialservices.house.gov/calendar/?EventTypeID=577&Congress=116",
+    "https://financialservices.house.gov/calendar",
     {
       version: "puppeteerv5",
       layerOne: {
@@ -362,7 +362,7 @@ const fisv: HouseJob<V5>[] = [
   jobCreator(
     "fisv",
     "House Financial Services Committee Markups",
-    "https://financialservices.house.gov/calendar/?EventTypeID=575&Congress=116",
+    "https://financialservices.house.gov/calendar",
     {
       version: "puppeteerv5",
       layerOne: {
@@ -629,24 +629,24 @@ export const house: (
   | HouseJob<V5>
   | HouseJob<V6>
 )[] = [
-  ...admn,
-  ...hfac,
-  hagc,
-  ...hapc,
-  hasc,
-  ...hbuc,
-  clmt,
-  ...help,
-  ...nrgy,
+  //...admn,
+  //...hfac,
+  //hagc,
+  //...hapc,
+  //hasc,
+  //...hbuc,
+  //clmt,
+  //...help,
+  //...nrgy,
   ...fisv,
-  hjud,
-  hrle,
-  ...hhsc,
-  ntty,
-  ...ovst,
-  ...scnc,
-  smbs,
-  ...trns,
-  ...hvac,
-  ...wymn,
+  //hjud,
+  //hrle,
+  //...hhsc,
+  //ntty,
+  //...ovst,
+  //...scnc,
+  //smbs,
+  //...trns,
+  //...hvac,
+  //...wymn,
 ];

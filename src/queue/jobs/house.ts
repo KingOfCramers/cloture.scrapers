@@ -60,7 +60,7 @@ const hfac: HouseJob<V1>[] = [
     {
       version: "puppeteerv1",
       layerOne: {
-        depth: 1,
+        depth: 10,
         rows: "table tbody tr",
       },
       layerTwo: {
@@ -78,7 +78,7 @@ const hfac: HouseJob<V1>[] = [
     {
       version: "puppeteerv1",
       layerOne: {
-        depth: 1,
+        depth: 10,
         rows: "table tbody tr",
       },
       layerTwo: {

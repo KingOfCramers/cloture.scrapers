@@ -8,7 +8,7 @@
     "prod:build": "tsc",
     "dev:debug": "tsc && NODE_ENV=development node --inspect-brk build/index.js",
     "prod:deploy": "tsc && scp -r ./build",
-    "prod:start": "pm2 start ecosystem.config.json --env production"
+    "prod:start": "node build/index.js"
   },
   "dependencies": {
     "@typegoose/typegoose": "^7.6.0",

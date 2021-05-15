@@ -7,7 +7,6 @@
     "dev:start": "nodemon",
     "prod:build": "tsc",
     "dev:debug": "tsc && NODE_ENV=development node --inspect-brk build/index.js",
-    "prod:deploy": "tsc && scp -r ./build",
     "prod:start": "node build/index.js"
   },
   "dependencies": {

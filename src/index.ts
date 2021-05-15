@@ -2,15 +2,16 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
 
-const envPath = path.resolve(__dirname, "..", `.${process.env.NODE_ENV}.env`);
-let fileExists = fs.existsSync(envPath);
-
-if (!fileExists) {
-  console.log("Environment variables not found.");
-  process.exit(1);
+// Environment variables will be passed in via the --env-file option in production
+if (process.env.NODE_ENV === "development") {
+  const envPath = path.resolve(__dirname, "..", `.${process.env.NODE_ENV}.env`);
+  let fileExists = fs.existsSync(envPath);
+  if (!fileExists) {
+    console.log("Environment variables not found.");
+    process.exit(1);
+  }
+  dotenv.config({ path: envPath });
 }
-
-dotenv.config({ path: envPath });
 
 import { connect } from "./mongodb/connect";
 import { configureRedis } from "./redis";

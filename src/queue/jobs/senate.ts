@@ -412,7 +412,7 @@ export const senate: (SenateJob<V1> | SenateJob<V2> | SenateJob<V3>)[] = [
   sind,
   sjud,
   snat,
-  seth,
+  // seth,
   ssci,
   ssbs,
   ...sstr,

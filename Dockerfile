@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:15.2.0
 LABEL maintainer="kingofcramers.dev@gmail.com"
 WORKDIR /app
 

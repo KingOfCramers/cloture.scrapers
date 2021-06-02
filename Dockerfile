@@ -30,4 +30,7 @@ COPY modules.d.ts global.d.ts tsconfig.json .
 COPY src ./src
 RUN npm run prod:build
 
+# Set timezone to EST
+ENV TZ=America/New_York
+
 CMD ["node", "build/index.js"]
